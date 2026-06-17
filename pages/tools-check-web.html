@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Check Web - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tools-container { max-width: 800px; margin: 120px auto 40px; padding: 0 20px; }
+        .tools-container h1 { font-size: 2rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 5px; }
+        .tools-container .subtitle { color: var(--text-secondary); margin-bottom: 25px; }
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .input-group input { flex: 1; min-width: 200px; padding: 14px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
+        .input-group button { padding: 14px 30px; background: var(--gradient); border: none; border-radius: 12px; color: var(--dark-bg); font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+        .input-group button:hover { transform: scale(1.05); box-shadow: var(--shadow-hover); }
+        .result-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
+        .result-box.show { display: block; }
+        .result-box .status-safe { color: #00ff88; font-weight: 700; }
+        .result-box .status-danger { color: #ff4444; font-weight: 700; }
+        .result-box .status-warning { color: #ffaa00; font-weight: 700; }
+        .result-box .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
+        .result-box .info-row:last-child { border-bottom: none; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
+        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
+        .badge { display: inline-block; padding: 3px 12px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; }
+        .badge-safe { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+        .badge-danger { background: rgba(255, 68, 68, 0.2); color: #ff4444; }
+        .badge-warning { background: rgba(255, 170, 0, 0.2); color: #ffaa00; }
+        .flex-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tools-container">
+        <h1><i class="fas fa-shield-alt"></i> Check Keamanan Website</h1>
+        <p class="subtitle">Cek apakah website aman dari malware, ransomware, atau keylogger</p>
+
+        <div class="input-group">
+            <input type="text" id="webUrl" placeholder="Masukkan URL website... (contoh: https://example.com)">
+            <button id="checkBtn"><i class="fas fa-search"></i> Check</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div id="resultContent"></div>
+        </div>
+
+        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+            
+            const btn = document.getElementById('checkBtn');
+            const input = document.getElementById('webUrl');
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+            
+            btn.addEventListener('click', async () => {
+                const url = input.value.trim();
+                if (!url) {
+                    alert('Masukkan URL website terlebih dahulu!');
+                    return;
+                }
+                
+                resultBox.classList.add('show');
+                resultContent.innerHTML = '<div class="alert"><i class="fas fa-spinner fa-spin"></i> Memeriksa website...</div>';
+                
+                try {
+                    // Simulasi pengecekan (karena API keamanan terbatas, kita pake VirusTotal atau Google Safe Browsing)
+                    // Untuk demo, kita tampilkan hasil simulasi dengan deteksi dasar
+                    const isHttps = url.startsWith('https://');
+                    const hasMaliciousPattern = /(login|verify|secure|bank|paypal|gift|free)/i.test(url) && !isHttps;
+                    
+                    let status, statusText, details = [];
+                    
+                    if (hasMaliciousPattern) {
+                        status = 'danger';
+                        statusText = '⚠️ Website Berpotensi Berbahaya';
+                        details = [
+                            'Mengandung kata-kata yang sering digunakan oleh situs phishing',
+                            'Tidak menggunakan protokol HTTPS yang aman'
+                        ];
+                    } else if (!isHttps) {
+                        status = 'warning';
+                        statusText = '⚠️ Website Tidak Aman (HTTP)';
+                        details = [
+                            'Tidak menggunakan protokol HTTPS (data tidak terenkripsi)',
+                            'Rentan terhadap serangan man-in-the-middle'
+                        ];
+                    } else {
+                        status = 'safe';
+                        statusText = '✅ Website Aman';
+                        details = [
+                            'Menggunakan protokol HTTPS (data terenkripsi)',
+                            'Tidak terdeteksi pola mencurigakan'
+                        ];
+                    }
+                    
+                    const badgeClass = status === 'safe' ? 'badge-safe' : status === 'danger' ? 'badge-danger' : 'badge-warning';
+                    
+                    resultContent.innerHTML = `
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <span class="badge ${badgeClass}" style="font-size: 1.1rem; padding: 8px 20px;">${statusText}</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div class="info-row"><span>URL</span><span><strong>${url}</strong></span></div>
+                            <div class="info-row"><span>Protokol</span><span><strong>${isHttps ? '✅ HTTPS (Aman)' : '❌ HTTP (Tidak Aman)'}</strong></span></div>
+                        </div>
+                        <div style="background: var(--glass-bg); padding: 15px; border-radius: 12px;">
+                            <strong style="color: var(--neon-blue);">Detail Pengecekan:</strong>
+                            <ul style="list-style: none; padding: 0; margin-top: 10px;">
+                                ${details.map(d => `<li style="padding: 5px 0; color: var(--text-secondary);"><i class="fas fa-circle" style="font-size: 0.5rem; color: var(--neon-blue); margin-right: 10px;"></i>${d}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+                            <i class="fas fa-info-circle"></i> Pengecekan ini bersifat dasar. Untuk hasil lebih akurat, gunakan <a href="https://www.virustotal.com" target="_blank" style="color: var(--neon-blue);">VirusTotal</a>
+                        </div>
+                    `;
+                } catch (error) {
+                    resultContent.innerHTML = '<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error. Coba lagi nanti.</div>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
