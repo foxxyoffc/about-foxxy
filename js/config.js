@@ -1,17 +1,17 @@
 // ========== KONFIGURASI DEFAULT ==========
 const CONFIG = {
     // ===== PROFIL & BRANDING =====
-    profileImage: 'https://j.top4top.io/p_38195t90r1.jpg',
-    logoImage: 'https://c.top4top.io/p_3819ed0vz1.jpg',
-    heroVideo: 'https://files.catbox.moe/vwy06h.mp4',
-    websiteTitle: 'FoxxyPortofolio',
+    profileImage: 'https://files.catbox.moe/c0okkd.png',
+    logoImage: 'https://files.catbox.moe/prffsb.png',
+    heroVideo: 'https://files.catbox.moe/o0zgot.mp4',
+    websiteTitle: 'FoxxyWebcode',
     
     // ===== SOSIAL MEDIA =====
     whatsapp: '6281997149736',
     telegram: 'https://t.me/foxxyoffc',
     tiktok: 'https://www.tiktok.com/@foxxyoffc',
     github: 'https://github.com/foxxyoffc',
-    gmail: 'foxxy@example.com',
+    gmail: 'mzakifarel@gmail.com',
     
     // ===== KOMUNITAS =====
     grupWhatsApp: 'https://chat.whatsapp.com/Fl4UBHHDPpg2DdxpQwHNeK',
@@ -31,8 +31,8 @@ const CONFIG = {
     // ===== API KEY UNTUK TOOLS =====
     apis: {
         pinterest: {
-            url: 'https://api.botcahx.eu.org/api/download/pinterest',
-            key: 'alipaiapikeybaru'
+            url: 'https://api-faa.my.id/faa/pin-down',
+            key: ''
         },
         tiktok: {
             url: 'https://tikwm.com/api',
