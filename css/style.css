@@ -156,7 +156,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ========== HERO SECTION (LAYOUT ASUMA) ========== */
+/* ========== HERO SECTION ========== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -185,11 +185,53 @@ body {
     z-index: 2;
 }
 
+/* ========== HERO VIDEO WRAPPER ========== */
+.hero-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #0a0a0f;
+}
+
+.hero-video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #0a0a0f;
+}
+
+.hero-video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fallback jika video gagal */
+.hero-video-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ========== HERO CONTENT ========== */
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
 }
 
 /* ========== HERO TEXT ========== */
@@ -230,20 +272,39 @@ body {
     margin: 0 auto 25px;
 }
 
-/* ========== HERO STATS (HORIZONTAL SEPERTI ASUMA) ========== */
+/* ========== HERO STATS (KOLOM + ICON) ========== */
 .hero-stats {
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 30px;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .stat-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px 30px;
     text-align: center;
-    min-width: 80px;
+    min-width: 140px;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.stat-item:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    display: block;
+    margin-bottom: 8px;
 }
 
 .stat-number {
@@ -259,7 +320,7 @@ body {
 
 .stat-label {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     display: block;
@@ -735,100 +796,101 @@ body.light-theme .theme-toggle {
     .nav-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -7px);
     }
-
+    
+    .hero-video-wrapper {
+        border-radius: 12px;
+        max-width: 100%;
+    }
+    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
-
+    
     .hero-stats {
-        gap: 30px;
+        gap: 12px;
     }
-
+    
+    .stat-item {
+        padding: 12px 16px;
+        min-width: 80px;
+        flex: 1 1 40%;
+    }
+    
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
-
+    
+    .stat-icon {
+        font-size: 1.3rem;
+    }
+    
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        margin: 5px;
+    }
+    
+    .hero-text {
+        padding: 0 10px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .tool-card {
+        padding: 20px 15px;
+    }
+    
     .about-wrapper {
         flex-direction: column;
         text-align: center;
     }
-
+    
     .about-image {
-        flex: 0 0 140px;
+        flex: 0 0 120px;
     }
-
+    
     .about-image img {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
     }
-
+    
     .about-tags {
         justify-content: center;
     }
-
-    .section-header h2 {
-        font-size: 2rem;
-    }
-
-    .tools-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .why-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .cta-section h2 {
-        font-size: 2rem;
-    }
-
+    
     .footer-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 30px;
-    }
-
-    .footer-brand p {
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
-    .footer-nav a,
-    .footer-links a {
-        display: inline-block;
-        margin: 0 10px 10px;
-    }
-
-    .footer-nav h4,
-    .footer-links h4 {
-        text-align: center;
+        gap: 20px;
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
-
-    .hero-subtitle {
-        font-size: 1rem;
+    
+    .stat-item {
+        flex: 1 1 45%;
+        padding: 10px 12px;
     }
-
-    .hero-stats {
-        gap: 15px;
-    }
-
+    
     .stat-number {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+    
+    .stat-label {
+        font-size: 0.65rem;
     }
 }
 
-/* ========== TOOLS PAGE STYLE (UNTUK HALAMAN TOOLS LAIN) ========== */
+/* ========== TOOLS PAGE STYLE ========== */
 .tools-container {
     max-width: 800px;
     margin: 120px auto 40px;
@@ -1313,76 +1375,3 @@ body.light-theme .theme-toggle {
         font-size: 0.9rem;
     }
     }
-
-/* ========== HERO STATS (DALAM KOLOM + ICON) ========== */
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.stat-item {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 20px 30px;
-    text-align: center;
-    min-width: 140px;
-    transition: all 0.3s ease;
-    flex: 1;
-}
-
-.stat-item:hover {
-    border-color: var(--neon-blue);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-}
-
-.stat-icon {
-    font-size: 2rem;
-    color: var(--neon-blue);
-    display: block;
-    margin-bottom: 8px;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    display: block;
-    font-variant-numeric: tabular-nums;
-}
-
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: block;
-    margin-top: 4px;
-}
-
-/* ========== RESPONSIVE STATS ========== */
-@media (max-width: 600px) {
-    .hero-stats {
-        gap: 15px;
-    }
-    .stat-item {
-        padding: 15px 20px;
-        min-width: 100px;
-        flex: 1 1 40%;
-    }
-    .stat-number {
-        font-size: 1.8rem;
-    }
-    .stat-icon {
-        font-size: 1.5rem;
-    }
-}
