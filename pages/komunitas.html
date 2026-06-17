@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Komunitas - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== KOMUNITAS STYLE ===== */
+        .komunitas-header {
+            text-align: center;
+            padding: 120px 20px 40px;
+        }
+        .komunitas-header h1 {
+            font-size: 2.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        .komunitas-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .komunitas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .komunitas-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px 25px;
+            transition: all 0.3s ease;
+        }
+        .komunitas-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        .komunitas-card .icon {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+        .komunitas-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+        }
+        .komunitas-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .komunitas-card ul li {
+            color: var(--text-secondary);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+        .komunitas-card ul li:last-child {
+            border-bottom: none;
+        }
+        .komunitas-card ul li i {
+            color: var(--neon-blue);
+            width: 20px;
+            text-align: center;
+        }
+
+        .komunitas-card .btn-join {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 12px 35px;
+            background: var(--gradient);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .komunitas-card .btn-join:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        .komunitas-card .btn-join-secondary {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+        }
+        .komunitas-card .btn-join-secondary:hover {
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        /* ===== TENTANG KOMUNITAS (BAGIAN BAWAH) ===== */
+        .tentang-section {
+            max-width: 900px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+        }
+        .tentang-section .card {
+            padding: 30px;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+        .tentang-section .card h2 {
+            color: var(--neon-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .tentang-section .card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .komunitas-grid {
+                grid-template-columns: 1fr;
+            }
+            .komunitas-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== THEME TOGGLE ===== -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="komunitas.html" class="nav-link active">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <div class="komunitas-header">
+        <h1><i class="fas fa-users"></i> Komunitas Sekte Editor</h1>
+        <p>Bergabunglah dengan komunitas editor terbaik dan kembangkan skillmu!</p>
+    </div>
+
+    <!-- ===== KOMUNITAS GRID ===== -->
+    <div class="komunitas-grid">
+
+        <!-- KIRI: Rules -->
+        <div class="komunitas-card">
+            <div class="icon"><i class="fas fa-clipboard-list"></i></div>
+            <h2>📋 Rules Join</h2>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Berumur <strong>17+</strong></li>
+                <li><i class="fas fa-check-circle"></i> Paham <strong>Basic Edit</strong></li>
+                <li><i class="fas fa-check-circle"></i> <strong>No Double Sekte</strong></li>
+                <li><i class="fas fa-check-circle"></i> Wajib <strong>CN TikTok</strong></li>
+                <li><i class="fas fa-check-circle"></i> <strong>Ga Baperan</strong></li>
+            </ul>
+            <a href="https://sekte-creator-kece.vercel.app" target="_blank" class="btn-join">
+                <i class="fas fa-external-link-alt"></i> Join Sekarang
+            </a>
+        </div>
+
+        <!-- KANAN: Tentang Komunitas -->
+        <div class="komunitas-card">
+            <div class="icon"><i class="fas fa-smile"></i></div>
+            <h2>👥 Tentang Komunitas</h2>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 15px;">
+                Komunitas ini adalah tempat berkumpulnya para editor keren dari berbagai kalangan. 
+                <strong>Member-nya asik</strong>, saling support, dan selalu ada yang bantu kalo lagi stuck.
+                Cocok buat yang mau belajar bareng, sharing preset, atau sekedar cari teman sefrekuensi.
+            </p>
+            <a href="https://chat.whatsapp.com/Fl4UBHHDPpg2DdxpQwHNeK" target="_blank" class="btn-join btn-join-secondary">
+                <i class="fab fa-whatsapp"></i> Join Grup WhatsApp
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+        });
+    </script>
+
+</body>
+</html>
