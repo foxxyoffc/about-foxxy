@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- THEME TOGGLE (dipindah ke bawah biar ga nutup navbar) -->
+    <!-- THEME TOGGLE -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
         <i class="fas fa-moon" style="display: none;"></i>
@@ -39,8 +39,8 @@
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="container">
-            <div class="hero-wrapper">
-                <!-- HERO TEXT (KIRI) -->
+            <div class="hero-content">
+                <!-- HERO TEXT -->
                 <div class="hero-text">
                     <span class="hero-badge">🦊 Personal Portfolio</span>
                     <h1 class="hero-title">Foxxy<span>Portofolio</span></h1>
@@ -51,33 +51,33 @@
                     </div>
                 </div>
 
-                <!-- STATISTIK (KANAN) dengan format "15+ Tools" -->
+                <!-- STATISTIK (HORIZONTAL SEPERTI ASUMA) -->
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number" data-count="15">15+</span>
+                        <span class="stat-number" data-count="15">0</span>
                         <span class="stat-label">Tools</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" data-count="10">10+</span>
+                        <span class="stat-number" data-count="10">0</span>
                         <span class="stat-label">Projects</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" data-count="100">100+</span>
+                        <span class="stat-number" data-count="100">0</span>
                         <span class="stat-label">Users</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number" data-count="24">24/7</span>
-                        <span class="stat-label">Support</span>
+                        <span class="stat-number" data-count="24">0</span>
+                        <span class="stat-label">/ 7 Support</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== TOOLS PREVIEW (LINK KE HALAMAN TOOLS) ========== -->
+    <!-- ========== TOOLS PREVIEW ========== -->
     <section class="tools-preview" id="tools-section">
         <div class="container">
-            <div class="section-header" style="text-align: left;">
+            <div class="section-header">
                 <span class="section-badge">🛠️ FITUR UNGGULAN</span>
                 <h2>Semua yang kamu butuhkan,<br>dalam satu website.</h2>
                 <p>Dari downloader hingga stalking, semua tools tersedia lengkap.</p>
@@ -120,7 +120,7 @@
         </div>
     </section>
 
-    <!-- ========== ABOUT PREVIEW (LINK KE HALAMAN ABOUT) ========== -->
+    <!-- ========== ABOUT PREVIEW ========== -->
     <section class="about-preview" id="about-section">
         <div class="container">
             <div class="about-wrapper">
@@ -147,7 +147,7 @@
     <!-- ========== WHY SECTION ========== -->
     <section class="why-section">
         <div class="container">
-            <div class="section-header" style="text-align: left;">
+            <div class="section-header">
                 <span class="section-badge">🔥 KENAPA FOXXY?</span>
                 <h2>Dipilih bukan tanpa alasan.</h2>
                 <p>Foxxy dirancang agar benar-benar berguna, bukan sekadar terlihat keren.</p>
@@ -281,6 +281,25 @@
                 logoImg.src = config.logoImage;
             }
 
+            // ===== STATISTIK ANIMASI (ANGKA BERURUT) =====
+            const stats = document.querySelectorAll('.stat-number');
+            
+            function animateNumbers() {
+                stats.forEach(stat => {
+                    const target = parseInt(stat.dataset.count);
+                    let current = 0;
+                    const increment = Math.ceil(target / 80);
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = current;
+                    }, 30);
+                });
+            }
+
             // ===== SCROLL REVEAL =====
             const revealElements = document.querySelectorAll('.tool-card, .why-card, .about-wrapper, .section-header');
             const revealObserver = new IntersectionObserver((entries) => {
@@ -316,6 +335,19 @@
                         if (navToggle) navToggle.classList.remove('active');
                     }
                 });
+            });
+
+            // ===== TRIGGER ANIMASI STATS SAAT VIEWPORT =====
+            let statsAnimated = false;
+            window.addEventListener('scroll', function() {
+                const heroStats = document.querySelector('.hero-stats');
+                if (heroStats && !statsAnimated) {
+                    const rect = heroStats.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.8) {
+                        statsAnimated = true;
+                        animateNumbers();
+                    }
+                }
             });
         });
     </script>
