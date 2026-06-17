@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title id="websiteTitle">FoxxyPortofolio</title>
+    <title>FoxxyPortofolio</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <!-- ===== THEME TOGGLE ===== -->
+    <!-- THEME TOGGLE -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
         <i class="fas fa-moon" style="display: none;"></i>
     </div>
 
-    <!-- ===== NAVBAR ===== -->
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -37,34 +37,24 @@
         </div>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- ========== HERO SECTION ========== -->
     <section class="hero">
         <div class="hero-bg"></div>
+        
+        <!-- VIDEO HERO -->
+        <div class="hero-video-wrapper">
+            <div class="hero-video-container">
+                <video id="heroVideo" autoplay muted loop playsinline>
+                    <source src="https://d.top4top.io/m_3819tiava1.mp4" type="video/mp4">
+                </video>
+                <button class="video-play-btn" id="videoPlayBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        </div>
+
         <div class="container">
-
-            <!-- Video Hero -->
-            <div class="video-wrapper">
-                <div class="video-container">
-                    <video id="heroVideo" autoplay muted loop playsinline>
-                        <source src="https://d.top4top.io/m_3819tiava1.mp4" type="video/mp4">
-                    </video>
-                    <button class="video-play-btn" id="videoPlayBtn">
-                        <i class="fas fa-play"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Profile -->
-            <div class="profile-wrapper">
-                <div class="profile-image">
-                    <img src="https://j.top4top.io/p_38195t90r1.jpg" alt="Foxxy" id="profileImage">
-                </div>
-            </div>
-
-            <!-- Glitch Title -->
-            <h1 class="glitch-text" data-text="FoxxyPortofolio">FoxxyPortofolio</h1>
-
-            <!-- Info: Date, Time, Battery, CPU -->
+            <!-- INFO: JAM, BATERAI, CPU -->
             <div class="info-wrapper">
                 <div class="info-card" id="dateCard"><i class="fas fa-calendar-alt"></i> Loading...</div>
                 <div class="info-card" id="timeCard"><i class="fas fa-clock"></i> Loading...</div>
@@ -72,37 +62,159 @@
                 <div class="info-card" id="cpuCard"><i class="fas fa-microchip"></i> CPU: -- Core</div>
             </div>
 
-            <!-- Hero Buttons -->
-            <div class="hero-buttons">
-                <a href="pages/store.html" class="btn btn-primary"><i class="fas fa-store"></i> Store</a>
-                <a href="pages/bot-sewa.html" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> Sewa Bot</a>
-                <a href="pages/tools.html" class="btn btn-primary"><i class="fas fa-tools"></i> Tools</a>
-                <a href="pages/komunitas.html" class="btn btn-secondary"><i class="fas fa-users"></i> Komunitas</a>
+            <!-- HERO TEXT -->
+            <div class="hero-text">
+                <span class="hero-badge">🦊 Personal Portfolio</span>
+                <h1 class="hero-title">Foxxy<span>Portofolio</span></h1>
+                <p class="hero-subtitle">Portofolio personal + kumpulan tools lengkap dalam satu website.</p>
+                <div class="hero-buttons">
+                    <a href="pages/tools.html" class="btn btn-primary"><i class="fas fa-tools"></i> Explore Tools</a>
+                    <a href="pages/store.html" class="btn btn-secondary"><i class="fas fa-store"></i> Store</a>
+                </div>
             </div>
 
-            <!-- Navigation Grid -->
-            <div class="nav-grid">
-                <a href="pages/tools-tiktok.html" class="btn btn-secondary"><i class="fab fa-tiktok"></i> TikTok Downloader</a>
-                <a href="pages/tools-pinterest.html" class="btn btn-secondary"><i class="fab fa-pinterest"></i> Pinterest Downloader</a>
-                <a href="pages/tools-youtube.html" class="btn btn-secondary"><i class="fab fa-youtube"></i> YouTube Downloader</a>
-                <a href="pages/tools-instagram.html" class="btn btn-secondary"><i class="fab fa-instagram"></i> Instagram Downloader</a>
-                <a href="pages/tools-stalk-tiktok.html" class="btn btn-secondary"><i class="fas fa-search"></i> Stalk TikTok</a>
-                <a href="pages/tools-stalk-ig.html" class="btn btn-secondary"><i class="fas fa-search"></i> Stalk Instagram</a>
-                <a href="pages/tools-stalk-ml.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Stalk ML</a>
-                <a href="pages/tools-stalk-ff.html" class="btn btn-secondary"><i class="fas fa-gamepad"></i> Stalk FF</a>
-                <a href="pages/tools-check-web.html" class="btn btn-secondary"><i class="fas fa-shield-alt"></i> Check Web</a>
-                <a href="pages/tools-check-file.html" class="btn btn-secondary"><i class="fas fa-file"></i> Check File</a>
-                <a href="pages/tools-web-maker.html" class="btn btn-secondary"><i class="fas fa-code"></i> Web Maker</a>
-                <a href="pages/tools-web-request.html" class="btn btn-secondary"><i class="fas fa-pen-fancy"></i> Web Request</a>
-                <a href="pages/tools-trading.html" class="btn btn-secondary"><i class="fas fa-chart-line"></i> Trading</a>
-                <a href="pages/tools-mata-uang.html" class="btn btn-secondary"><i class="fas fa-money-bill-wave"></i> Mata Uang</a>
-                <a href="pages/tools-device.html" class="btn btn-secondary"><i class="fas fa-laptop"></i> Device Info</a>
+            <!-- STATISTIK -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span>
+                    <span class="stat-label">Tools</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="10">0</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="100">0</span>
+                    <span class="stat-label">Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="24">0</span>
+                    <span class="stat-label">/ 7 Support</span>
+                </div>
             </div>
-
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ========== FITUR UNGGULAN ========== -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🛠️ Fitur</span>
+                <h2>Semua yang kamu butuhkan,<br>dalam satu website.</h2>
+                <p>Dari downloader hingga stalking, semua tools tersedia lengkap.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-download"></i></div>
+                    <h3>Downloader</h3>
+                    <p>Download video dari TikTok, Pinterest, YouTube, Instagram tanpa watermark.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Stalking</h3>
+                    <p>Cari informasi akun TikTok, Instagram, Mobile Legends, dan Free Fire.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Check Keamanan</h3>
+                    <p>Cek website dan file dari malware, ransomware, atau keylogger.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Maker</h3>
+                    <p>Copy website atau request fitur dengan tema sesuai keinginan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Trading</h3>
+                    <p>Pantau harga crypto, meme coin, dan konversi mata uang real-time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-laptop"></i></div>
+                    <h3>Device Info</h3>
+                    <p>Cek informasi lengkap device seperti RAM, baterai, CPU, dan storage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TENTANG FOXXY ========== -->
+    <section class="about">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-image">
+                    <img src="https://j.top4top.io/p_38195t90r1.jpg" alt="Foxxy" id="profileImage">
+                </div>
+                <div class="about-text">
+                    <span class="section-badge">👨‍💻 Developer</span>
+                    <h2>Dibuat oleh <span>Foxxy</span></h2>
+                    <p>Foxxy adalah seorang developer yang berfokus pada pengembangan WhatsApp Bot, backend API, dan aplikasi web modern. Tujuan Foxxy adalah menghadirkan solusi digital yang mudah digunakan dan bermanfaat bagi semua pengguna.</p>
+                    <div class="about-tags">
+                        <span><i class="fab fa-whatsapp"></i> WhatsApp Bot Development</span>
+                        <span><i class="fas fa-server"></i> Backend API & Node.js</span>
+                        <span><i class="fas fa-globe"></i> Modern Web Applications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== KENAPA FOXXY? ========== -->
+    <section class="why">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🔥 Kenapa Foxxy?</span>
+                <h2>Dipilih bukan tanpa alasan.</h2>
+                <p>Foxxy dirancang agar benar-benar berguna, bukan sekadar terlihat keren.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Cepat & Stabil</h3>
+                    <p>Respons instan dengan infrastruktur yang dioptimalkan untuk performa tinggi.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-cubes"></i></div>
+                    <h3>Banyak Tools</h3>
+                    <p>Lebih dari 15 tools tersedia — satu website untuk semua kebutuhan digital.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Selalu Dikembangkan</h3>
+                    <p>Update rutin setiap bulan menghadirkan fitur baru berdasarkan masukan pengguna.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-user-friends"></i></div>
+                    <h3>Mudah Digunakan</h3>
+                    <p>Antarmuka sederhana, jelas, dan tidak perlu instalasi apapun dari pengguna.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Aman & Privasi</h3>
+                    <p>Tidak menyimpan data pribadi. Privasi pengguna adalah prioritas utama.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Gratis Digunakan</h3>
+                    <p>Semua fitur inti tersedia gratis. Tidak ada paywall untuk fungsi utama.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="cta">
+        <div class="container">
+            <h2>Siap mencoba <span>FoxxyPortofolio</span>?</h2>
+            <p>Gunakan sekarang dan nikmati pengalaman digital yang lebih cerdas, praktis, dan menyenangkan.</p>
+            <div class="cta-buttons">
+                <a href="pages/tools.html" class="btn btn-primary"><i class="fas fa-tools"></i> Coba Tools</a>
+                <a href="pages/komunitas.html" class="btn btn-secondary"><i class="fas fa-users"></i> Gabung Komunitas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -112,37 +224,37 @@
         </div>
     </footer>
 
-    <!-- ===== SCRIPTS ===== -->
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/tools.js"></script>
     <script>
-        // ===== VIDEO PLAY/PAUSE =====
         document.addEventListener('DOMContentLoaded', function() {
+            // ===== VIDEO PLAY/PAUSE =====
             const video = document.getElementById('heroVideo');
             const btn = document.getElementById('videoPlayBtn');
-            
             if (video && btn) {
                 btn.addEventListener('click', function() {
-                    if (video.paused) {
-                        video.play();
-                        btn.innerHTML = '<i class="fas fa-pause"></i>';
-                    } else {
-                        video.pause();
-                        btn.innerHTML = '<i class="fas fa-play"></i>';
-                    }
+                    if (video.paused) { video.play(); btn.innerHTML = '<i class="fas fa-pause"></i>'; } 
+                    else { video.pause(); btn.innerHTML = '<i class="fas fa-play"></i>'; }
                 });
-                
-                video.addEventListener('play', () => {
-                    btn.innerHTML = '<i class="fas fa-pause"></i>';
-                });
-                
-                video.addEventListener('pause', () => {
-                    btn.innerHTML = '<i class="fas fa-play"></i>';
-                });
+                video.addEventListener('play', () => { btn.innerHTML = '<i class="fas fa-pause"></i>'; });
+                video.addEventListener('pause', () => { btn.innerHTML = '<i class="fas fa-play"></i>'; });
             }
+
+            // ===== STATISTIK ANIMASI =====
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.dataset.count);
+                let current = 0;
+                const increment = Math.ceil(target / 50);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    stat.textContent = current;
+                }, 30);
+            });
         });
     </script>
 </body>
