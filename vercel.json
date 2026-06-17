@@ -1,0 +1,171 @@
+{
+  "version": 2,
+  "buildCommand": null,
+  "devCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "outputDirectory": ".",
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/js/$1"
+    },
+    {
+      "src": "/pages/(.*)",
+      "dest": "/pages/$1"
+    },
+    {
+      "src": "/pages/store.html",
+      "dest": "/pages/store.html"
+    },
+    {
+      "src": "/pages/bot-sewa.html",
+      "dest": "/pages/bot-sewa.html"
+    },
+    {
+      "src": "/pages/komunitas.html",
+      "dest": "/pages/komunitas.html"
+    },
+    {
+      "src": "/pages/tentang-komunitas.html",
+      "dest": "/pages/tentang-komunitas.html"
+    },
+    {
+      "src": "/pages/tools.html",
+      "dest": "/pages/tools.html"
+    },
+    {
+      "src": "/pages/tools-tiktok.html",
+      "dest": "/pages/tools-tiktok.html"
+    },
+    {
+      "src": "/pages/tools-pinterest.html",
+      "dest": "/pages/tools-pinterest.html"
+    },
+    {
+      "src": "/pages/tools-youtube.html",
+      "dest": "/pages/tools-youtube.html"
+    },
+    {
+      "src": "/pages/tools-instagram.html",
+      "dest": "/pages/tools-instagram.html"
+    },
+    {
+      "src": "/pages/tools-stalk-tiktok.html",
+      "dest": "/pages/tools-stalk-tiktok.html"
+    },
+    {
+      "src": "/pages/tools-stalk-ig.html",
+      "dest": "/pages/tools-stalk-ig.html"
+    },
+    {
+      "src": "/pages/tools-stalk-ml.html",
+      "dest": "/pages/tools-stalk-ml.html"
+    },
+    {
+      "src": "/pages/tools-stalk-ff.html",
+      "dest": "/pages/tools-stalk-ff.html"
+    },
+    {
+      "src": "/pages/tools-check-web.html",
+      "dest": "/pages/tools-check-web.html"
+    },
+    {
+      "src": "/pages/tools-check-file.html",
+      "dest": "/pages/tools-check-file.html"
+    },
+    {
+      "src": "/pages/tools-web-maker.html",
+      "dest": "/pages/tools-web-maker.html"
+    },
+    {
+      "src": "/pages/tools-web-request.html",
+      "dest": "/pages/tools-web-request.html"
+    },
+    {
+      "src": "/pages/tools-trading.html",
+      "dest": "/pages/tools-trading.html"
+    },
+    {
+      "src": "/pages/tools-mata-uang.html",
+      "dest": "/pages/tools-mata-uang.html"
+    },
+    {
+      "src": "/pages/tools-device.html",
+      "dest": "/pages/tools-device.html"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/$1"
+    },
+    {
+      "src": "/admin/developer.html",
+      "dest": "/admin/developer.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/css/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, immutable"
+        }
+      ]
+    }
+  ]
+}
