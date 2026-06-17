@@ -1313,3 +1313,76 @@ body.light-theme .theme-toggle {
         font-size: 0.9rem;
     }
     }
+
+/* ========== HERO STATS (DALAM KOLOM + ICON) ========== */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px 30px;
+    text-align: center;
+    min-width: 140px;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.stat-item:hover {
+    border-color: var(--neon-blue);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: block;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 4px;
+}
+
+/* ========== RESPONSIVE STATS ========== */
+@media (max-width: 600px) {
+    .hero-stats {
+        gap: 15px;
+    }
+    .stat-item {
+        padding: 15px 20px;
+        min-width: 100px;
+        flex: 1 1 40%;
+    }
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+}
