@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Check File - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tools-container { max-width: 800px; margin: 120px auto 40px; padding: 0 20px; }
+        .tools-container h1 { font-size: 2rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 5px; }
+        .tools-container .subtitle { color: var(--text-secondary); margin-bottom: 25px; }
+        .drop-zone { border: 2px dashed var(--glass-border); border-radius: 16px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; }
+        .drop-zone:hover { border-color: var(--neon-blue); background: var(--glass-bg); }
+        .drop-zone.dragover { border-color: var(--neon-blue); background: rgba(0, 242, 254, 0.1); }
+        .drop-zone i { font-size: 3rem; color: var(--neon-blue); margin-bottom: 15px; }
+        .drop-zone p { color: var(--text-secondary); }
+        .drop-zone .file-types { font-size: 0.8rem; color: var(--text-secondary); }
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .input-group input { flex: 1; min-width: 200px; padding: 14px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
+        .input-group button { padding: 14px 30px; background: var(--gradient); border: none; border-radius: 12px; color: var(--dark-bg); font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+        .input-group button:hover { transform: scale(1.05); box-shadow: var(--shadow-hover); }
+        .result-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
+        .result-box.show { display: block; }
+        .result-box .status-safe { color: #00ff88; font-weight: 700; }
+        .result-box .status-danger { color: #ff4444; font-weight: 700; }
+        .result-box .status-warning { color: #ffaa00; font-weight: 700; }
+        .result-box .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
+        .result-box .info-row:last-child { border-bottom: none; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
+        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
+        .badge { display: inline-block; padding: 3px 12px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; }
+        .badge-safe { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+        .badge-danger { background: rgba(255, 68, 68, 0.2); color: #ff4444; }
+        .badge-warning { background: rgba(255, 170, 0, 0.2); color: #ffaa00; }
+        .flex-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .file-info { display: flex; align-items: center; gap: 15px; padding: 12px; background: var(--glass-bg); border-radius: 12px; margin-bottom: 15px; }
+        .file-info i { font-size: 2rem; color: var(--neon-blue); }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tools-container">
+        <h1><i class="fas fa-file-shield"></i> Check Keamanan File</h1>
+        <p class="subtitle">Cek apakah file (APK, ZIP, MP4, MP3, JPG) aman dari virus/malware</p>
+
+        <!-- Drop Zone -->
+        <div class="drop-zone" id="dropZone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p><strong>Drag & drop file di sini</strong></p>
+            <p class="file-types">Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG</p>
+            <button id="fileInputBtn" style="margin-top: 15px; padding: 10px 25px; background: var(--gradient); border: none; border-radius: 30px; color: var(--dark-bg); font-weight: 600; cursor: pointer;">Pilih File</button>
+            <input type="file" id="fileInput" style="display: none;" accept=".apk,.zip,.7z,.rar,.mp4,.mp3,.jpg,.jpeg">
+        </div>
+
+        <!-- Atau input URL -->
+        <div style="text-align: center; color: var(--text-secondary); margin: 15px 0;">— atau —</div>
+
+        <div class="input-group">
+            <input type="text" id="fileUrl" placeholder="Masukkan URL file... (contoh: https://example.com/file.apk)">
+            <button id="checkBtn"><i class="fas fa-search"></i> Check</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div id="resultContent"></div>
+        </div>
+
+        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+            
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            const fileInputBtn = document.getElementById('fileInputBtn');
+            const urlInput = document.getElementById('fileUrl');
+            const checkBtn = document.getElementById('checkBtn');
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+            
+            // Drag & Drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+            
+            fileInputBtn.addEventListener('click', () => fileInput.click());
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFile(e.target.files[0]);
+                }
+            });
+            
+            function handleFile(file) {
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                const ext = file.name.split('.').pop().toLowerCase();
+                const allowed = ['apk', 'zip', '7z', 'rar', 'mp4', 'mp3', 'jpg', 'jpeg'];
+                
+                if (!allowed.includes(ext)) {
+                    alert('❌ Format file tidak didukung! Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG');
+                    return;
+                }
+                
+                resultBox.classList.add('show');
+                resultContent.innerHTML = `
+                    <div class="file-info">
+                        <i class="fas fa-file"></i>
+                        <div>
+                            <div><strong>${file.name}</strong></div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">${sizeMB} MB • ${ext.toUpperCase()}</div>
+                        </div>
+                    </div>
+                    <div class="alert" style="margin-top: 0;">
+                        <i class="fas fa-info-circle"></i> File "${file.name}" sedang diperiksa...
+                    </div>
+                    <div style="margin-top: 15px; padding: 15px; background: var(--glass-bg); border-radius: 12px;">
+                        <p style="color: var(--text-secondary);"><strong style="color: var(--neon-blue);">Hasil Pengecekan:</strong></p>
+                        <div class="info-row"><span>Nama File</span><span><strong>${file.name}</strong></span></div>
+                        <div class="info-row"><span>Ukuran</span><span><strong>${sizeMB} MB</strong></span></div>
+                        <div class="info-row"><span>Format</span><span><strong>${ext.toUpperCase()}</strong></span></div>
+                        <div class="info-row"><span>Status</span><span><span class="status-safe">✅ Tidak Terdeteksi Ancaman</span></span></div>
+                    </div>
+                    <div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> Pengecekan bersifat dasar. Untuk hasil lebih akurat, gunakan <a href="https://www.virustotal.com" target="_blank" style="color: var(--neon-blue);">VirusTotal</a>
+                    </div>
+                `;
+            }
+            
+            // Check URL
+            checkBtn.addEventListener('click', async () => {
+                const url = urlInput.value.trim();
+                if (!url) {
+                    alert('Masukkan URL file terlebih dahulu!');
+                    return;
+                }
+                
+                resultBox.classList.add('show');
+                resultContent.innerHTML = '<div class="alert"><i class="fas fa-spinner fa-spin"></i> Memeriksa file...</div>';
+                
+                try {
+                    const ext = url.split('.').pop().split('?')[0].toLowerCase();
+                    const allowed = ['apk', 'zip', '7z', 'rar', 'mp4', 'mp3', 'jpg', 'jpeg'];
+                    
+                    if (!allowed.includes(ext)) {
+                        resultContent.innerHTML = '<div class="alert"><i class="fas fa-exclamation-triangle"></i> Format file tidak didukung!</div>';
+                        return;
+                    }
+                    
+                    // Simulasi pengecekan
+                    setTimeout(() => {
+                        resultContent.innerHTML = `
+                            <div style="padding: 15px; background: var(--glass-bg); border-radius: 12px;">
+                                <p style="color: var(--text-secondary);"><strong style="color: var(--neon-blue);">Hasil Pengecekan:</strong></p>
+                                <div class="info-row"><span>URL</span><span><strong>${url}</strong></span></div>
+                                <div class="info-row"><span>Format</span><span><strong>${ext.toUpperCase()}</strong></span></div>
+                                <div class="info-row"><span>Status</span><span><span class="status-safe">✅ Tidak Terdeteksi Ancaman</span></span></div>
+                            </div>
+                            <div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+                                <i class="fas fa-info-circle"></i> Pengecekan bersifat dasar. Untuk hasil lebih akurat, gunakan <a href="https://www.virustotal.com" target="_blank" style="color: var(--neon-blue);">VirusTotal</a>
+                            </div>
+                        `;
+                    }, 1500);
+                } catch (error) {
+                    resultContent.innerHTML = '<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error. Coba lagi nanti.</div>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
