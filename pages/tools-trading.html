@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Trading - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tools-container { max-width: 1000px; margin: 120px auto 40px; padding: 0 20px; }
+        .tools-container h1 { font-size: 2.2rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 5px; }
+        .tools-container .subtitle { color: var(--text-secondary); margin-bottom: 25px; }
+        
+        .trading-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .trading-tabs button { padding: 10px 22px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+        .trading-tabs button:hover { border-color: var(--neon-blue); transform: translateY(-2px); }
+        .trading-tabs button.active { border-color: var(--neon-blue); background: rgba(0, 242, 254, 0.15); color: var(--neon-blue); }
+        .trading-tabs button i { margin-right: 6px; }
+
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .input-group input { flex: 1; min-width: 200px; padding: 14px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
+        .input-group button { padding: 14px 30px; background: var(--gradient); border: none; border-radius: 12px; color: var(--dark-bg); font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+        .input-group button:hover { transform: scale(1.05); box-shadow: var(--shadow-hover); }
+
+        .result-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
+        .result-box.show { display: block; }
+        
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .market-item { background: var(--glass-bg); padding: 18px 15px; border-radius: 14px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; }
+        .market-item:hover { border-color: var(--neon-blue); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .market-item .rank { font-size: 0.7rem; color: var(--text-secondary); background: var(--glass-bg); padding: 2px 10px; border-radius: 30px; display: inline-block; margin-bottom: 5px; }
+        .market-item .symbol { font-weight: 800; font-size: 1.1rem; color: var(--neon-blue); }
+        .market-item .name { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; }
+        .market-item .price { font-size: 1.4rem; font-weight: 700; margin: 5px 0; }
+        .market-item .price-up { color: #00ff88; }
+        .market-item .price-down { color: #ff4444; }
+        .market-item .change { font-size: 0.9rem; font-weight: 600; }
+        .market-item .volume { font-size: 0.7rem; color: var(--text-secondary); margin-top: 5px; }
+
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
+        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
+        .alert i { margin-right: 8px; }
+        .flex-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; justify-content: center; }
+
+        .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--neon-blue); border-radius: 50%; border-top-color: transparent; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            .tools-container h1 { font-size: 1.7rem; }
+            .market-grid { grid-template-columns: 1fr; }
+            .trading-tabs button { flex: 1; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tools-container">
+        <h1><i class="fas fa-chart-line"></i> Trading & Pasar</h1>
+        <p class="subtitle">Pantau harga saham, crypto, meme coin, dan mata uang secara real-time</p>
+
+        <div class="trading-tabs">
+            <button class="active" data-tab="crypto"><i class="fab fa-bitcoin"></i> Crypto</button>
+            <button data-tab="meme"><i class="fas fa-dog"></i> Meme Coin</button>
+            <button data-tab="forex"><i class="fas fa-money-bill-wave"></i> Forex</button>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="searchInput" placeholder="Cari aset... (contoh: BTC, ETH, DOGE)">
+            <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div id="resultContent"></div>
+        </div>
+
+        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initTheme === 'function') initTheme();
+            if (typeof initNavToggle === 'function') initNavToggle();
+
+            // ========== CONFIG ==========
+            const API_KEY = 'CG-VeR2FXGunnhDevotZmg8bMej';
+            const BASE_URL = 'https://api.coingecko.com/api/v3';
+
+            // ========== DOM ==========
+            const tabs = document.querySelectorAll('.trading-tabs button');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+
+            let activeTab = 'crypto';
+
+            // ========== TAB SWITCHING ==========
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    activeTab = tab.dataset.tab;
+                    searchInput.placeholder = `Cari ${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}...`;
+                    // Auto load top data saat ganti tab
+                    loadTopData(activeTab);
+                });
+            });
+
+            // ========== LOAD TOP DATA BY CATEGORY ==========
+            async function loadTopData(category) {
+                resultBox.classList.add('show');
+                resultContent.innerHTML = `<div class="alert"><span class="loading-spinner"></span> Memuat data ${category}...</div>`;
+
+                try {
+                    let ids = [];
+                    let vsCurrency = 'usd';
+
+                    if (category === 'crypto') {
+                        // Top 10 crypto by market cap
+                        ids = ['bitcoin', 'ethereum', 'ripple', 'solana', 'cardano', 'polkadot', 'dogecoin', 'avalanche', 'chainlink', 'polygon'];
+                    } else if (category === 'meme') {
+                        ids = ['dogecoin', 'shiba-inu', 'pepe', 'floki', 'bonk', 'mog-coin', 'brett', 'popcat', 'cat-in-a-dogs-world', 'neiro'];
+                    } else if (category === 'forex') {
+                        // Forex tidak tersedia di CoinGecko, pake data simulasi dengan rate USD
+                        showForexData();
+                        return;
+                    }
+
+                    const url = `${BASE_URL}/simple/price?ids=${ids.join(',')}&vs_currencies=${vsCurrency}&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true&x_cg_demo_api_key=${API_KEY}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data && Object.keys(data).length > 0) {
+                        let html = `<div class="market-grid">`;
+                        const sortedIds = ids.filter(id => data[id]);
+
+                        sortedIds.forEach(id => {
+                            const item = data[id];
+                            const price = item[vsCurrency] || 0;
+                            const change = item[`${vsCurrency}_24h_change`] || 0;
+                            const vol = item[`${vsCurrency}_24h_vol`] || 0;
+                            const mcap = item[`${vsCurrency}_market_cap`] || 0;
+                            const isUp = change >= 0;
+                            const symbol = id === 'bitcoin' ? 'BTC' :
+                                           id === 'ethereum' ? 'ETH' :
+                                           id === 'ripple' ? 'XRP' :
+                                           id === 'solana' ? 'SOL' :
+                                           id === 'cardano' ? 'ADA' :
+                                           id === 'polkadot' ? 'DOT' :
+                                           id === 'dogecoin' ? 'DOGE' :
+                                           id === 'avalanche' ? 'AVAX' :
+                                           id === 'chainlink' ? 'LINK' :
+                                           id === 'polygon' ? 'MATIC' :
+                                           id === 'shiba-inu' ? 'SHIB' :
+                                           id === 'pepe' ? 'PEPE' :
+                                           id === 'floki' ? 'FLOKI' :
+                                           id === 'bonk' ? 'BONK' :
+                                           id === 'mog-coin' ? 'MOG' :
+                                           id === 'brett' ? 'BRETT' :
+                                           id === 'popcat' ? 'POPCAT' :
+                                           id === 'cat-in-a-dogs-world' ? 'MEW' :
+                                           id === 'neiro' ? 'NEIRO' :
+                                           id.toUpperCase();
+
+                            const priceFormatted = price < 0.01 ? price.toFixed(8) : price < 1 ? price.toFixed(4) : price.toFixed(2);
+                            const volFormatted = vol > 1e9 ? (vol / 1e9).toFixed(2) + 'B' : vol > 1e6 ? (vol / 1e6).toFixed(2) + 'M' : vol.toFixed(0);
+
+                            html += `
+                                <div class="market-item">
+                                    <div class="rank">#${sortedIds.indexOf(id) + 1}</div>
+                                    <div class="symbol">${symbol}</div>
+                                    <div class="name">${id.replace(/-/g, ' ').toUpperCase()}</div>
+                                    <div class="price ${isUp ? 'price-up' : 'price-down'}">$${priceFormatted}</div>
+                                    <div class="change ${isUp ? 'price-up' : 'price-down'}">${isUp ? '+' : ''}${change.toFixed(2)}%</div>
+                                    <div class="volume">Vol: $${volFormatted}</div>
+                                </div>
+                            `;
+                        });
+
+                        html += `</div>`;
+                        html += `<div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                                    <i class="fas fa-info-circle"></i> Data real-time dari CoinGecko
+                                </div>`;
+                        resultContent.innerHTML = html;
+                    } else {
+                        resultContent.innerHTML = `<div class="alert"><i class="fas fa-exclamation-triangle"></i> Gagal memuat data. Coba lagi nanti.</div>`;
+                    }
+
+                } catch (error) {
+                    console.error('CoinGecko Error:', error);
+                    resultContent.innerHTML = `<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}. Coba lagi nanti.</div>`;
+                }
+            }
+
+            // ========== FOREX DATA (SIMULASI KARENA COINGECKO TIDAK SUPPORT FOREX) ==========
+            function showForexData() {
+                const forexData = [
+                    { symbol: 'USD/IDR', price: '15,850', change: '+0.2%', up: true },
+                    { symbol: 'EUR/USD', price: '1.0850', change: '-0.1%', up: false },
+                    { symbol: 'USD/JPY', price: '154.30', change: '+0.4%', up: true },
+                    { symbol: 'GBP/USD', price: '1.2650', change: '+0.3%', up: true },
+                    { symbol: 'AUD/USD', price: '0.6580', change: '+0.1%', up: true },
+                    { symbol: 'USD/CHF', price: '0.8920', change: '-0.2%', up: false }
+                ];
+
+                let html = `<div class="market-grid">`;
+                forexData.forEach(item => {
+                    html += `
+                        <div class="market-item">
+                            <div class="symbol">${item.symbol}</div>
+                            <div class="price ${item.up ? 'price-up' : 'price-down'}">${item.price}</div>
+                            <div class="change ${item.up ? 'price-up' : 'price-down'}">${item.change}</div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                html += `<div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                            <i class="fas fa-info-circle"></i> Data Forex simulasi. Untuk real-time gunakan API Forex.
+                        </div>`;
+                resultContent.innerHTML = html;
+            }
+
+            // ========== SEARCH FUNCTION ==========
+            async function searchAsset() {
+                const query = searchInput.value.trim().toLowerCase();
+                if (!query) {
+                    alert('Masukkan nama aset yang ingin dicari!');
+                    return;
+                }
+
+                resultBox.classList.add('show');
+                resultContent.innerHTML = `<div class="alert"><span class="loading-spinner"></span> Mencari ${query}...</div>`;
+
+                try {
+                    // Cari di CoinGecko
+                    const searchUrl = `${BASE_URL}/search?query=${encodeURIComponent(query)}&x_cg_demo_api_key=${API_KEY}`;
+                    const searchResp = await fetch(searchUrl);
+                    const searchData = await searchResp.json();
+
+                    if (searchData.coins && searchData.coins.length > 0) {
+                        const ids = searchData.coins.slice(0, 10).map(c => c.id);
+                        const priceUrl = `${BASE_URL}/simple/price?ids=${ids.join(',')}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&x_cg_demo_api_key=${API_KEY}`;
+                        const priceResp = await fetch(priceUrl);
+                        const priceData = await priceResp.json();
+
+                        if (priceData && Object.keys(priceData).length > 0) {
+                            let html = `<div class="market-grid">`;
+                            ids.forEach(id => {
+                                const item = priceData[id];
+                                if (!item) return;
+                                const price = item.usd || 0;
+                                const change = item.usd_24h_change || 0;
+                                const isUp = change >= 0;
+                                const symbol = searchData.coins.find(c => c.id === id)?.symbol?.toUpperCase() || id.toUpperCase();
+                                const name = searchData.coins.find(c => c.id === id)?.name || id;
+
+                                const priceFormatted = price < 0.01 ? price.toFixed(8) : price < 1 ? price.toFixed(4) : price.toFixed(2);
+
+                                html += `
+                                    <div class="market-item">
+                                        <div class="symbol">${symbol}</div>
+                                        <div class="name">${name}</div>
+                                        <div class="price ${isUp ? 'price-up' : 'price-down'}">$${priceFormatted}</div>
+                                        <div class="change ${isUp ? 'price-up' : 'price-down'}">${isUp ? '+' : ''}${change.toFixed(2)}%</div>
+                                    </div>
+                                `;
+                            });
+                            html += `</div>`;
+                            html += `<div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                                        <i class="fas fa-info-circle"></i> Hasil pencarian dari CoinGecko
+                                    </div>`;
+                            resultContent.innerHTML = html;
+                        } else {
+                            resultContent.innerHTML = `<div class="alert"><i class="fas fa-exclamation-triangle"></i> Tidak ditemukan data untuk "${query}"</div>`;
+                        }
+                    } else {
+                        resultContent.innerHTML = `<div class="alert"><i class="fas fa-exclamation-triangle"></i> Tidak ditemukan aset dengan nama "${query}"</div>`;
+                    }
+
+                } catch (error) {
+                    console.error('Search Error:', error);
+                    resultContent.innerHTML = `<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}. Coba lagi nanti.</div>`;
+                }
+            }
+
+            // ========== EVENT LISTENERS ==========
+            searchBtn.addEventListener('click', searchAsset);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') searchAsset();
+            });
+
+            // ========== INIT ==========
+            // Load default data
+            loadTopData('crypto');
+        });
+    </script>
+</body>
+</html>
