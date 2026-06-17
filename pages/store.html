@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Store - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== STORE STYLE ===== */
+        .store-header {
+            text-align: center;
+            padding: 120px 20px 40px;
+        }
+        .store-header h1 {
+            font-size: 2.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        .store-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .store-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px 20px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .store-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-blue);
+            box-shadow: var(--shadow-hover);
+        }
+        .store-card .icon {
+            font-size: 3rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+        .store-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .store-card .price {
+            color: var(--neon-blue);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+        .store-card .desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .store-card .btn-buy {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
+            background: var(--gradient);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .store-card .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        .store-card .btn-buy i {
+            font-size: 1rem;
+        }
+
+        /* ===== KATEGORI ===== */
+        .category-title {
+            max-width: 1200px;
+            margin: 40px auto 10px;
+            padding: 0 20px;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .store-header h1 { font-size: 2rem; }
+            .store-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== THEME TOGGLE ===== -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link active">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <div class="store-header">
+        <h1><i class="fas fa-store"></i> Foxxy Store</h1>
+        <p>Dapatkan produk premium & jasa berkualitas dengan harga terbaik!</p>
+    </div>
+
+    <!-- ===== APK PREMIUM ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-mobile-alt"></i> APK Premium</h2>
+    </div>
+
+    <div class="store-grid">
+        <!-- Netflix Premium -->
+        <div class="store-card">
+            <div class="icon"><i class="fab fa-netflix"></i></div>
+            <h3>Netflix Premium</h3>
+            <div class="price">Rp 25.000</div>
+            <div class="desc">Akses semua film & series tanpa batas. 4K HDR, multi-device.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20beli%20Netflix%20Premium" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Beli Sekarang
+            </a>
+        </div>
+
+        <!-- CapCut Premium -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-video"></i></div>
+            <h3>CapCut Premium</h3>
+            <div class="price">Rp 15.000</div>
+            <div class="desc">Fitur editing pro, efek eksklusif, tanpa watermark.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20beli%20CapCut%20Premium" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Beli Sekarang
+            </a>
+        </div>
+
+        <!-- Canva Pro -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-palette"></i></div>
+            <h3>Canva Pro</h3>
+            <div class="price">Rp 20.000</div>
+            <div class="desc">Desain grafis dengan jutaan template premium & font eksklusif.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20beli%20Canva%20Pro" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Beli Sekarang
+            </a>
+        </div>
+
+        <!-- AM Premium Generator -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h3>AM Premium Generator</h3>
+            <div class="price">Rp 10.000</div>
+            <div class="desc">Generate akun premium berbagai aplikasi dengan mudah.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20beli%20AM%20Premium%20Generator" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Beli Sekarang
+            </a>
+        </div>
+
+        <!-- AM Google -->
+        <div class="store-card">
+            <div class="icon"><i class="fab fa-google"></i></div>
+            <h3>AM Premium Google</h3>
+            <div class="price">Rp 12.000</div>
+            <div class="desc">Akses premium Google Drive, Gmail, dan layanan Google lainnya.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20beli%20AM%20Premium%20Google" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Beli Sekarang
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== JASA EDIT ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-edit"></i> Jasa Edit & Lainnya</h2>
+    </div>
+
+    <div class="store-grid">
+        <!-- Jasa Edit Video -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-film"></i></div>
+            <h3>Jasa Edit Video</h3>
+            <div class="price">Mulai Rp 30.000</div>
+            <div class="desc">Edit video profesional untuk konten, iklan, atau acara spesial.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20order%20jasa%20edit%20video" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+        </div>
+
+        <!-- Jasa Edit Foto -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-camera"></i></div>
+            <h3>Jasa Edit Foto</h3>
+            <div class="price">Mulai Rp 15.000</div>
+            <div class="desc">Edit foto profesional untuk produk, potret, atau konten sosial media.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20order%20jasa%20edit%20foto" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+        </div>
+
+        <!-- Jasa Desain Grafis -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-pen-fancy"></i></div>
+            <h3>Jasa Desain Grafis</h3>
+            <div class="price">Mulai Rp 25.000</div>
+            <div class="desc">Desain logo, banner, poster, dan kebutuhan branding lainnya.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20order%20jasa%20desain%20grafis" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+        </div>
+
+        <!-- Jasa Thumbnail -->
+        <div class="store-card">
+            <div class="icon"><i class="fas fa-image"></i></div>
+            <h3>Jasa Thumbnail</h3>
+            <div class="price">Mulai Rp 10.000</div>
+            <div class="desc">Thumbnail menarik untuk YouTube, TikTok, atau konten digital.</div>
+            <a href="https://wa.me/6281997149736?text=Halo%20Foxxy%2C%20saya%20mau%20order%20jasa%20thumbnail" target="_blank" class="btn-buy">
+                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+        });
+    </script>
+
+</body>
+</html>
