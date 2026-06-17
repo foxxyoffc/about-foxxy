@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>About - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .about-hero {
+            padding: 120px 20px 40px;
+            text-align: center;
+        }
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .about-hero p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .about-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 35px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .about-card .avatar {
+            flex: 0 0 150px;
+        }
+        .about-card .avatar img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+        }
+        .about-card .bio {
+            flex: 1;
+        }
+        .about-card .bio .role {
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .about-card .bio h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .about-card .bio h2 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .about-card .bio p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .about-card .bio .tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .about-card .bio .tags span {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .about-card .bio .tags span i {
+            color: var(--neon-blue);
+            margin-right: 6px;
+        }
+        .about-card .bio .btn-group {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 600px) {
+            .about-card { flex-direction: column; align-items: center; text-align: center; padding: 25px 20px; }
+            .about-card .avatar { flex: 0 0 120px; }
+            .about-card .avatar img { width: 120px; height: 120px; }
+            .about-hero h1 { font-size: 2rem; }
+            .about-card .bio .btn-group { justify-content: center; }
+            .about-card .bio .tags { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="../index.html#contact-section" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about-hero">
+        <h1><i class="fas fa-user"></i> About Developer</h1>
+        <p>Mengenal lebih dekat orang di balik FoxxyPortofolio</p>
+    </div>
+
+    <div class="about-container">
+        <div class="about-card">
+            <div class="avatar">
+                <img src="https://j.top4top.io/p_38195t90r1.jpg" alt="Foxxy" id="profileImage">
+            </div>
+            <div class="bio">
+                <div class="role">🦊 Developer</div>
+                <h2>Dibuat oleh <span>Foxxy</span></h2>
+                <p>Foxxy adalah seorang developer yang berfokus pada pengembangan WhatsApp Bot, backend API, dan aplikasi web modern. Tujuan Foxxy adalah menghadirkan solusi digital yang mudah digunakan dan bermanfaat bagi semua pengguna.</p>
+                <div class="tags">
+                    <span><i class="fab fa-whatsapp"></i> WhatsApp Bot Development</span>
+                    <span><i class="fas fa-server"></i> Backend API & Node.js</span>
+                    <span><i class="fas fa-globe"></i> Modern Web Applications</span>
+                </div>
+                <div class="btn-group">
+                    <a href="../pages/tools.html" class="btn btn-primary"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/komunitas.html" class="btn btn-secondary"><i class="fas fa-users"></i> Komunitas</a>
+                    <a href="../admin/developer.html" class="btn btn-secondary"><i class="fas fa-lock"></i> Developer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Foxxy</h3>
+                    <p>WhatsApp Bot modern yang dirancang untuk membantu produktivitas, hiburan, dan otomatisasi dalam satu platform.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>Navigasi</h4>
+                    <a href="../index.html">Home</a>
+                    <a href="tools.html">Tools</a>
+                    <a href="about.html">About</a>
+                    <a href="../index.html#contact-section">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Tautan</h4>
+                    <a href="https://github.com/foxxyoffc" target="_blank">GitHub</a>
+                    <a href="https://wa.me/6281997149736" target="_blank">WhatsApp</a>
+                    <a href="komunitas.html">Komunitas</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Foxxy. All rights reserved.</p>
+                <p>Developed with ❤️ by <span class="watermark">FoxxyOffc</span> · foxxy.my.id</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const sunIcon = themeToggle.querySelector('.fa-sun');
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+            if (currentTheme === 'light') {
+                document.body.classList.add('light-theme');
+                if (sunIcon) sunIcon.style.display = 'none';
+                if (moonIcon) moonIcon.style.display = 'flex';
+            }
+            themeToggle.addEventListener('click', () => {
+                if (currentTheme === 'dark') {
+                    document.body.classList.add('light-theme');
+                    if (sunIcon) sunIcon.style.display = 'none';
+                    if (moonIcon) moonIcon.style.display = 'flex';
+                    currentTheme = 'light';
+                } else {
+                    document.body.classList.remove('light-theme');
+                    if (sunIcon) sunIcon.style.display = 'flex';
+                    if (moonIcon) moonIcon.style.display = 'none';
+                    currentTheme = 'dark';
+                }
+                localStorage.setItem('theme', currentTheme);
+            });
+
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            const config = typeof getConfig === 'function' ? getConfig() : {};
+            const profileImg = document.getElementById('profileImage');
+            if (profileImg && config.profileImage) {
+                profileImg.src = config.profileImage;
+            }
+        });
+    </script>
+</body>
+</html>
