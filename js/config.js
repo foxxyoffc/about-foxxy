@@ -3,7 +3,7 @@ const CONFIG = {
     // ===== PROFIL & BRANDING =====
     profileImage: 'https://j.top4top.io/p_38195t90r1.jpg',
     logoImage: 'https://c.top4top.io/p_3819ed0vz1.jpg',
-    heroVideo: 'https://d.top4top.io/m_3819tiava1.mp4',
+    heroVideo: 'https://files.catbox.moe/vwy06h.mp4',
     websiteTitle: 'FoxxyPortofolio',
     
     // ===== SOSIAL MEDIA =====
