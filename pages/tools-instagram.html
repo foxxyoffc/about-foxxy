@@ -21,4 +21,150 @@
         .result-box img { width: 100%; border-radius: 12px; }
         .result-box .info { margin-top: 15px; color: var(--text-secondary); }
         .result-box .info strong { color: var(--text-primary); }
-        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
+        .download-link { display: inline-block; background: var(--neon-blue); color: var(--dark-bg); padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 600; margin-top: 10px; }
+        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
+        .flex-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tools-container">
+        <h1><i class="fab fa-instagram"></i> Instagram Downloader</h1>
+        <p class="subtitle">Download postingan, reels, story, dan audio dari Instagram</p>
+
+        <div class="input-group">
+            <input type="text" id="instagramUrl" placeholder="Masukkan URL Instagram... (contoh: https://www.instagram.com/p/xxxxx)">
+            <button id="downloadBtn"><i class="fab fa-instagram"></i> Download</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div id="resultContent"></div>
+        </div>
+
+        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+            
+            const btn = document.getElementById('downloadBtn');
+            const urlInput = document.getElementById('instagramUrl');
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+            
+            btn.addEventListener('click', async () => {
+                const url = urlInput.value.trim();
+                if (!url) {
+                    alert('Masukkan URL Instagram terlebih dahulu!');
+                    return;
+                }
+                
+                resultBox.classList.add('show');
+                resultContent.innerHTML = '<div class="alert"><i class="fas fa-spinner fa-spin"></i> Memproses...</div>';
+                
+                try {
+                    const apiUrl = `https://api.ryzendesu.vip/api/downloader/igdl?url=${encodeURIComponent(url)}`;
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    
+                    if (data.status === 200 && data.url) {
+                        const mediaUrl = data.url;
+                        const isVideo = mediaUrl.includes('.mp4') || mediaUrl.includes('.mov');
+                        const caption = data.caption || 'Instagram Media';
+                        const username = data.username || 'instagram_user';
+                        
+                        if (isVideo) {
+                            resultContent.innerHTML = `
+                                <video src="${mediaUrl}" controls></video>
+                                <div class="info">
+                                    <p><strong><i class="fab fa-instagram"></i> Username:</strong> @${username}</p>
+                                    <p><strong><i class="fas fa-caption"></i> Caption:</strong> ${caption.substring(0, 200)}${caption.length > 200 ? '...' : ''}</p>
+                                    <div class="flex-wrap">
+                                        <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Video</a>
+                                        <button onclick="copyCaptionText('${caption.replace(/'/g, "\\'")}')" class="download-link" style="background: var(--glass-bg); color: var(--neon-blue); border: none; cursor: pointer;">Salin Caption</button>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            resultContent.innerHTML = `
+                                <img src="${mediaUrl}" alt="Instagram Image">
+                                <div class="info">
+                                    <p><strong><i class="fab fa-instagram"></i> Username:</strong> @${username}</p>
+                                    <p><strong><i class="fas fa-caption"></i> Caption:</strong> ${caption.substring(0, 200)}${caption.length > 200 ? '...' : ''}</p>
+                                    <div class="flex-wrap">
+                                        <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Gambar</a>
+                                        <button onclick="copyCaptionText('${caption.replace(/'/g, "\\'")}')" class="download-link" style="background: var(--glass-bg); color: var(--neon-blue); border: none; cursor: pointer;">Salin Caption</button>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        resultContent.innerHTML = `
+                            <div class="alert">
+                                <i class="fas fa-exclamation-triangle"></i> Gagal memproses. 
+                                <a href="${getConfig().downloadLinks?.instagram || 'https://snapinsta.app'}" target="_blank" style="color: var(--neon-blue);">Buka link resmi</a>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    resultContent.innerHTML = `
+                        <div class="alert">
+                            <i class="fas fa-exclamation-triangle"></i> Error. 
+                            <a href="${getConfig().downloadLinks?.instagram || 'https://snapinsta.app'}" target="_blank" style="color: var(--neon-blue);">Buka link resmi</a>
+                        </div>
+                    `;
+                }
+            });
+        });
+        
+        function copyCaptionText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Caption berhasil disalin!');
+            }).catch(() => {
+                alert('Caption: ' + text);
+            });
+        }
+    </script>
+</body>
+</html>
