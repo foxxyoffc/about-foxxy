@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Developer Panel - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 900px;
+            margin: 120px auto 40px;
+            padding: 0 20px;
+        }
+        .admin-container h1 {
+            font-size: 2.2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+        }
+        .admin-container .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+        }
+        .login-box h2 {
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--dark-bg);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .login-box button:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+        .login-box .error-msg {
+            color: #ff4444;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+        .admin-panel.show {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .admin-header .user-badge {
+            background: var(--glass-bg);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid var(--glass-border);
+        }
+        .admin-header .user-badge i {
+            color: var(--neon-blue);
+            margin-right: 8px;
+        }
+        .btn-logout {
+            padding: 10px 25px;
+            background: transparent;
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-logout:hover {
+            background: #ff4444;
+            color: #fff;
+        }
+
+        .setting-section {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .setting-section h3 {
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+        }
+        .setting-section h3 i {
+            margin-right: 8px;
+        }
+        .setting-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .setting-row .field {
+            flex: 1;
+            min-width: 200px;
+        }
+        .setting-row .field label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .setting-row .field input,
+        .setting-row .field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .setting-row .field textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        .btn-save {
+            padding: 12px 35px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 30px;
+            color: var(--dark-bg);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .btn-save:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-save i {
+            margin-right: 8px;
+        }
+
+        .btn-add {
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        .btn-add:hover {
+            background: rgba(0, 242, 254, 0.1);
+        }
+        .btn-add i {
+            margin-right: 6px;
+        }
+
+        .btn-remove {
+            padding: 4px 12px;
+            background: transparent;
+            border: 1px solid #ff4444;
+            color: #ff4444;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .btn-remove:hover {
+            background: #ff4444;
+            color: #fff;
+        }
+
+        .co-owner-list,
+        .leader-list,
+        .divisi-list {
+            margin-top: 10px;
+        }
+        .co-owner-item,
+        .leader-item,
+        .divisi-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--glass-bg);
+            border-radius: 10px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .co-owner-item .info,
+        .leader-item .info,
+        .divisi-item .info {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        .co-owner-item .info strong,
+        .leader-item .info strong,
+        .divisi-item .info strong {
+            color: var(--neon-blue);
+        }
+
+        .akun-list {
+            margin-top: 10px;
+        }
+        .akun-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--glass-bg);
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+        .akun-item .info {
+            font-size: 0.9rem;
+        }
+        .akun-item .info .role-badge {
+            background: rgba(0, 242, 254, 0.15);
+            color: var(--neon-blue);
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .admin-container h1 { font-size: 1.7rem; }
+            .setting-row { flex-direction: column; }
+            .setting-row .field { min-width: 100%; }
+            .admin-header { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="../pages/store.html" class="nav-link">Store</a>
+                <a href="../pages/bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="../pages/tools.html" class="nav-link">Tools</a>
+                <a href="../pages/komunitas.html" class="nav-link">Komunitas</a>
+                <a href="developer.html" class="nav-link active">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+
+        <h1><i class="fas fa-code"></i> Developer Panel</h1>
+        <p class="subtitle">Kelola semua konfigurasi website dari sini</p>
+
+        <!-- ========== LOGIN BOX ========== -->
+        <div id="loginBox" class="login-box">
+            <h2><i class="fas fa-lock"></i> Developer Login</h2>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <div id="loginError" class="error-msg"><i class="fas fa-exclamation-circle"></i> Username atau password salah!</div>
+            </form>
+        </div>
+
+        <!-- ========== ADMIN PANEL ========== -->
+        <div id="adminPanel" class="admin-panel">
+
+            <div class="admin-header">
+                <div class="user-badge"><i class="fas fa-user-shield"></i> <span id="userDisplay">Developer</span></div>
+                <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+
+            <!-- ====== SETTING UMUM ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-globe"></i> Setting Umum</h3>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Judul Website</label>
+                        <input type="text" id="sWebsiteTitle" placeholder="FoxxyPortofolio">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Link Foto Profil</label>
+                        <input type="text" id="sProfileImage" placeholder="https://example.com/profile.jpg">
+                    </div>
+                    <div class="field">
+                        <label>Link Logo</label>
+                        <input type="text" id="sLogoImage" placeholder="https://example.com/logo.jpg">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Link Video Hero</label>
+                        <input type="text" id="sHeroVideo" placeholder="https://example.com/video.mp4">
+                    </div>
+                </div>
+                <button id="saveGeneral" class="btn-save"><i class="fas fa-save"></i> Simpan Setting Umum</button>
+            </div>
+
+            <!-- ====== SOSIAL MEDIA ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-share-alt"></i> Sosial Media</h3>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>WhatsApp (nomor)</label>
+                        <input type="text" id="sWhatsapp" placeholder="6281234567890">
+                    </div>
+                    <div class="field">
+                        <label>Telegram (link)</label>
+                        <input type="text" id="sTelegram" placeholder="https://t.me/username">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>TikTok (link)</label>
+                        <input type="text" id="sTiktok" placeholder="https://www.tiktok.com/@username">
+                    </div>
+                    <div class="field">
+                        <label>GitHub (link)</label>
+                        <input type="text" id="sGithub" placeholder="https://github.com/username">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Gmail (email)</label>
+                        <input type="text" id="sGmail" placeholder="email@gmail.com">
+                    </div>
+                </div>
+                <button id="saveSocial" class="btn-save"><i class="fas fa-save"></i> Simpan Sosial Media</button>
+            </div>
+
+            <!-- ====== KOMUNITAS ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-users"></i> Komunitas</h3>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Link Grup WhatsApp</label>
+                        <input type="text" id="sGrupWA" placeholder="https://chat.whatsapp.com/xxxxx">
+                    </div>
+                    <div class="field">
+                        <label>Link Website Sekte</label>
+                        <input type="text" id="sWebsiteSekte" placeholder="https://sekte-creator-kece.vercel.app">
+                    </div>
+                </div>
+                <button id="saveKomunitas" class="btn-save"><i class="fas fa-save"></i> Simpan Komunitas</button>
+            </div>
+
+            <!-- ====== QRIS DONASI ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-qrcode"></i> QRIS Donasi</h3>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>Link Gambar QRIS</label>
+                        <input type="text" id="sQris" placeholder="https://example.com/qris.jpg">
+                    </div>
+                </div>
+                <button id="saveQris" class="btn-save"><i class="fas fa-save"></i> Simpan QRIS</button>
+            </div>
+
+            <!-- ====== DOWNLOADER FALLBACK ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-download"></i> Link Downloader (Fallback)</h3>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>TikTok</label>
+                        <input type="text" id="sDlTiktok" placeholder="https://tikwm.com">
+                    </div>
+                    <div class="field">
+                        <label>Pinterest</label>
+                        <input type="text" id="sDlPinterest" placeholder="https://pindown.io">
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <div class="field">
+                        <label>YouTube</label>
+                        <input type="text" id="sDlYoutube" placeholder="https://yt1s.com">
+                    </div>
+                    <div class="field">
+                        <label>Instagram</label>
+                        <input type="text" id="sDlInstagram" placeholder="https://snapinsta.app">
+                    </div>
+                </div>
+                <button id="saveDownloader" class="btn-save"><i class="fas fa-save"></i> Simpan Link Downloader</button>
+            </div>
+
+            <!-- ====== AKUN ADMIN ====== -->
+            <div class="setting-section">
+                <h3><i class="fas fa-user-shield"></i> Kelola Akun Developer</h3>
+                <div id="akunList" class="akun-list"></div>
+                <div class="setting-row" style="margin-top: 15px;">
+                    <div class="field">
+                        <label>Username Baru</label>
+                        <input type="text" id="newDevUser" placeholder="username">
+                    </div>
+                    <div class="field">
+                        <label>Password Baru</label>
+                        <input type="text" id="newDevPass" placeholder="password">
+                    </div>
+                    <div class="field" style="display: flex; align-items: flex-end;">
+                        <button id="addDevAccount" class="btn-add"><i class="fas fa-plus"></i> Tambah Akun</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ====== END ADMIN PANEL ====== -->
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initTheme === 'function') initTheme();
+            if (typeof initNavToggle === 'function') initNavToggle();
+
+            // ========== ELEMENTS ==========
+            const loginBox = document.getElementById('loginBox');
+            const adminPanel = document.getElementById('adminPanel');
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const userDisplay = document.getElementById('userDisplay');
+
+            // ========== CHECK LOGIN STATUS ==========
+            function checkLogin() {
+                if (typeof isDevLoggedIn === 'function' && isDevLoggedIn()) {
+                    loginBox.style.display = 'none';
+                    adminPanel.classList.add('show');
+                    userDisplay.textContent = sessionStorage.getItem('devUsername') || 'Developer';
+                    loadAllSettings();
+                    loadAkunList();
+                } else {
+                    loginBox.style.display = 'block';
+                    adminPanel.classList.remove('show');
+                }
+            }
+
+            // ========== LOGIN ==========
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+
+                if (typeof loginDeveloper === 'function' && loginDeveloper(username, password)) {
+                    loginError.style.display = 'none';
+                    checkLogin();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+
+            // ========== LOGOUT ==========
+            logoutBtn.addEventListener('click', function() {
+                if (typeof logout === 'function') logout();
+                checkLogin();
+            });
+
+            // ========== LOAD ALL SETTINGS ==========
+            function loadAllSettings() {
+                const config = typeof getConfig === 'function' ? getConfig() : {};
+
+                document.getElementById('sWebsiteTitle').value = config.websiteTitle || '';
+                document.getElementById('sProfileImage').value = config.profileImage || '';
+                document.getElementById('sLogoImage').value = config.logoImage || '';
+                document.getElementById('sHeroVideo').value = config.heroVideo || '';
+
+                document.getElementById('sWhatsapp').value = config.whatsapp || '';
+                document.getElementById('sTelegram').value = config.telegram || '';
+                document.getElementById('sTiktok').value = config.tiktok || '';
+                document.getElementById('sGithub').value = config.github || '';
+                document.getElementById('sGmail').value = config.gmail || '';
+
+                document.getElementById('sGrupWA').value = config.grupWhatsApp || '';
+                document.getElementById('sWebsiteSekte').value = config.websiteSekte || '';
+
+                document.getElementById('sQris').value = config.qrisImage || '';
+
+                document.getElementById('sDlTiktok').value = config.downloadLinks?.tiktok || '';
+                document.getElementById('sDlPinterest').value = config.downloadLinks?.pinterest || '';
+                document.getElementById('sDlYoutube').value = config.downloadLinks?.youtube || '';
+                document.getElementById('sDlInstagram').value = config.downloadLinks?.instagram || '';
+            }
+
+            // ========== SAVE FUNCTIONS ==========
+            function saveSetting(key, value) {
+                let config = typeof getConfig === 'function' ? getConfig() : {};
+                const keys = key.split('.');
+                let current = config;
+                for (let i = 0; i < keys.length - 1; i++) {
+                    if (!current[keys[i]]) current[keys[i]] = {};
+                    current = current[keys[i]];
+                }
+                current[keys[keys.length - 1]] = value;
+                if (typeof saveConfig === 'function') saveConfig(config);
+            }
+
+            function getField(id) {
+                return document.getElementById(id).value;
+            }
+
+            // General
+            document.getElementById('saveGeneral').addEventListener('click', function() {
+                saveSetting('websiteTitle', getField('sWebsiteTitle'));
+                saveSetting('profileImage', getField('sProfileImage'));
+                saveSetting('logoImage', getField('sLogoImage'));
+                saveSetting('heroVideo', getField('sHeroVideo'));
+                alert('✅ Setting Umum berhasil disimpan!');
+                location.reload();
+            });
+
+            // Social
+            document.getElementById('saveSocial').addEventListener('click', function() {
+                saveSetting('whatsapp', getField('sWhatsapp'));
+                saveSetting('telegram', getField('sTelegram'));
+                saveSetting('tiktok', getField('sTiktok'));
+                saveSetting('github', getField('sGithub'));
+                saveSetting('gmail', getField('sGmail'));
+                alert('✅ Sosial Media berhasil disimpan!');
+                location.reload();
+            });
+
+            // Komunitas
+            document.getElementById('saveKomunitas').addEventListener('click', function() {
+                saveSetting('grupWhatsApp', getField('sGrupWA'));
+                saveSetting('websiteSekte', getField('sWebsiteSekte'));
+                alert('✅ Komunitas berhasil disimpan!');
+                location.reload();
+            });
+
+            // QRIS
+            document.getElementById('saveQris').addEventListener('click', function() {
+                saveSetting('qrisImage', getField('sQris'));
+                alert('✅ QRIS berhasil disimpan!');
+                location.reload();
+            });
+
+            // Downloader
+            document.getElementById('saveDownloader').addEventListener('click', function() {
+                saveSetting('downloadLinks.tiktok', getField('sDlTiktok'));
+                saveSetting('downloadLinks.pinterest', getField('sDlPinterest'));
+                saveSetting('downloadLinks.youtube', getField('sDlYoutube'));
+                saveSetting('downloadLinks.instagram', getField('sDlInstagram'));
+                alert('✅ Link Downloader berhasil disimpan!');
+                location.reload();
+            });
+
+            // ========== AKUN LIST ==========
+            function loadAkunList() {
+                const container = document.getElementById('akunList');
+                const creds = JSON.parse(localStorage.getItem('devCredentials')) || 
+                              (typeof devCredentials !== 'undefined' ? devCredentials : [{ username: 'foxxy', password: 'foxxy2026' }]);
+                
+                if (creds.length === 0) {
+                    container.innerHTML = '<div style="color: var(--text-secondary); font-size: 0.9rem;">Belum ada akun.</div>';
+                    return;
+                }
+
+                let html = '';
+                creds.forEach((acc, index) => {
+                    const isCurrent = acc.username === sessionStorage.getItem('devUsername');
+                    html += `
+                        <div class="akun-item">
+                            <div class="info">
+                                <strong>${acc.username}</strong>
+                                ${isCurrent ? '<span class="role-badge">Aktif</span>' : ''}
+                            </div>
+                            <div>
+                                <button class="btn-remove" data-username="${acc.username}" ${isCurrent ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+
+                // Event hapus akun
+                container.querySelectorAll('.btn-remove').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const username = this.dataset.username;
+                        if (confirm(`Hapus akun "${username}"?`)) {
+                            if (typeof removeDevUser === 'function') {
+                                removeDevUser(username);
+                                loadAkunList();
+                            }
+                        }
+                    });
+                });
+            }
+
+            // ========== TAMBAH AKUN ==========
+            document.getElementById('addDevAccount').addEventListener('click', function() {
+                const username = document.getElementById('newDevUser').value.trim();
+                const password = document.getElementById('newDevPass').value.trim();
+
+                if (!username || !password) {
+                    alert('Isi username dan password!');
+                    return;
+                }
+
+                if (typeof addDevUser === 'function') {
+                    if (addDevUser(username, password)) {
+                        alert('✅ Akun berhasil ditambahkan!');
+                        document.getElementById('newDevUser').value = '';
+                        document.getElementById('newDevPass').value = '';
+                        loadAkunList();
+                    } else {
+                        alert('❌ Username sudah ada!');
+                    }
+                }
+            });
+
+            // ========== INIT ==========
+            checkLogin();
+        });
+    </script>
+
+</body>
+</html>
