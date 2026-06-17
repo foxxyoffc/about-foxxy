@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Tools - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== TOOLS STYLE ===== */
+        .tools-header {
+            text-align: center;
+            padding: 120px 20px 40px;
+        }
+        .tools-header h1 {
+            font-size: 2.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        .tools-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .tools-grid .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+        .tools-grid .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-blue);
+            box-shadow: var(--shadow-hover);
+        }
+        .tools-grid .tool-card i {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 12px;
+        }
+        .tools-grid .tool-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        .tools-grid .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* ===== KATEGORI ===== */
+        .category-title {
+            max-width: 1200px;
+            margin: 40px auto 10px;
+            padding: 0 20px;
+            font-size: 1.6rem;
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .tools-header h1 { font-size: 2rem; }
+            .tools-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== THEME TOGGLE ===== -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <div class="tools-header">
+        <h1><i class="fas fa-tools"></i> Tools</h1>
+        <p>Kumpulan tools bermanfaat untuk kebutuhan sehari-hari</p>
+    </div>
+
+    <!-- ===== DOWNLOADER ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-download"></i> Downloader</h2>
+    </div>
+    <div class="tools-grid">
+        <a href="tools-tiktok.html" class="tool-card">
+            <i class="fab fa-tiktok"></i>
+            <h3>TikTok Downloader</h3>
+            <p>No watermark, MP3, caption</p>
+        </a>
+        <a href="tools-pinterest.html" class="tool-card">
+            <i class="fab fa-pinterest"></i>
+            <h3>Pinterest Downloader</h3>
+            <p>Video & foto</p>
+        </a>
+        <a href="tools-youtube.html" class="tool-card">
+            <i class="fab fa-youtube"></i>
+            <h3>YouTube Downloader</h3>
+            <p>MP3 & MP4</p>
+        </a>
+        <a href="tools-instagram.html" class="tool-card">
+            <i class="fab fa-instagram"></i>
+            <h3>Instagram Downloader</h3>
+            <p>Postingan, reels, status, MP3, MP4</p>
+        </a>
+    </div>
+
+    <!-- ===== STALKING ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-search"></i> Stalking</h2>
+    </div>
+    <div class="tools-grid">
+        <a href="tools-stalk-tiktok.html" class="tool-card">
+            <i class="fab fa-tiktok"></i>
+            <h3>Stalk TikTok</h3>
+            <p>Followers, like, following, dll</p>
+        </a>
+        <a href="tools-stalk-ig.html" class="tool-card">
+            <i class="fab fa-instagram"></i>
+            <h3>Stalk Instagram</h3>
+            <p>Informasi akun</p>
+        </a>
+        <a href="tools-stalk-ml.html" class="tool-card">
+            <i class="fas fa-gamepad"></i>
+            <h3>Stalk ML</h3>
+            <p>ID, hero fav, rank</p>
+        </a>
+        <a href="tools-stalk-ff.html" class="tool-card">
+            <i class="fas fa-gamepad"></i>
+            <h3>Stalk FF</h3>
+            <p>Informasi akun</p>
+        </a>
+    </div>
+
+    <!-- ===== CHECK ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-shield-alt"></i> Check</h2>
+    </div>
+    <div class="tools-grid">
+        <a href="tools-check-web.html" class="tool-card">
+            <i class="fas fa-globe"></i>
+            <h3>Check Web</h3>
+            <p>Malware, ransomware, keylogger</p>
+        </a>
+        <a href="tools-check-file.html" class="tool-card">
+            <i class="fas fa-file"></i>
+            <h3>Check File</h3>
+            <p>APK, ZIP, MP4, MP3, JPG</p>
+        </a>
+    </div>
+
+    <!-- ===== WEB MAKER ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-code"></i> Web Maker</h2>
+    </div>
+    <div class="tools-grid">
+        <a href="tools-web-maker.html" class="tool-card">
+            <i class="fas fa-copy"></i>
+            <h3>Web Maker</h3>
+            <p>Copy website → download zip</p>
+        </a>
+        <a href="tools-web-request.html" class="tool-card">
+            <i class="fas fa-pen-fancy"></i>
+            <h3>Web Request</h3>
+            <p>Request fitur + tema mirip link</p>
+        </a>
+    </div>
+
+    <!-- ===== TRADING & MATA UANG ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-chart-line"></i> Trading & Mata Uang</h2>
+    </div>
+    <div class="tools-grid">
+        <a href="tools-trading.html" class="tool-card">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Trading</h3>
+            <p>Saham, crypto, meme coin</p>
+        </a>
+        <a href="tools-mata-uang.html" class="tool-card">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>Mata Uang</h3>
+            <p>Konversi ke Rupiah</p>
+        </a>
+    </div>
+
+    <!-- ===== DEVICE INFO ===== -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <h2 class="category-title"><i class="fas fa-laptop"></i> Device Info</h2>
+    </div>
+    <div class="tools-grid" style="margin-bottom: 50px;">
+        <a href="tools-device.html" class="tool-card">
+            <i class="fas fa-microchip"></i>
+            <h3>Device Info</h3>
+            <p>RAM, storage, battery, CPU, Antutu, Hz</p>
+        </a>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+        });
+    </script>
+
+</body>
+</html>
