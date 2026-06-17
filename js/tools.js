@@ -141,7 +141,7 @@ function copyCaption() {
     }
 }
 
-// ========== YOUTUBE DOWNLOADER ==========
+// ========== YOUTUBE DOWNLOADER (PAKE API FAA) ==========
 async function downloadYouTube(type = 'video') {
     const urlInput = document.getElementById('youtubeUrl');
     const resultDiv = document.getElementById('youtubeResult');
@@ -155,28 +155,33 @@ async function downloadYouTube(type = 'video') {
     resultDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-spinner fa-spin"></i> Memproses video...</div>';
     
     try {
+        // PAKE API FAA - beda endpoint buat video & audio
         const endpoint = type === 'video' ? 'ytmp4' : 'ytmp3';
-        const apiUrl = `https://api.ryzendesu.vip/api/downloader/${endpoint}?url=${encodeURIComponent(url)}`;
+        const apiUrl = `https://api-faa.my.id/faa/${endpoint}?url=${encodeURIComponent(url)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         
-        if (data.status === 200 || data.url) {
-            const mediaUrl = data.url || data.download_url;
-            const title = data.title || 'YouTube Video';
-            const duration = data.duration || 'Unknown';
+        if (data && data.result) {
+            const media = data.result;
+            const title = media.title || 'YouTube Video';
+            const duration = media.duration || 'Unknown';
             
             if (type === 'video') {
+                // Video (MP4)
+                const videoUrl = media.video || media.url;
                 resultDiv.innerHTML = `
                     <div class="video-preview">
-                        <video src="${mediaUrl}" controls></video>
+                        <video src="${videoUrl}" controls></video>
                         <div class="video-info">
                             <p><strong><i class="fab fa-youtube"></i> Judul:</strong> ${title}</p>
                             <p><strong><i class="fas fa-clock"></i> Durasi:</strong> ${duration}</p>
-                            <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Video</a>
+                            <a href="${videoUrl}" download class="download-link"><i class="fas fa-download"></i> Download Video (MP4)</a>
                         </div>
                     </div>
                 `;
             } else {
+                // Audio (MP3)
+                const audioUrl = media.audio || media.url;
                 resultDiv.innerHTML = `
                     <div class="video-preview">
                         <div style="text-align: center; padding: 20px;">
@@ -186,7 +191,7 @@ async function downloadYouTube(type = 'video') {
                             <p><strong><i class="fab fa-youtube"></i> Judul:</strong> ${title}</p>
                             <p><strong><i class="fas fa-clock"></i> Durasi:</strong> ${duration}</p>
                             <p><strong><i class="fas fa-file-audio"></i> Format:</strong> MP3</p>
-                            <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Audio (MP3)</a>
+                            <a href="${audioUrl}" download class="download-link"><i class="fas fa-download"></i> Download Audio (MP3)</a>
                         </div>
                     </div>
                 `;
@@ -200,6 +205,7 @@ async function downloadYouTube(type = 'video') {
             `;
         }
     } catch (error) {
+        console.error('YouTube Download Error:', error);
         resultDiv.innerHTML = `
             <div class="alert alert-info">
                 <i class="fas fa-exclamation-triangle"></i> Error. 
@@ -209,7 +215,7 @@ async function downloadYouTube(type = 'video') {
     }
 }
 
-// ========== INSTAGRAM DOWNLOADER ==========
+// ========== INSTAGRAM DOWNLOADER (PAKE API FAA) ==========
 async function downloadInstagram() {
     const urlInput = document.getElementById('instagramUrl');
     const resultDiv = document.getElementById('instagramResult');
@@ -223,69 +229,64 @@ async function downloadInstagram() {
     resultDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-spinner fa-spin"></i> Memproses...</div>';
     
     try {
-        const apiUrl = `https://api.ryzendesu.vip/api/downloader/igdl?url=${encodeURIComponent(url)}`;
+        // PAKE API FAA
+        const apiUrl = `https://api-faa.my.id/faa/igdl?url=${encodeURIComponent(url)}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         
-        if (data.status === 200 && data.url) {
-            const mediaUrl = data.url;
-            const isVideo = mediaUrl.includes('.mp4') || mediaUrl.includes('.mov');
-            const caption = data.caption || 'Instagram Media';
-            const username = data.username || 'instagram_user';
+        if (data && data.result) {
+            const media = data.result;
             
-            if (isVideo) {
+            // Cek apakah video atau gambar
+            if (media.video || media.url?.includes('.mp4')) {
+                const videoUrl = media.video || media.url;
                 resultDiv.innerHTML = `
                     <div class="video-preview">
-                        <video src="${mediaUrl}" controls></video>
+                        <video src="${videoUrl}" controls></video>
                         <div class="video-info">
-                            <p><strong><i class="fab fa-instagram"></i> Username:</strong> @${username}</p>
-                            <p class="video-caption"><strong><i class="fas fa-caption"></i> Caption:</strong> ${caption.substring(0, 200)}${caption.length > 200 ? '...' : ''}</p>
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                                <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Video</a>
-                                <button onclick="copyCaptionText('${caption.replace(/'/g, "\\'")}')" class="download-link" style="background: var(--glass-bg); color: var(--neon-blue); border: none; cursor: pointer;">Salin Caption</button>
-                            </div>
+                            <p><strong><i class="fab fa-instagram"></i> Username:</strong> ${media.username || 'Unknown'}</p>
+                            <p class="video-caption"><strong><i class="fas fa-caption"></i> Caption:</strong> ${(media.caption || 'Tidak ada caption').substring(0, 200)}</p>
+                            <a href="${videoUrl}" download class="download-link"><i class="fas fa-download"></i> Download Video</a>
+                        </div>
+                    </div>
+                `;
+            } else if (media.image) {
+                resultDiv.innerHTML = `
+                    <div class="video-preview">
+                        <img src="${media.image}" style="width: 100%; border-radius: 15px;" alt="Instagram Image">
+                        <div class="video-info">
+                            <p><strong><i class="fab fa-instagram"></i> Username:</strong> ${media.username || 'Unknown'}</p>
+                            <p class="video-caption"><strong><i class="fas fa-caption"></i> Caption:</strong> ${(media.caption || 'Tidak ada caption').substring(0, 200)}</p>
+                            <a href="${media.image}" download class="download-link"><i class="fas fa-download"></i> Download Gambar</a>
                         </div>
                     </div>
                 `;
             } else {
-                resultDiv.innerHTML = `
-                    <div class="video-preview">
-                        <img src="${mediaUrl}" style="width: 100%; border-radius: 15px;" alt="Instagram Image">
-                        <div class="video-info">
-                            <p><strong><i class="fab fa-instagram"></i> Username:</strong> @${username}</p>
-                            <p class="video-caption"><strong><i class="fas fa-caption"></i> Caption:</strong> ${caption.substring(0, 200)}${caption.length > 200 ? '...' : ''}</p>
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                                <a href="${mediaUrl}" download class="download-link"><i class="fas fa-download"></i> Download Gambar</a>
-                                <button onclick="copyCaptionText('${caption.replace(/'/g, "\\'")}')" class="download-link" style="background: var(--glass-bg); color: var(--neon-blue); border: none; cursor: pointer;">Salin Caption</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                resultDiv.innerHTML = '<div class="alert alert-info">Media tidak ditemukan.</div>';
             }
         } else {
             resultDiv.innerHTML = `
                 <div class="alert alert-info">
-                    <i class="fas fa-exclamation-triangle"></i> Gagal memproses. 
-                    <a href="${getConfig().downloadLinks?.instagram || 'https://snapinsta.app'}" target="_blank" style="color: var(--neon-blue);">Buka link resmi</a>
+                    <i class="fas fa-exclamation-triangle"></i> Gagal memproses. Coba gunakan tools alternatif di bawah:
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 15px;">
+                    <a href="https://snapinsta.app" target="_blank" class="btn btn-primary">Buka SnapInsta</a>
+                    <a href="https://saveinsta.app" target="_blank" class="btn btn-secondary">Buka SaveInsta</a>
                 </div>
             `;
         }
     } catch (error) {
+        console.error('Instagram Download Error:', error);
         resultDiv.innerHTML = `
             <div class="alert alert-info">
-                <i class="fas fa-exclamation-triangle"></i> Error. 
-                <a href="${getConfig().downloadLinks?.instagram || 'https://snapinsta.app'}" target="_blank" style="color: var(--neon-blue);">Buka link resmi</a>
+                <i class="fas fa-exclamation-triangle"></i> Error. Coba gunakan tools alternatif di bawah:
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 15px;">
+                <a href="https://snapinsta.app" target="_blank" class="btn btn-primary">Buka SnapInsta</a>
+                <a href="https://saveinsta.app" target="_blank" class="btn btn-secondary">Buka SaveInsta</a>
             </div>
         `;
     }
-}
-
-function copyCaptionText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Caption berhasil disalin!');
-    }).catch(() => {
-        alert('Caption: ' + text);
-    });
 }
 
 // ========== STALKING FUNCTIONS ==========
@@ -336,7 +337,7 @@ async function stalkTiktok() {
     }
 }
 
-// Stalk Instagram
+// ========== STALK INSTAGRAM (PAKE API FAA) ==========
 async function stalkIg() {
     const input = document.getElementById('usernameInput');
     const resultDiv = document.getElementById('resultBox');
@@ -353,30 +354,44 @@ async function stalkIg() {
     resultContent.innerHTML = '<div class="alert alert-info"><i class="fas fa-spinner fa-spin"></i> Mencari data...</div>';
     
     try {
-        const response = await fetch(`https://api.botcahx.eu.org/api/stalk/ig?apikey=alipaiapikeybaru&username=${encodeURIComponent(username)}`);
+        // PAKE API FAA
+        const apiUrl = `https://api-faa.my.id/faa/igstalk?username=${encodeURIComponent(username)}`;
+        const response = await fetch(apiUrl);
         const data = await response.json();
         
         if (data && data.result) {
             const user = data.result;
+            
+            // Map response dari FAA
+            const profilePic = user.profile_pic || user.avatar || 'https://via.placeholder.com/80x80?text=No+Avatar';
+            const fullName = user.full_name || user.name || user.username;
+            const bio = user.bio || user.biography || '';
+            const followers = user.followers || user.follower_count || 0;
+            const following = user.following || user.following_count || 0;
+            const posts = user.posts || user.media_count || 0;
+            
             resultContent.innerHTML = `
                 <div class="profile">
-                    <img src="${user.profile_pic || 'https://via.placeholder.com/80x80?text=No+Avatar'}" alt="Avatar">
+                    <img src="${profilePic}" alt="Avatar">
                     <div>
-                        <div class="name">${user.full_name || user.username}</div>
+                        <div class="name">${fullName}</div>
                         <div class="username">@${user.username}</div>
                     </div>
                 </div>
                 <div class="stats">
-                    <div class="stat"><div class="number">${user.followers || 0}</div><div class="label">Followers</div></div>
-                    <div class="stat"><div class="number">${user.following || 0}</div><div class="label">Following</div></div>
-                    <div class="stat"><div class="number">${user.posts || 0}</div><div class="label">Posts</div></div>
+                    <div class="stat"><div class="number">${followers}</div><div class="label">Followers</div></div>
+                    <div class="stat"><div class="number">${following}</div><div class="label">Following</div></div>
+                    <div class="stat"><div class="number">${posts}</div><div class="label">Posts</div></div>
                 </div>
-                ${user.bio ? `<div class="bio"><strong>Bio:</strong> ${user.bio}</div>` : ''}
+                ${bio ? `<div class="bio"><strong>Bio:</strong> ${bio}</div>` : ''}
+                ${user.is_private ? `<div class="bio" style="color: #ffaa00;"><strong>🔒 Akun Private</strong></div>` : ''}
+                ${user.is_verified ? `<div class="bio" style="color: #00ff88;"><strong>✅ Verified</strong></div>` : ''}
             `;
         } else {
             resultContent.innerHTML = '<div class="alert alert-info"><i class="fas fa-exclamation-triangle"></i> Akun tidak ditemukan atau username salah.</div>';
         }
     } catch (error) {
+        console.error('Instagram Stalk Error:', error);
         resultContent.innerHTML = '<div class="alert alert-info"><i class="fas fa-exclamation-triangle"></i> Error. Coba lagi nanti.</div>';
     }
 }
