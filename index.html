@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- THEME TOGGLE -->
+    <!-- THEME TOGGLE (dipindah ke bawah biar ga nutup navbar) -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
         <i class="fas fa-moon" style="display: none;"></i>
@@ -25,8 +25,8 @@
             </div>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link active">Home</a>
-                <a href="#tools-section" class="nav-link">Tools</a>
-                <a href="#about-section" class="nav-link">About</a>
+                <a href="pages/tools.html" class="nav-link">Tools</a>
+                <a href="pages/about.html" class="nav-link">About</a>
                 <a href="#contact-section" class="nav-link">Contact</a>
             </div>
             <div class="nav-toggle" id="navToggle">
@@ -39,45 +39,45 @@
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="container">
-            <!-- HERO TEXT -->
-            <div class="hero-text">
-                <span class="hero-badge">🦊 Personal Portfolio</span>
-                <h1 class="hero-title">Foxxy<span>Portofolio</span></h1>
-                <p class="hero-subtitle">Portofolio personal + kumpulan tools lengkap dalam satu website.</p>
-            </div>
+            <div class="hero-wrapper">
+                <!-- HERO TEXT (KIRI) -->
+                <div class="hero-text">
+                    <span class="hero-badge">🦊 Personal Portfolio</span>
+                    <h1 class="hero-title">Foxxy<span>Portofolio</span></h1>
+                    <p class="hero-subtitle">Portofolio personal + kumpulan tools lengkap dalam satu website.</p>
+                    <div class="hero-buttons">
+                        <a href="pages/tools.html" class="btn btn-primary"><i class="fas fa-tools"></i> Coba Tools</a>
+                        <a href="pages/about.html" class="btn btn-secondary"><i class="fas fa-user"></i> Tentang Saya</a>
+                    </div>
+                </div>
 
-            <!-- STATISTIK (ANIMASI ANGKA BERURUT) -->
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-count="15">0</span>
-                    <span class="stat-label">Tools</span>
+                <!-- STATISTIK (KANAN) dengan format "15+ Tools" -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="15">15+</span>
+                        <span class="stat-label">Tools</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="10">10+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="100">100+</span>
+                        <span class="stat-label">Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="24">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="10">0</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="100">0</span>
-                    <span class="stat-label">Users</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="24">0</span>
-                    <span class="stat-label">/ 7 Support</span>
-                </div>
-            </div>
-
-            <!-- CTA HERO -->
-            <div class="hero-buttons">
-                <a href="#tools-section" class="btn btn-primary"><i class="fas fa-tools"></i> Coba Tools</a>
-                <a href="#about-section" class="btn btn-secondary"><i class="fas fa-user"></i> Tentang Saya</a>
             </div>
         </div>
     </section>
 
-    <!-- ========== TOOLS SECTION ========== -->
-    <section class="tools-section" id="tools-section">
+    <!-- ========== TOOLS PREVIEW (LINK KE HALAMAN TOOLS) ========== -->
+    <section class="tools-preview" id="tools-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="text-align: left;">
                 <span class="section-badge">🛠️ FITUR UNGGULAN</span>
                 <h2>Semua yang kamu butuhkan,<br>dalam satu website.</h2>
                 <p>Dari downloader hingga stalking, semua tools tersedia lengkap.</p>
@@ -114,11 +114,14 @@
                     <p>Cek informasi lengkap device seperti RAM, baterai, CPU, dan storage.</p>
                 </div>
             </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="pages/tools.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Lihat Semua Tools</a>
+            </div>
         </div>
     </section>
 
-    <!-- ========== ABOUT SECTION ========== -->
-    <section class="about-section" id="about-section">
+    <!-- ========== ABOUT PREVIEW (LINK KE HALAMAN ABOUT) ========== -->
+    <section class="about-preview" id="about-section">
         <div class="container">
             <div class="about-wrapper">
                 <div class="about-image">
@@ -133,6 +136,9 @@
                         <span><i class="fas fa-server"></i> Backend API & Node.js</span>
                         <span><i class="fas fa-globe"></i> Modern Web Applications</span>
                     </div>
+                    <div style="margin-top: 20px;">
+                        <a href="pages/about.html" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> About Developer</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,7 +147,7 @@
     <!-- ========== WHY SECTION ========== -->
     <section class="why-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="text-align: left;">
                 <span class="section-badge">🔥 KENAPA FOXXY?</span>
                 <h2>Dipilih bukan tanpa alasan.</h2>
                 <p>Foxxy dirancang agar benar-benar berguna, bukan sekadar terlihat keren.</p>
@@ -204,8 +210,8 @@
                 <div class="footer-nav">
                     <h4>Navigasi</h4>
                     <a href="index.html">Home</a>
-                    <a href="#tools-section">Tools</a>
-                    <a href="#about-section">About</a>
+                    <a href="pages/tools.html">Tools</a>
+                    <a href="pages/about.html">About</a>
                     <a href="#contact-section">Contact</a>
                 </div>
                 <div class="footer-links">
@@ -227,41 +233,6 @@
     <script src="js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ===== STATISTIK ANIMASI (ANGKA BERURUT) =====
-            const stats = document.querySelectorAll('.stat-number');
-            
-            function animateNumbers() {
-                stats.forEach(stat => {
-                    const target = parseInt(stat.dataset.count);
-                    let current = 0;
-                    const increment = Math.ceil(target / 80);
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                        }
-                        stat.textContent = current;
-                    }, 30);
-                });
-            }
-
-            // ===== SCROLL REVEAL (MUNCUL PERLAHAN) =====
-            const revealElements = document.querySelectorAll('.tool-card, .why-card, .about-wrapper, .section-header');
-            
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                    }
-                });
-            }, { threshold: 0.15 });
-
-            revealElements.forEach(el => {
-                el.classList.add('hidden-reveal');
-                revealObserver.observe(el);
-            });
-
             // ===== NAV TOGGLE =====
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
@@ -271,45 +242,6 @@
                     navMenu.classList.toggle('active');
                 });
             }
-
-            // ===== SCROLL SMOOTH + ANIMASI STATS =====
-            let statsAnimated = false;
-            
-            window.addEventListener('scroll', function() {
-                const scrollY = window.scrollY;
-                const heroStats = document.querySelector('.hero-stats');
-                
-                if (heroStats && !statsAnimated) {
-                    const rect = heroStats.getBoundingClientRect();
-                    if (rect.top < window.innerHeight * 0.8) {
-                        statsAnimated = true;
-                        animateNumbers();
-                    }
-                }
-            });
-
-            // ===== BURST TOOL CARDS INITIAL ANIMATION =====
-            setTimeout(() => {
-                document.querySelectorAll('.tool-card').forEach((card, i) => {
-                    setTimeout(() => {
-                        card.classList.add('burst-in');
-                    }, i * 100);
-                });
-            }, 200);
-
-            // ===== SMOOTH SCROLL FOR NAV LINKS =====
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        // Close mobile nav
-                        if (navMenu) navMenu.classList.remove('active');
-                        if (navToggle) navToggle.classList.remove('active');
-                    }
-                });
-            });
 
             // ===== THEME =====
             const themeToggle = document.getElementById('themeToggle');
@@ -338,18 +270,53 @@
                 localStorage.setItem('theme', currentTheme);
             });
 
-            // ===== LOAD PROFILE IMAGE =====
+            // ===== LOAD CONFIG =====
             const config = typeof getConfig === 'function' ? getConfig() : {};
             const profileImg = document.getElementById('profileImage');
             if (profileImg && config.profileImage) {
                 profileImg.src = config.profileImage;
             }
-
-            // ===== LOGO =====
             const logoImg = document.querySelector('.logo-img');
             if (logoImg && config.logoImage) {
                 logoImg.src = config.logoImage;
             }
+
+            // ===== SCROLL REVEAL =====
+            const revealElements = document.querySelectorAll('.tool-card, .why-card, .about-wrapper, .section-header');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach(el => {
+                el.classList.add('hidden-reveal');
+                revealObserver.observe(el);
+            });
+
+            // ===== BURST TOOL CARDS =====
+            setTimeout(() => {
+                document.querySelectorAll('.tool-card').forEach((card, i) => {
+                    setTimeout(() => {
+                        card.classList.add('burst-in');
+                    }, i * 100);
+                });
+            }, 200);
+
+            // ===== SMOOTH SCROLL =====
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        if (navMenu) navMenu.classList.remove('active');
+                        if (navToggle) navToggle.classList.remove('active');
+                    }
+                });
+            });
         });
     </script>
 </body>
