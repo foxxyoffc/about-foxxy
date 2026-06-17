@@ -39,6 +39,17 @@
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="container">
+            
+            <!-- VIDEO HERO (AUTOPLAY + LOOP, TANPA TOMBOL) -->
+            <div class="hero-video-wrapper">
+                <div class="hero-video-container">
+                    <video id="heroVideo" autoplay muted loop playsinline>
+                        <source src="https://files.catbox.moe/vwy06h.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- HERO CONTENT (TEKS + STATISTIK) -->
             <div class="hero-content">
                 <!-- HERO TEXT -->
                 <div class="hero-text">
@@ -237,6 +248,7 @@
     <script src="js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             // ===== NAV TOGGLE =====
             const navToggle = document.getElementById('navToggle');
             const navMenu = document.getElementById('navMenu');
