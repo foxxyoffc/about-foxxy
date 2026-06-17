@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Device Info - FoxxyPortofolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tools-container { max-width: 800px; margin: 120px auto 40px; padding: 0 20px; }
+        .tools-container h1 { font-size: 2rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 5px; }
+        .tools-container .subtitle { color: var(--text-secondary); margin-bottom: 25px; }
+        .btn-check { padding: 14px 30px; background: var(--gradient); border: none; border-radius: 12px; color: var(--dark-bg); font-weight: 700; cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; }
+        .btn-check:hover { transform: scale(1.05); box-shadow: var(--shadow-hover); }
+        .result-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
+        .result-box.show { display: block; }
+        .result-box .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
+        .result-box .info-row:last-child { border-bottom: none; }
+        .result-box .info-row .label { color: var(--text-secondary); }
+        .result-box .info-row .value { font-weight: 600; }
+        .result-box .device-name { font-size: 1.5rem; font-weight: 700; color: var(--neon-blue); text-align: center; padding: 10px; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
+        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
+        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
+        .device-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        @media (max-width: 600px) { .device-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon" style="display: none;"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <span>Foxxy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tools-container">
+        <h1><i class="fas fa-laptop"></i> Device Info</h1>
+        <p class="subtitle">Cek informasi lengkap tentang device yang kamu gunakan</p>
+
+        <div style="text-align: center;">
+            <button id="checkBtn" class="btn-check"><i class="fas fa-search"></i> Check My Device</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div id="resultContent"></div>
+        </div>
+
+        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
+                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initNavToggle();
+            
+            const btn = document.getElementById('checkBtn');
+            const resultBox = document.getElementById('resultBox');
+            const resultContent = document.getElementById('resultContent');
+            
+            btn.addEventListener('click', async () => {
+                resultBox.classList.add('show');
+                resultContent.innerHTML = '<div class="alert"><i class="fas fa-spinner fa-spin"></i> Mengumpulkan informasi device...</div>';
+                
+                try {
+                    // Ambil informasi device
+                    const deviceInfo = {
+                        name: navigator.userAgentData?.platform || navigator.platform || 'Unknown',
+                        brand: navigator.userAgentData?.brands ? navigator.userAgentData.brands.map(b => b.brand).join(', ') : 'Unknown',
+                        ram: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Tidak tersedia',
+                        cores: navigator.hardwareConcurrency || 'Tidak tersedia',
+                        battery: await getBatteryLevel(),
+                        storage: await getStorageInfo(),
+                        screen: `${window.screen.width}x${window.screen.height}`,
+                        colorDepth: `${window.screen.colorDepth} bit`,
+                        language: navigator.language,
+                        online: navigator.onLine ? 'Online' : 'Offline',
+                        touchSupport: 'ontouchstart' in window ? '✅ Ya' : '❌ Tidak'
+                    };
+                    
+                    resultContent.innerHTML = `
+                        <div class="device-name">${deviceInfo.name}</div>
+                        <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">${deviceInfo.brand}</div>
+                        <div class="device-grid">
+                            <div class="info-row"><span class="label">Device Name</span><span class="value">${deviceInfo.name}</span></div>
+                            <div class="info-row"><span class="label">Brand/Model</span><span class="value">${deviceInfo.brand}</span></div>
+                            <div class="info-row"><span class="label">RAM</span><span class="value">${deviceInfo.ram}</span></div>
+                            <div class="info-row"><span class="label">CPU Cores</span><span class="value">${deviceInfo.cores}</span></div>
+                            <div class="info-row"><span class="label">Baterai</span><span class="value">${deviceInfo.battery}</span></div>
+                            <div class="info-row"><span class="label">Penyimpanan</span><span class="value">${deviceInfo.storage}</span></div>
+                            <div class="info-row"><span class="label">Resolusi Layar</span><span class="value">${deviceInfo.screen}</span></div>
+                            <div class="info-row"><span class="label">Color Depth</span><span class="value">${deviceInfo.colorDepth}</span></div>
+                            <div class="info-row"><span class="label">Bahasa</span><span class="value">${deviceInfo.language}</span></div>
+                            <div class="info-row"><span class="label">Status Koneksi</span><span class="value">${deviceInfo.online}</span></div>
+                            <div class="info-row"><span class="label">Touch Support</span><span class="value">${deviceInfo.touchSupport}</span></div>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+                            <i class="fas fa-info-circle"></i> Informasi device yang terdeteksi oleh browser
+                        </div>
+                    `;
+                } catch (error) {
+                    resultContent.innerHTML = '<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error. Coba lagi nanti.</div>';
+                }
+            });
+            
+            // Fungsi bantu
+            async function getBatteryLevel() {
+                try {
+                    if (navigator.getBattery) {
+                        const battery = await navigator.getBattery();
+                        const level = Math.round(battery.level * 100);
+                        const charging = battery.charging ? '🔌 Charging' : '🔋 Tidak Charging';
+                        return `${level}% (${charging})`;
+                    }
+                    return 'Tidak tersedia';
+                } catch {
+                    return 'Tidak tersedia';
+                }
+            }
+            
+            async function getStorageInfo() {
+                try {
+                    if (navigator.storage && navigator.storage.estimate) {
+                        const estimate = await navigator.storage.estimate();
+                        const total = (estimate.quota / (1024 * 1024 * 1024)).toFixed(2);
+                        const used = (estimate.usage / (1024 * 1024 * 1024)).toFixed(2);
+                        return `${used} GB / ${total} GB (terpakai)`;
+                    }
+                    return 'Tidak tersedia';
+                } catch {
+                    return 'Tidak tersedia';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
