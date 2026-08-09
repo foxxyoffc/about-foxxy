@@ -10,10 +10,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    >
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         .tools-container {
@@ -39,21 +37,17 @@
         .drop-zone {
             border: 2px dashed var(--glass-border);
             border-radius: 16px;
-            padding: 40px;
+            padding: 40px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 20px;
         }
 
-        .drop-zone:hover {
-            border-color: var(--neon-blue);
-            background: var(--glass-bg);
-        }
-
+        .drop-zone:hover,
         .drop-zone.dragover {
             border-color: var(--neon-blue);
-            background: rgba(0, 242, 254, 0.1);
+            background: rgba(0, 242, 254, 0.08);
         }
 
         .drop-zone i {
@@ -67,18 +61,19 @@
         }
 
         .file-types {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        .file-button {
+        .choose-btn {
             margin-top: 15px;
-            padding: 10px 25px;
+            padding: 12px 28px;
             background: var(--gradient);
             border: none;
             border-radius: 30px;
             color: var(--dark-bg);
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
         }
 
@@ -113,18 +108,12 @@
             color: var(--dark-bg);
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .input-group button:hover {
-            transform: scale(1.03);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .input-group button:disabled {
-            opacity: 0.6;
+        .input-group button:disabled,
+        .choose-btn:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
         .result-box {
@@ -141,31 +130,32 @@
         }
 
         .alert {
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             text-align: center;
+            line-height: 1.6;
         }
 
         .alert-info {
-            background: rgba(0, 242, 254, 0.1);
+            background: rgba(0, 242, 254, 0.08);
             border: 1px solid var(--neon-blue);
             color: var(--neon-blue);
         }
 
-        .alert-danger {
-            background: rgba(255, 68, 68, 0.1);
-            border: 1px solid #ff4444;
-            color: #ff4444;
-        }
-
         .alert-warning {
-            background: rgba(255, 170, 0, 0.1);
+            background: rgba(255, 170, 0, 0.08);
             border: 1px solid #ffaa00;
             color: #ffaa00;
         }
 
-        .alert-success {
-            background: rgba(0, 255, 136, 0.1);
+        .alert-danger {
+            background: rgba(255, 68, 68, 0.08);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+
+        .alert-safe {
+            background: rgba(0, 255, 136, 0.08);
             border: 1px solid #00ff88;
             color: #00ff88;
         }
@@ -180,61 +170,157 @@
             margin-bottom: 15px;
         }
 
-        .file-info i {
-            font-size: 2rem;
+        .file-info > i {
+            font-size: 2.5rem;
             color: var(--neon-blue);
         }
 
-        .info-card {
-            margin-top: 15px;
-            padding: 15px;
+        .file-name {
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .file-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .result-card {
             background: var(--glass-bg);
-            border-radius: 12px;
+            border-radius: 14px;
+            padding: 18px;
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
             gap: 20px;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--glass-border);
-            word-break: break-word;
         }
 
         .info-row:last-child {
             border-bottom: none;
         }
 
-        .info-row span:last-child {
-            text-align: right;
+        .info-label {
+            color: var(--text-secondary);
         }
 
-        .badge {
-            display: inline-block;
-            padding: 7px 15px;
-            border-radius: 30px;
+        .info-value {
+            font-weight: 700;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .status-safe {
+            color: #00ff88;
+            font-weight: 800;
+        }
+
+        .status-danger {
+            color: #ff4444;
+            font-weight: 800;
+        }
+
+        .status-warning {
+            color: #ffaa00;
+            font-weight: 800;
+        }
+
+        .status-unknown {
+            color: #aaa;
+            font-weight: 800;
+        }
+
+        .score-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 14px;
+            background: var(--glass-bg);
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .score-text {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .engine-box {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 14px;
+            background: var(--glass-bg);
+        }
+
+        .engine-title {
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 12px;
+        }
+
+        .engine-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .engine-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--glass-border);
             font-size: 0.9rem;
+        }
+
+        .engine-item:last-child {
+            border-bottom: none;
+        }
+
+        .engine-detected {
+            color: #ff4444;
             font-weight: 700;
         }
 
-        .badge-safe {
-            background: rgba(0, 255, 136, 0.2);
+        .engine-clean {
             color: #00ff88;
+            font-weight: 700;
         }
 
-        .badge-danger {
-            background: rgba(255, 68, 68, 0.2);
-            color: #ff4444;
+        .engine-undetected {
+            color: var(--text-secondary);
         }
 
-        .badge-warning {
-            background: rgba(255, 170, 0, 0.2);
-            color: #ffaa00;
+        .progress-wrap {
+            margin-top: 18px;
         }
 
-        .badge-info {
-            background: rgba(0, 242, 254, 0.2);
-            color: var(--neon-blue);
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 0.9rem;
         }
 
         .btn-back {
@@ -248,38 +334,18 @@
             border-radius: 30px;
             color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
-        .btn-back:hover {
-            border-color: var(--neon-blue);
-            transform: translateX(-5px);
-        }
-
-        .scan-note {
-            margin-top: 15px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+        .vt-note {
+            margin-top: 18px;
             text-align: center;
-            line-height: 1.6;
-        }
-
-        .divider {
-            text-align: center;
-            color: var(--text-secondary);
-            margin: 20px 0;
-        }
-
-        .small-text {
             color: var(--text-secondary);
             font-size: 0.85rem;
             line-height: 1.6;
         }
 
-        .analysis-id {
-            font-family: monospace;
-            font-size: 0.85rem;
-            word-break: break-all;
+        .vt-note a {
+            color: var(--neon-blue);
         }
 
         @media (max-width: 600px) {
@@ -288,16 +354,7 @@
             }
 
             .drop-zone {
-                padding: 30px 15px;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .input-group input,
-            .input-group button {
-                width: 100%;
+                padding: 35px 15px;
             }
 
             .info-row {
@@ -305,8 +362,12 @@
                 gap: 5px;
             }
 
-            .info-row span:last-child {
+            .info-value {
                 text-align: left;
+            }
+
+            .input-group button {
+                width: 100%;
             }
         }
     </style>
@@ -314,13 +375,11 @@
 
 <body>
 
-    <!-- Theme -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
-        <i class="fas fa-moon" style="display: none;"></i>
+        <i class="fas fa-moon" style="display:none;"></i>
     </div>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
 
@@ -334,31 +393,12 @@
             </div>
 
             <div class="nav-menu" id="navMenu">
-
-                <a href="../index.html" class="nav-link">
-                    Beranda
-                </a>
-
-                <a href="store.html" class="nav-link">
-                    Store
-                </a>
-
-                <a href="bot-sewa.html" class="nav-link">
-                    Sewa Bot
-                </a>
-
-                <a href="tools.html" class="nav-link active">
-                    Tools
-                </a>
-
-                <a href="komunitas.html" class="nav-link">
-                    Komunitas
-                </a>
-
-                <a href="../admin/developer.html" class="nav-link">
-                    Developer
-                </a>
-
+                <a href="../index.html" class="nav-link">Beranda</a>
+                <a href="store.html" class="nav-link">Store</a>
+                <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+                <a href="tools.html" class="nav-link active">Tools</a>
+                <a href="komunitas.html" class="nav-link">Komunitas</a>
+                <a href="../admin/developer.html" class="nav-link">Developer</a>
             </div>
 
             <div class="nav-toggle" id="navToggle">
@@ -370,8 +410,6 @@
         </div>
     </nav>
 
-
-    <!-- MAIN -->
     <div class="tools-container">
 
         <h1>
@@ -380,11 +418,12 @@
         </h1>
 
         <p class="subtitle">
-            Scan URL file menggunakan VirusTotal untuk mendeteksi malware dan ancaman lainnya.
+            Scan file menggunakan VirusTotal untuk mendeteksi malware,
+            trojan, ransomware, dan ancaman lainnya.
         </p>
 
+        <!-- FILE UPLOAD -->
 
-        <!-- FILE AREA -->
         <div class="drop-zone" id="dropZone">
 
             <i class="fas fa-cloud-upload-alt"></i>
@@ -395,12 +434,14 @@
 
             <p class="file-types">
                 Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG, JPEG
+                <br>
+                Maksimal ukuran upload: 32 MB
             </p>
 
             <button
                 type="button"
                 id="fileInputBtn"
-                class="file-button"
+                class="choose-btn"
             >
                 <i class="fas fa-folder-open"></i>
                 Pilih File
@@ -409,26 +450,22 @@
             <input
                 type="file"
                 id="fileInput"
-                style="display:none;"
+                hidden
                 accept=".apk,.zip,.7z,.rar,.mp4,.mp3,.jpg,.jpeg"
             >
 
         </div>
 
-
-        <div class="small-text" style="text-align:center;">
-            Upload file lokal belum dikirim langsung ke VirusTotal melalui browser.
-            Untuk menjaga API Key tetap aman, upload file harus diproses oleh backend.
+        <div style="
+            text-align:center;
+            color:var(--text-secondary);
+            margin:20px 0;
+        ">
+            — atau scan URL file —
         </div>
-
-
-        <!-- DIVIDER -->
-        <div class="divider">
-            — atau scan URL —
-        </div>
-
 
         <!-- URL -->
+
         <div class="input-group">
 
             <input
@@ -448,8 +485,8 @@
 
         </div>
 
-
         <!-- RESULT -->
+
         <div
             class="result-box"
             id="resultBox"
@@ -457,8 +494,6 @@
             <div id="resultContent"></div>
         </div>
 
-
-        <!-- BACK -->
         <a
             href="tools.html"
             class="btn-back"
@@ -469,8 +504,6 @@
 
     </div>
 
-
-    <!-- FOOTER -->
     <footer class="footer">
 
         <div class="container">
@@ -479,9 +512,7 @@
 
                 <p>
                     &copy; 2026
-                    <span class="watermark">
-                        Foxxy
-                    </span>.
+                    <span class="watermark">Foxxy</span>.
                     All right reserved.
                 </p>
 
@@ -499,332 +530,600 @@
     </footer>
 
 
-    <!-- CONFIG -->
     <script src="../js/config.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/auth.js"></script>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
 
-            /*
-             * ============================
-             * INIT WEBSITE
-             * ============================
-             */
+        document.addEventListener("DOMContentLoaded", () => {
 
-            if (typeof initTheme === 'function') {
+            if (typeof initTheme === "function") {
                 initTheme();
             }
 
-            if (typeof initNavToggle === 'function') {
+            if (typeof initNavToggle === "function") {
                 initNavToggle();
             }
 
 
-            /*
-             * ============================
-             * ELEMENTS
-             * ============================
-             */
-
             const dropZone =
-                document.getElementById('dropZone');
+                document.getElementById("dropZone");
 
             const fileInput =
-                document.getElementById('fileInput');
+                document.getElementById("fileInput");
 
             const fileInputBtn =
-                document.getElementById('fileInputBtn');
+                document.getElementById("fileInputBtn");
 
             const urlInput =
-                document.getElementById('fileUrl');
+                document.getElementById("fileUrl");
 
             const checkBtn =
-                document.getElementById('checkBtn');
+                document.getElementById("checkBtn");
 
             const resultBox =
-                document.getElementById('resultBox');
+                document.getElementById("resultBox");
 
             const resultContent =
-                document.getElementById('resultContent');
+                document.getElementById("resultContent");
 
 
-            /*
-             * ============================
-             * SUPPORTED FILE
-             * ============================
-             */
+            const API_ENDPOINT = "/api/scan-file";
 
-            const allowedExtensions = [
-                'apk',
-                'zip',
-                '7z',
-                'rar',
-                'mp4',
-                'mp3',
-                'jpg',
-                'jpeg'
+
+            const ALLOWED = [
+                "apk",
+                "zip",
+                "7z",
+                "rar",
+                "mp4",
+                "mp3",
+                "jpg",
+                "jpeg"
             ];
 
 
-            /*
-             * ============================
-             * SHOW RESULT
-             * ============================
-             */
-
             function showResult(html) {
 
-                resultBox.classList.add('show');
+                resultBox.classList.add("show");
 
                 resultContent.innerHTML = html;
 
                 resultBox.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest'
+                    behavior: "smooth",
+                    block: "center"
                 });
             }
 
 
-            /*
-             * ============================
-             * ESCAPE HTML
-             * ============================
-             */
+            function escapeHTML(value) {
 
-            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
 
-                return String(value)
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
+
+            function formatSize(bytes) {
+
+                if (!bytes) {
+                    return "0 B";
+                }
+
+                const units = [
+                    "B",
+                    "KB",
+                    "MB",
+                    "GB"
+                ];
+
+                let i = 0;
+                let size = bytes;
+
+                while (
+                    size >= 1024 &&
+                    i < units.length - 1
+                ) {
+                    size /= 1024;
+                    i++;
+                }
+
+                return size.toFixed(
+                    i === 0 ? 0 : 2
+                ) + " " + units[i];
+            }
+
+
+            function getExtension(name) {
+
+                return name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+            }
+
+
+            function loading(text) {
+
+                showResult(`
+                    <div class="alert alert-info">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <br>
+                        <strong>${escapeHTML(text)}</strong>
+                        <br>
+                        <small>
+                            Mohon tunggu...
+                        </small>
+
+                        <div class="progress-wrap">
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    id="progressFill"
+                                ></div>
+                            </div>
+
+                            <div
+                                class="progress-text"
+                                id="progressText"
+                            >
+                                Memproses...
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                animateProgress();
+            }
+
+
+            let progressTimer = null;
+
+            function animateProgress() {
+
+                let progress = 5;
+
+                const fill =
+                    document.getElementById("progressFill");
+
+                const text =
+                    document.getElementById("progressText");
+
+                if (!fill) {
+                    return;
+                }
+
+                clearInterval(progressTimer);
+
+                progressTimer = setInterval(() => {
+
+                    if (progress < 90) {
+                        progress += Math.floor(
+                            Math.random() * 5
+                        ) + 1;
+                    }
+
+                    if (progress > 90) {
+                        progress = 90;
+                    }
+
+                    fill.style.width =
+                        progress + "%";
+
+                    if (text) {
+
+                        if (progress < 30) {
+                            text.textContent =
+                                "Mengirim ke VirusTotal...";
+                        }
+                        else if (progress < 60) {
+                            text.textContent =
+                                "VirusTotal sedang menganalisis...";
+                        }
+                        else {
+                            text.textContent =
+                                "Menunggu hasil scan...";
+                        }
+                    }
+
+                }, 700);
+            }
+
+
+            function stopProgress() {
+
+                clearInterval(progressTimer);
+
+                const fill =
+                    document.getElementById("progressFill");
+
+                if (fill) {
+                    fill.style.width = "100%";
+                }
             }
 
 
             /*
-             * ============================
-             * FILE SELECT
-             * ============================
+             * Membaca response dengan aman.
+             *
+             * Ini penting karena error sebelumnya:
+             *
+             * Unexpected token 'R'...
+             *
+             * terjadi ketika server mengembalikan TEXT/HTML
+             * tetapi JavaScript langsung memanggil response.json().
              */
 
-            fileInputBtn.addEventListener('click', (event) => {
+            async function readResponse(response) {
 
-                event.stopPropagation();
+                const text =
+                    await response.text();
 
-                fileInput.click();
+                let data = null;
 
-            });
+                try {
 
+                    data = text
+                        ? JSON.parse(text)
+                        : {};
 
-            dropZone.addEventListener('click', (event) => {
+                } catch (e) {
 
-                if (
-                    event.target === fileInputBtn ||
-                    fileInputBtn.contains(event.target)
-                ) {
-                    return;
-                }
-
-                fileInput.click();
-
-            });
-
-
-            /*
-             * ============================
-             * DRAG OVER
-             * ============================
-             */
-
-            dropZone.addEventListener('dragover', (event) => {
-
-                event.preventDefault();
-
-                dropZone.classList.add('dragover');
-
-            });
-
-
-            /*
-             * ============================
-             * DRAG LEAVE
-             * ============================
-             */
-
-            dropZone.addEventListener('dragleave', () => {
-
-                dropZone.classList.remove('dragover');
-
-            });
-
-
-            /*
-             * ============================
-             * DROP
-             * ============================
-             */
-
-            dropZone.addEventListener('drop', (event) => {
-
-                event.preventDefault();
-
-                dropZone.classList.remove('dragover');
-
-                const files =
-                    event.dataTransfer.files;
-
-                if (files && files.length > 0) {
-
-                    handleLocalFile(files[0]);
-
-                }
-
-            });
-
-
-            /*
-             * ============================
-             * FILE CHANGE
-             * ============================
-             */
-
-            fileInput.addEventListener('change', (event) => {
-
-                if (
-                    event.target.files &&
-                    event.target.files.length > 0
-                ) {
-
-                    handleLocalFile(
-                        event.target.files[0]
+                    throw new Error(
+                        "Server tidak mengembalikan JSON. " +
+                        "HTTP " +
+                        response.status +
+                        ". Response: " +
+                        text.substring(0, 200)
                     );
-
                 }
 
-            });
+                if (!response.ok) {
+
+                    throw new Error(
+                        data?.error ||
+                        data?.message ||
+                        "Server error HTTP " +
+                        response.status
+                    );
+                }
+
+                return data;
+            }
 
 
             /*
-             * ============================
-             * LOCAL FILE
-             *
-             * NOTE:
-             * Backend kamu saat ini hanya
-             * menerima "url".
-             *
-             * Jadi jangan menampilkan
-             * file sebagai "aman".
-             * ============================
+             * Mendapatkan data hasil scan dari berbagai
+             * kemungkinan format response backend.
              */
 
-            function handleLocalFile(file) {
+            function extractStats(data) {
 
-                const fileName =
-                    escapeHtml(file.name);
+                const attributes =
+                    data?.data?.attributes ||
+                    data?.attributes ||
+                    data?.data ||
+                    data ||
+                    {};
 
-                const extension =
-                    file.name
-                        .split('.')
-                        .pop()
-                        .toLowerCase();
+                const stats =
+                    attributes?.stats ||
+                    {};
 
-                const sizeMB =
-                    (file.size / 1024 / 1024)
-                    .toFixed(2);
+                return {
+                    malicious:
+                        Number(stats.malicious || 0),
+
+                    suspicious:
+                        Number(stats.suspicious || 0),
+
+                    harmless:
+                        Number(stats.harmless || 0),
+
+                    undetected:
+                        Number(stats.undetected || 0)
+                };
+            }
+
+
+            function getStatus(stats) {
+
+                if (stats.malicious > 0) {
+
+                    return {
+                        text: "BERBAHAYA",
+                        className: "status-danger",
+                        alert: "alert-danger",
+                        icon: "fa-skull-crossbones"
+                    };
+
+                }
+
+                if (stats.suspicious > 0) {
+
+                    return {
+                        text: "MENCURIGAKAN",
+                        className: "status-warning",
+                        alert: "alert-warning",
+                        icon: "fa-triangle-exclamation"
+                    };
+
+                }
 
                 if (
-                    !allowedExtensions.includes(extension)
+                    stats.harmless > 0 ||
+                    stats.undetected > 0
                 ) {
 
-                    showResult(`
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <br><br>
-                            Format file tidak didukung.
-                        </div>
-                    `);
-
-                    return;
+                    return {
+                        text: "TIDAK TERDETEKSI",
+                        className: "status-safe",
+                        alert: "alert-safe",
+                        icon: "fa-circle-check"
+                    };
                 }
+
+                return {
+                    text: "BELUM DIKETAHUI",
+                    className: "status-unknown",
+                    alert: "alert-warning",
+                    icon: "fa-circle-question"
+                };
+            }
+
+
+            function renderResult(data, extra = {}) {
+
+                stopProgress();
+
+                const stats =
+                    extractStats(data);
+
+                const status =
+                    getStatus(stats);
+
+                const total =
+                    stats.malicious +
+                    stats.suspicious +
+                    stats.harmless +
+                    stats.undetected;
+
+                let engineHTML = "";
+
+                const results =
+                    data?.data?.attributes?.results ||
+                    data?.attributes?.results ||
+                    {};
+
+                const entries =
+                    Object.entries(results);
+
+                if (entries.length > 0) {
+
+                    const sorted =
+                        entries.sort((a, b) => {
+
+                            const aCat =
+                                a[1]?.category || "";
+
+                            const bCat =
+                                b[1]?.category || "";
+
+                            return aCat.localeCompare(
+                                bCat
+                            );
+                        });
+
+                    engineHTML = sorted
+                        .map(([engine, result]) => {
+
+                            const category =
+                                result?.category ||
+                                "unknown";
+
+                            const resultName =
+                                result?.result ||
+                                category;
+
+                            let cls =
+                                "engine-undetected";
+
+                            if (
+                                category ===
+                                "malicious"
+                            ) {
+                                cls =
+                                    "engine-detected";
+                            }
+                            else if (
+                                category ===
+                                "harmless"
+                            ) {
+                                cls =
+                                    "engine-clean";
+                            }
+
+                            return `
+                                <div class="engine-item">
+                                    <span>
+                                        ${escapeHTML(engine)}
+                                    </span>
+
+                                    <span class="${cls}">
+                                        ${escapeHTML(resultName)}
+                                    </span>
+                                </div>
+                            `;
+
+                        })
+                        .join("");
+                }
+
+
+                const source =
+                    extra.source === "file"
+                        ? "File Lokal"
+                        : "URL";
 
 
                 showResult(`
 
-                    <div class="file-info">
+                    <div class="alert ${status.alert}">
 
-                        <i class="fas fa-file"></i>
+                        <i
+                            class="fas ${status.icon}"
+                            style="font-size:2rem;"
+                        ></i>
 
-                        <div>
+                        <div style="
+                            margin-top:10px;
+                            font-size:1.4rem;
+                            font-weight:800;
+                        ">
+                            ${status.text}
+                        </div>
 
-                            <strong>
-                                ${fileName}
-                            </strong>
+                        <div style="
+                            margin-top:5px;
+                            font-size:.9rem;
+                        ">
+                            Hasil analisis VirusTotal
+                        </div>
 
-                            <div class="small-text">
-                                ${sizeMB} MB
-                                •
-                                ${extension.toUpperCase()}
+                    </div>
+
+
+                    <div class="result-card"
+                         style="margin-top:15px;">
+
+                        ${
+                            extra.name
+                            ? `
+                            <div class="info-row">
+                                <span class="info-label">
+                                    Nama File
+                                </span>
+
+                                <span class="info-value">
+                                    ${escapeHTML(extra.name)}
+                                </span>
                             </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="alert alert-warning">
-
-                        <i class="fas fa-info-circle"></i>
-
-                        <br><br>
-
-                        File lokal berhasil dipilih,
-                        tetapi belum dilakukan scan VirusTotal.
-
-                    </div>
+                            `
+                            : ""
+                        }
 
 
-                    <div class="info-card">
+                        ${
+                            extra.size
+                            ? `
+                            <div class="info-row">
+                                <span class="info-label">
+                                    Ukuran
+                                </span>
 
-                        <div class="info-row">
+                                <span class="info-value">
+                                    ${escapeHTML(extra.size)}
+                                </span>
+                            </div>
+                            `
+                            : ""
+                        }
 
-                            <span>Nama File</span>
 
-                            <strong>
-                                ${fileName}
-                            </strong>
+                        ${
+                            extra.url
+                            ? `
+                            <div class="info-row">
+                                <span class="info-label">
+                                    URL
+                                </span>
 
-                        </div>
+                                <span class="info-value">
+                                    ${escapeHTML(extra.url)}
+                                </span>
+                            </div>
+                            `
+                            : ""
+                        }
 
-                        <div class="info-row">
-
-                            <span>Ukuran</span>
-
-                            <strong>
-                                ${sizeMB} MB
-                            </strong>
-
-                        </div>
-
-                        <div class="info-row">
-
-                            <span>Format</span>
-
-                            <strong>
-                                ${extension.toUpperCase()}
-                            </strong>
-
-                        </div>
 
                         <div class="info-row">
 
-                            <span>Status</span>
+                            <span class="info-label">
+                                Sumber
+                            </span>
 
-                            <span class="badge badge-warning">
-                                Belum di-scan
+                            <span class="info-value">
+                                ${source}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Status
+                            </span>
+
+                            <span class="info-value ${status.className}">
+                                ${status.text}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Malicious
+                            </span>
+
+                            <span class="info-value status-danger">
+                                ${stats.malicious}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Suspicious
+                            </span>
+
+                            <span class="info-value status-warning">
+                                ${stats.suspicious}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Harmless
+                            </span>
+
+                            <span class="info-value status-safe">
+                                ${stats.harmless}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Undetected
+                            </span>
+
+                            <span class="info-value">
+                                ${stats.undetected}
                             </span>
 
                         </div>
@@ -832,421 +1131,373 @@
                     </div>
 
 
-                    <div class="scan-note">
+                    <div class="score-box">
 
-                        Untuk scan file lokal secara real,
-                        backend harus mempunyai endpoint upload
-                        ke VirusTotal.
-                        API Key jangan ditaruh di HTML/JavaScript.
+                        <div class="score-number
+                            ${status.className}">
+
+                            ${stats.malicious}
+                            /
+                            ${total || 0}
+
+                        </div>
+
+                        <div class="score-text">
+                            Engine mendeteksi sebagai
+                            malicious
+                        </div>
+
+                    </div>
+
+
+                    ${
+                        engineHTML
+                        ? `
+                        <div class="engine-box">
+
+                            <div class="engine-title">
+                                <i class="fas fa-shield-virus"></i>
+                                Detail Engine
+                            </div>
+
+                            <div class="engine-list">
+                                ${engineHTML}
+                            </div>
+
+                        </div>
+                        `
+                        : ""
+                    }
+
+
+                    <div class="vt-note">
+
+                        <i class="fas fa-circle-info"></i>
+
+                        Hasil berasal dari analisis
+                        VirusTotal. Tidak ada API key
+                        yang disimpan di browser.
+
+                        <br>
+
+                        <a
+                            href="https://www.virustotal.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Buka VirusTotal
+                        </a>
 
                     </div>
 
                 `);
-
             }
 
 
             /*
-             * ============================
-             * VALIDATE URL
-             * ============================
+             * Poll analysis.
+             *
+             * Backend perlu menyediakan:
+             *
+             * GET /api/scan-file?id=ANALYSIS_ID
+             *
+             * dan mengembalikan hasil VirusTotal.
              */
 
-            function validateUrl(value) {
+            async function pollAnalysis(
+                analysisId,
+                extra
+            ) {
 
-                try {
+                const maxAttempts = 30;
 
-                    const parsed =
-                        new URL(value);
+                for (
+                    let attempt = 0;
+                    attempt < maxAttempts;
+                    attempt++
+                ) {
+
+                    await new Promise(resolve =>
+                        setTimeout(
+                            resolve,
+                            3000
+                        )
+                    );
+
+
+                    const response =
+                        await fetch(
+                            API_ENDPOINT +
+                            "?id=" +
+                            encodeURIComponent(
+                                analysisId
+                            ),
+                            {
+                                method: "GET",
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                },
+                                cache: "no-store"
+                            }
+                        );
+
+
+                    const data =
+                        await readResponse(
+                            response
+                        );
+
+
+                    /*
+                     * Kalau backend mengembalikan
+                     * status completed/finished.
+                     */
+
+                    const status =
+                        data?.status ||
+                        data?.data?.attributes?.status ||
+                        data?.attributes?.status;
+
 
                     if (
-                        parsed.protocol !== 'http:' &&
-                        parsed.protocol !== 'https:'
+                        status === "completed" ||
+                        status === "finished"
                     ) {
 
-                        return false;
+                        renderResult(
+                            data,
+                            extra
+                        );
 
+                        return;
                     }
 
-                    return true;
 
-                } catch {
+                    /*
+                     * Kalau backend langsung memberikan
+                     * stats, berarti hasil sudah tersedia.
+                     */
 
-                    return false;
+                    const stats =
+                        extractStats(data);
 
+                    const hasStats =
+                        stats.malicious +
+                        stats.suspicious +
+                        stats.harmless +
+                        stats.undetected > 0;
+
+
+                    if (hasStats) {
+
+                        renderResult(
+                            data,
+                            extra
+                        );
+
+                        return;
+                    }
+
+
+                    const progressText =
+                        document.getElementById(
+                            "progressText"
+                        );
+
+                    if (progressText) {
+
+                        progressText.textContent =
+                            "VirusTotal sedang menganalisis... (" +
+                            (attempt + 1) +
+                            "/" +
+                            maxAttempts +
+                            ")";
+                    }
                 }
 
+
+                throw new Error(
+                    "Waktu tunggu analisis VirusTotal habis."
+                );
             }
 
 
             /*
-             * ============================
-             * SCAN URL
-             * ============================
+             * UPLOAD FILE
              */
 
-            async function scanUrl() {
+            async function scanFile(file) {
 
-                const url =
-                    urlInput.value.trim();
+                const ext =
+                    getExtension(file.name);
+
+
+                if (!ALLOWED.includes(ext)) {
+
+                    showResult(`
+                        <div class="alert alert-danger">
+                            <i class="fas fa-circle-xmark"></i>
+                            <br>
+                            Format file tidak didukung.
+                            <br>
+                            <small>
+                                Support:
+                                APK, ZIP, 7Z, RAR,
+                                MP4, MP3, JPG, JPEG
+                            </small>
+                        </div>
+                    `);
+
+                    return;
+                }
 
 
                 /*
-                 * EMPTY
+                 * 32 MB limit untuk upload endpoint
+                 * langsung.
                  */
 
-                if (!url) {
+                if (
+                    file.size >
+                    32 * 1024 * 1024
+                ) {
 
                     showResult(`
                         <div class="alert alert-warning">
 
-                            <i class="fas fa-exclamation-triangle"></i>
-
-                            <br><br>
-
-                            Masukkan URL file terlebih dahulu.
-
-                        </div>
-                    `);
-
-                    return;
-
-                }
-
-
-                /*
-                 * INVALID URL
-                 */
-
-                if (!validateUrl(url)) {
-
-                    showResult(`
-                        <div class="alert alert-danger">
-
-                            <i class="fas fa-times-circle"></i>
-
-                            <br><br>
-
-                            URL tidak valid.
+                            <i class="fas fa-weight-hanging"></i>
 
                             <br>
 
-                            Contoh:
-                            https://example.com/file.apk
+                            File terlalu besar.
+
+                            <br>
+
+                            Maksimal upload langsung:
+                            <strong>32 MB</strong>
+
+                            <br><br>
+
+                            Ukuran file:
+                            <strong>
+                                ${formatSize(file.size)}
+                            </strong>
 
                         </div>
                     `);
 
                     return;
-
                 }
 
 
-                /*
-                 * LOADING
-                 */
-
-                checkBtn.disabled = true;
-
-                checkBtn.innerHTML = `
-                    <i class="fas fa-spinner fa-spin"></i>
-                    Memeriksa...
-                `;
-
-
-                showResult(`
-                    <div class="alert alert-info">
-
-                        <i class="fas fa-spinner fa-spin"></i>
-
-                        <br><br>
-
-                        Mengirim URL ke VirusTotal...
-
-                    </div>
-                `);
+                loading(
+                    "Mengupload file ke VirusTotal..."
+                );
 
 
                 try {
 
-                    /*
-                     * ==========================
-                     * SEND TO VERCEL API
-                     * ==========================
-                     */
-
-                    const response =
-                        await fetch('/api/scan-file', {
-
-                            method: 'POST',
-
-                            headers: {
-                                'Content-Type':
-                                    'application/json',
-
-                                'Accept':
-                                    'application/json'
-                            },
-
-                            body: JSON.stringify({
-                                url: url
-                            })
-
-                        });
-
-
-                    /*
-                     * ==========================
-                     * READ RESPONSE SAFELY
-                     *
-                     * Jangan langsung:
-                     *
-                     * response.json()
-                     *
-                     * Karena kalau Vercel
-                     * mengembalikan HTML/text,
-                     * akan muncul:
-                     *
-                     * Unexpected token...
-                     * ==========================
-                     */
-
-                    const rawText =
-                        await response.text();
-
-                    let data = null;
-
-                    try {
-
-                        data =
-                            rawText
-                                ? JSON.parse(rawText)
-                                : null;
-
-                    } catch (jsonError) {
-
-                        console.error(
-                            'Response bukan JSON:',
-                            rawText
-                        );
-
-                        throw new Error(
-                            'Server mengembalikan response bukan JSON.'
-                        );
-
-                    }
-
-
-                    /*
-                     * ==========================
-                     * HTTP ERROR
-                     * ==========================
-                     */
-
-                    if (!response.ok) {
-
-                        const message =
-                            data?.error ||
-                            `Server error (${response.status})`;
-
-                        throw new Error(message);
-
-                    }
-
-
-                    /*
-                     * ==========================
-                     * API ERROR
-                     * ==========================
-                     */
-
-                    if (!data) {
-
-                        throw new Error(
-                            'Response dari server kosong.'
-                        );
-
-                    }
-
-
-                    if (data.error) {
-
-                        throw new Error(
-                            data.error
-                        );
-
-                    }
-
-
-                    /*
-                     * ==========================
-                     * ANALYSIS ID
-                     * ==========================
-                     */
-
-                    const analysisId =
-                        data.analysisId ||
-                        data.data?.data?.id ||
-                        data.data?.id;
-
-
-                    /*
-                     * ==========================
-                     * SUCCESS
-                     * ==========================
-                     */
-
-                    if (analysisId) {
-
-                        showResult(`
-
-                            <div
-                                style="
-                                    text-align:center;
-                                    margin-bottom:20px;
-                                "
-                            >
-
-                                <span class="badge badge-info">
-
-                                    <i class="fas fa-check"></i>
-
-                                    Scan berhasil dikirim
-
-                                </span>
-
-                            </div>
-
-
-                            <div class="info-card">
-
-                                <div class="info-row">
-
-                                    <span>
-                                        URL
-                                    </span>
-
-                                    <strong>
-                                        ${escapeHtml(url)}
-                                    </strong>
-
-                                </div>
-
-
-                                <div class="info-row">
-
-                                    <span>
-                                        Status
-                                    </span>
-
-                                    <span class="badge badge-warning">
-
-                                        Menunggu analisis
-
-                                    </span>
-
-                                </div>
-
-
-                                <div class="info-row">
-
-                                    <span>
-                                        Analysis ID
-                                    </span>
-
-                                    <span class="analysis-id">
-                                        ${escapeHtml(analysisId)}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="alert alert-info" style="margin-top:15px;">
-
-                                <i class="fas fa-shield-virus"></i>
-
-                                <br><br>
-
-                                VirusTotal sudah menerima URL tersebut
-                                dan sedang melakukan analisis.
-
-                            </div>
-
-
-                            <div class="scan-note">
-
-                                Hasil akhir tidak boleh dianggap
-                                "aman" sebelum analisis VirusTotal
-                                selesai.
-
-                            </div>
-
-                        `);
-
-                    } else {
-
-                        /*
-                         * Server sukses tetapi tidak
-                         * memberikan analysis ID.
-                         */
-
-                        showResult(`
-
-                            <div class="alert alert-warning">
-
-                                <i class="fas fa-exclamation-triangle"></i>
-
-                                <br><br>
-
-                                Request berhasil dikirim,
-                                tetapi VirusTotal tidak memberikan
-                                Analysis ID.
-
-                            </div>
-
-                            <div class="info-card">
-
-                                <div class="small-text">
-                                    Response server:
-                                </div>
-
-                                <pre
-                                    style="
-                                        white-space:pre-wrap;
-                                        word-break:break-word;
-                                        margin-top:10px;
-                                        color:var(--text-secondary);
-                                    "
-                                >${escapeHtml(rawText)}</pre>
-
-                            </div>
-
-                        `);
-
-                    }
-
-
-                } catch (error) {
-
-                    console.error(
-                        'Scan error:',
-                        error
+                    const formData =
+                        new FormData();
+
+                    formData.append(
+                        "file",
+                        file
                     );
 
 
+                    const response =
+                        await fetch(
+                            API_ENDPOINT,
+                            {
+                                method: "POST",
+                                body: formData,
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                }
+                            }
+                        );
+
+
+                    const data =
+                        await readResponse(
+                            response
+                        );
+
+
                     /*
-                     * ==========================
-                     * ERROR DISPLAY
-                     * ==========================
+                     * Backend bisa langsung
+                     * mengembalikan hasil.
                      */
 
-                    showResult(`
+                    const stats =
+                        extractStats(data);
 
+                    const hasStats =
+                        stats.malicious +
+                        stats.suspicious +
+                        stats.harmless +
+                        stats.undetected > 0;
+
+
+                    if (hasStats) {
+
+                        renderResult(
+                            data,
+                            {
+                                source: "file",
+                                name: file.name,
+                                size: formatSize(
+                                    file.size
+                                )
+                            }
+                        );
+
+                        return;
+                    }
+
+
+                    /*
+                     * Atau backend mengembalikan
+                     * analysisId.
+                     */
+
+                    const analysisId =
+                        data?.analysisId ||
+                        data?.data?.id ||
+                        data?.analysis?.id;
+
+
+                    if (!analysisId) {
+
+                        throw new Error(
+                            "Backend tidak mengembalikan analysisId."
+                        );
+                    }
+
+
+                    await pollAnalysis(
+                        analysisId,
+                        {
+                            source: "file",
+                            name: file.name,
+                            size: formatSize(
+                                file.size
+                            )
+                        }
+                    );
+
+                }
+                catch (error) {
+
+                    stopProgress();
+
+                    showResult(`
                         <div class="alert alert-danger">
 
-                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-triangle-exclamation"></i>
 
                             <br><br>
 
@@ -1256,89 +1507,310 @@
 
                             <br><br>
 
-                            ${escapeHtml(
-                                error.message ||
-                                'Terjadi kesalahan.'
+                            ${escapeHTML(
+                                error.message
                             )}
 
                         </div>
-
-
-                        <div class="scan-note">
-
-                            Pastikan endpoint berikut tersedia:
-
-                            <br>
-
-                            <strong>
-                                /api/scan-file
-                            </strong>
-
-                            <br><br>
-
-                            Dan environment variable:
-
-                            <br>
-
-                            <strong>
-                                VIRUSTOTAL_API_KEY
-                            </strong>
-
-                            sudah tersedia di
-                            Production Vercel.
-
-                        </div>
-
                     `);
 
-                } finally {
-
-                    checkBtn.disabled = false;
-
-                    checkBtn.innerHTML = `
-                        <i class="fas fa-search"></i>
-                        Check URL
-                    `;
-
+                    console.error(
+                        "FILE SCAN ERROR:",
+                        error
+                    );
                 }
-
             }
 
 
             /*
-             * ============================
-             * BUTTON
-             * ============================
+             * URL SCAN
              */
 
-            checkBtn.addEventListener(
-                'click',
-                scanUrl
-            );
+            async function scanURL(url) {
+
+                if (!url) {
+
+                    showResult(`
+                        <div class="alert alert-warning">
+                            Masukkan URL file terlebih dahulu.
+                        </div>
+                    `);
+
+                    return;
+                }
+
+
+                try {
+
+                    new URL(url);
+
+                }
+                catch {
+
+                    showResult(`
+                        <div class="alert alert-danger">
+                            <i class="fas fa-link-slash"></i>
+                            <br>
+                            URL tidak valid.
+                        </div>
+                    `);
+
+                    return;
+                }
+
+
+                loading(
+                    "Mengirim URL ke VirusTotal..."
+                );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            API_ENDPOINT,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    url: url
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await readResponse(
+                            response
+                        );
+
+
+                    /*
+                     * Kalau backend langsung
+                     * mengembalikan hasil.
+                     */
+
+                    const stats =
+                        extractStats(data);
+
+                    const hasStats =
+                        stats.malicious +
+                        stats.suspicious +
+                        stats.harmless +
+                        stats.undetected > 0;
+
+
+                    if (hasStats) {
+
+                        renderResult(
+                            data,
+                            {
+                                source: "url",
+                                url: url
+                            }
+                        );
+
+                        return;
+                    }
+
+
+                    const analysisId =
+                        data?.analysisId ||
+                        data?.data?.id ||
+                        data?.analysis?.id;
+
+
+                    if (!analysisId) {
+
+                        throw new Error(
+                            "Backend tidak mengembalikan analysisId."
+                        );
+                    }
+
+
+                    await pollAnalysis(
+                        analysisId,
+                        {
+                            source: "url",
+                            url: url
+                        }
+                    );
+
+                }
+                catch (error) {
+
+                    stopProgress();
+
+                    showResult(`
+                        <div class="alert alert-danger">
+
+                            <i class="fas fa-triangle-exclamation"></i>
+
+                            <br><br>
+
+                            <strong>
+                                Gagal melakukan scan URL
+                            </strong>
+
+                            <br><br>
+
+                            ${escapeHTML(
+                                error.message
+                            )}
+
+                        </div>
+                    `);
+
+                    console.error(
+                        "URL SCAN ERROR:",
+                        error
+                    );
+                }
+            }
 
 
             /*
-             * ============================
-             * ENTER KEY
-             * ============================
+             * BUTTON FILE
              */
 
-            urlInput.addEventListener(
-                'keydown',
+            fileInputBtn.addEventListener(
+                "click",
                 (event) => {
 
-                    if (event.key === 'Enter') {
+                    event.stopPropagation();
 
-                        event.preventDefault();
+                    fileInput.click();
+                }
+            );
 
-                        scanUrl();
+
+            dropZone.addEventListener(
+                "click",
+                () => {
+
+                    fileInput.click();
+                }
+            );
+
+
+            fileInput.addEventListener(
+                "change",
+                () => {
+
+                    if (
+                        fileInput.files &&
+                        fileInput.files.length > 0
+                    ) {
+
+                        scanFile(
+                            fileInput.files[0]
+                        );
 
                     }
 
                 }
             );
 
+
+            /*
+             * DRAG & DROP
+             */
+
+            dropZone.addEventListener(
+                "dragover",
+                (event) => {
+
+                    event.preventDefault();
+
+                    dropZone.classList.add(
+                        "dragover"
+                    );
+                }
+            );
+
+
+            dropZone.addEventListener(
+                "dragleave",
+                () => {
+
+                    dropZone.classList.remove(
+                        "dragover"
+                    );
+                }
+            );
+
+
+            dropZone.addEventListener(
+                "drop",
+                (event) => {
+
+                    event.preventDefault();
+
+                    dropZone.classList.remove(
+                        "dragover"
+                    );
+
+                    const files =
+                        event.dataTransfer.files;
+
+                    if (
+                        files &&
+                        files.length > 0
+                    ) {
+
+                        scanFile(files[0]);
+                    }
+                }
+            );
+
+
+            /*
+             * BUTTON URL
+             */
+
+            checkBtn.addEventListener(
+                "click",
+                () => {
+
+                    scanURL(
+                        urlInput.value.trim()
+                    );
+
+                }
+            );
+
+
+            /*
+             * ENTER DI INPUT URL
+             */
+
+            urlInput.addEventListener(
+                "keydown",
+                (event) => {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        scanURL(
+                            urlInput.value.trim()
+                        );
+                    }
+                }
+            );
+
         });
+
     </script>
 
 </body>
