@@ -8,15 +8,10 @@
 
     <link rel="stylesheet" href="../css/style.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    >
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         .tools-container {
@@ -154,11 +149,6 @@
             border-bottom: none;
         }
 
-        .info-value {
-            text-align: right;
-            word-break: break-word;
-        }
-
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -187,24 +177,18 @@
             text-align: center;
         }
 
-        .alert-danger {
+        .alert-error {
             background: rgba(255, 68, 68, 0.1);
             border-color: #ff4444;
             color: #ff4444;
         }
 
-        .alert-warning {
-            background: rgba(255, 170, 0, 0.1);
-            border-color: #ffaa00;
-            color: #ffaa00;
-        }
-
         .badge {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 3px 12px;
             border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .badge-safe {
@@ -237,56 +221,17 @@
             color: var(--neon-blue);
         }
 
-        .scan-card {
-            margin-top: 15px;
-            padding: 15px;
-            background: var(--glass-bg);
-            border-radius: 12px;
-        }
-
-        .scan-card-title {
-            color: var(--neon-blue);
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .virus-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 15px;
-            color: var(--neon-blue);
-            text-decoration: none;
-        }
-
-        .virus-link:hover {
-            text-decoration: underline;
-        }
-
-        .disclaimer {
-            margin-top: 15px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+        .progress-text {
+            margin-top: 10px;
             text-align: center;
-            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
         @media (max-width: 600px) {
-            .tools-container {
-                margin-top: 100px;
-            }
-
-            .drop-zone {
-                padding: 30px 15px;
-            }
-
             .result-box .info-row {
                 flex-direction: column;
-                gap: 5px;
-            }
-
-            .info-value {
-                text-align: left;
+                gap: 4px;
             }
         }
     </style>
@@ -294,466 +239,400 @@
 
 <body>
 
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon" style="display: none;"></i>
-    </div>
+<div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon" style="display: none;"></i>
+</div>
 
-    <nav class="navbar">
-        <div class="nav-container">
+<nav class="navbar">
+    <div class="nav-container">
 
-            <div class="nav-logo">
-                <img
-                    src="https://c.top4top.io/p_3819ed0vz1.jpg"
-                    alt="Logo"
-                    class="logo-img"
-                >
-                <span>Foxxy</span>
-            </div>
+        <div class="nav-logo">
+            <img src="https://c.top4top.io/p_3819ed0vz1.jpg"
+                 alt="Logo"
+                 class="logo-img">
 
-            <div class="nav-menu" id="navMenu">
-
-                <a href="../index.html" class="nav-link">
-                    Beranda
-                </a>
-
-                <a href="store.html" class="nav-link">
-                    Store
-                </a>
-
-                <a href="bot-sewa.html" class="nav-link">
-                    Sewa Bot
-                </a>
-
-                <a href="tools.html" class="nav-link active">
-                    Tools
-                </a>
-
-                <a href="komunitas.html" class="nav-link">
-                    Komunitas
-                </a>
-
-                <a href="../admin/developer.html" class="nav-link">
-                    Developer
-                </a>
-
-            </div>
-
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
+            <span>Foxxy</span>
         </div>
-    </nav>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html" class="nav-link">Beranda</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="bot-sewa.html" class="nav-link">Sewa Bot</a>
+            <a href="tools.html" class="nav-link active">Tools</a>
+            <a href="komunitas.html" class="nav-link">Komunitas</a>
+            <a href="../admin/developer.html" class="nav-link">Developer</a>
+        </div>
+
+        <div class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</nav>
 
 
-    <div class="tools-container">
+<div class="tools-container">
 
-        <h1>
-            <i class="fas fa-file-shield"></i>
-            Check Keamanan File
-        </h1>
+    <h1>
+        <i class="fas fa-file-shield"></i>
+        Check Keamanan File
+    </h1>
 
-        <p class="subtitle">
-            Cek file menggunakan engine keamanan VirusTotal secara real-time
+    <p class="subtitle">
+        Scan file secara real menggunakan VirusTotal
+    </p>
+
+
+    <!-- DROP ZONE -->
+
+    <div class="drop-zone" id="dropZone">
+
+        <i class="fas fa-cloud-upload-alt"></i>
+
+        <p>
+            <strong>Drag & drop file di sini</strong>
         </p>
 
+        <p class="file-types">
+            Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG, JPEG
+        </p>
 
-        <!-- ========================= -->
-        <!-- FILE UPLOAD -->
-        <!-- ========================= -->
+        <button
+            id="fileInputBtn"
+            type="button"
+            style="
+                margin-top:15px;
+                padding:10px 25px;
+                background:var(--gradient);
+                border:none;
+                border-radius:30px;
+                color:var(--dark-bg);
+                font-weight:600;
+                cursor:pointer;
+            ">
+            Pilih File
+        </button>
 
-        <div class="drop-zone" id="dropZone">
-
-            <i class="fas fa-cloud-upload-alt"></i>
-
-            <p>
-                <strong>
-                    Drag & drop file di sini
-                </strong>
-            </p>
-
-            <p class="file-types">
-                Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG
-            </p>
-
-            <button
-                id="fileInputBtn"
-                type="button"
-                style="
-                    margin-top:15px;
-                    padding:10px 25px;
-                    background:var(--gradient);
-                    border:none;
-                    border-radius:30px;
-                    color:var(--dark-bg);
-                    font-weight:600;
-                    cursor:pointer;
-                "
-            >
-                Pilih File
-            </button>
-
-            <input
-                type="file"
-                id="fileInput"
-                style="display:none;"
-                accept=".apk,.zip,.7z,.rar,.mp4,.mp3,.jpg,.jpeg"
-            >
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- URL -->
-        <!-- ========================= -->
-
-        <div style="
-            text-align:center;
-            color:var(--text-secondary);
-            margin:15px 0;
-        ">
-            — atau —
-        </div>
-
-
-        <div class="input-group">
-
-            <input
-                type="text"
-                id="fileUrl"
-                placeholder="Masukkan URL file..."
-            >
-
-            <button
-                id="checkBtn"
-                type="button"
-            >
-                <i class="fas fa-search"></i>
-                Check
-            </button>
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- RESULT -->
-        <!-- ========================= -->
-
-        <div
-            class="result-box"
-            id="resultBox"
-        >
-            <div id="resultContent"></div>
-        </div>
-
-
-        <a
-            href="tools.html"
-            class="btn-back"
-        >
-            <i class="fas fa-arrow-left"></i>
-            Kembali ke Tools
-        </a>
+        <input
+            type="file"
+            id="fileInput"
+            style="display:none;"
+            accept=".apk,.zip,.7z,.rar,.mp4,.mp3,.jpg,.jpeg">
 
     </div>
 
 
-    <footer class="footer">
+    <div style="
+        text-align:center;
+        color:var(--text-secondary);
+        margin:15px 0;
+    ">
+        — atau —
+    </div>
 
-        <div class="container">
 
-            <div class="footer-content">
+    <!-- URL -->
 
-                <p>
-                    &copy; 2026
-                    <span class="watermark">
-                        Foxxy
-                    </span>.
-                    All right reserved.
-                </p>
+    <div class="input-group">
 
-                <p>
-                    Developed By
-                    <span class="watermark">
-                        FoxxyOffc / FoxxyPrst
-                    </span>
-                </p>
+        <input
+            type="text"
+            id="fileUrl"
+            placeholder="Masukkan URL file...">
 
-            </div>
+        <button id="checkBtn" type="button">
+            <i class="fas fa-search"></i>
+            Check URL
+        </button>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div class="result-box" id="resultBox">
+        <div id="resultContent"></div>
+    </div>
+
+
+    <a href="tools.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i>
+        Kembali ke Tools
+    </a>
+
+</div>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <p>
+                &copy; 2026
+                <span class="watermark">Foxxy</span>.
+                All right reserved.
+            </p>
+
+            <p>
+                Developed By
+                <span class="watermark">
+                    FoxxyOffc / FoxxyPrst
+                </span>
+            </p>
 
         </div>
 
-    </footer>
+    </div>
 
+</footer>
 
-    <script src="../js/config.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/auth.js"></script>
 
+<script src="../js/config.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/auth.js"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
 
-        initTheme();
-        initNavToggle();
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
+    initTheme();
+    initNavToggle();
 
-        const dropZone =
-            document.getElementById('dropZone');
+    const dropZone =
+        document.getElementById('dropZone');
 
-        const fileInput =
-            document.getElementById('fileInput');
+    const fileInput =
+        document.getElementById('fileInput');
 
-        const fileInputBtn =
-            document.getElementById('fileInputBtn');
+    const fileInputBtn =
+        document.getElementById('fileInputBtn');
 
-        const urlInput =
-            document.getElementById('fileUrl');
+    const urlInput =
+        document.getElementById('fileUrl');
 
-        const checkBtn =
-            document.getElementById('checkBtn');
+    const checkBtn =
+        document.getElementById('checkBtn');
 
-        const resultBox =
-            document.getElementById('resultBox');
+    const resultBox =
+        document.getElementById('resultBox');
 
-        const resultContent =
-            document.getElementById('resultContent');
+    const resultContent =
+        document.getElementById('resultContent');
 
 
-        const MAX_SIZE =
-            32 * 1024 * 1024;
+    const allowedExtensions = [
+        'apk',
+        'zip',
+        '7z',
+        'rar',
+        'mp4',
+        'mp3',
+        'jpg',
+        'jpeg'
+    ];
 
 
-        const ALLOWED =
-            [
-                'apk',
-                'zip',
-                '7z',
-                'rar',
-                'mp4',
-                'mp3',
-                'jpg',
-                'jpeg'
-            ];
+    function escapeHtml(value) {
 
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
 
-        // =========================
-        // UTILITY
-        // =========================
+    }
 
-        function escapeHtml(value) {
 
-            return String(value)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+    function showError(message) {
 
-        }
+        resultBox.classList.add('show');
 
+        resultContent.innerHTML = `
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                ${escapeHtml(message)}
+            </div>
+        `;
 
-        function sleep(ms) {
+    }
 
-            return new Promise(
-                resolve => setTimeout(resolve, ms)
-            );
 
-        }
+    function getExtension(filename) {
 
+        return filename
+            .split('.')
+            .pop()
+            .toLowerCase();
 
-        function showResult() {
+    }
 
-            resultBox.classList.add('show');
 
-        }
+    function showLoading(file) {
 
+        const sizeMB =
+            (file.size / (1024 * 1024)).toFixed(2);
 
-        function showError(message) {
+        resultBox.classList.add('show');
 
-            showResult();
+        resultContent.innerHTML = `
 
-            resultContent.innerHTML = `
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    ${escapeHtml(message)}
-                </div>
-            `;
+            <div class="file-info">
 
-        }
+                <i class="fas fa-file"></i>
 
-
-        function setLoading(message) {
-
-            showResult();
-
-            resultContent.innerHTML = `
-                <div class="alert">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    ${escapeHtml(message)}
-                </div>
-            `;
-
-        }
-
-
-        // =========================
-        // DRAG & DROP
-        // =========================
-
-        dropZone.addEventListener(
-            'dragover',
-            (event) => {
-
-                event.preventDefault();
-
-                dropZone.classList.add(
-                    'dragover'
-                );
-
-            }
-        );
-
-
-        dropZone.addEventListener(
-            'dragleave',
-            () => {
-
-                dropZone.classList.remove(
-                    'dragover'
-                );
-
-            }
-        );
-
-
-        dropZone.addEventListener(
-            'drop',
-            (event) => {
-
-                event.preventDefault();
-
-                dropZone.classList.remove(
-                    'dragover'
-                );
-
-                const files =
-                    event.dataTransfer.files;
-
-                if (
-                    files &&
-                    files.length > 0
-                ) {
-
-                    scanFile(files[0]);
-
-                }
-
-            }
-        );
-
-
-        fileInputBtn.addEventListener(
-            'click',
-            () => {
-
-                fileInput.click();
-
-            }
-        );
-
-
-        fileInput.addEventListener(
-            'change',
-            (event) => {
-
-                if (
-                    event.target.files &&
-                    event.target.files.length > 0
-                ) {
-
-                    scanFile(
-                        event.target.files[0]
-                    );
-
-                }
-
-            }
-        );
-
-
-        // =========================
-        // SCAN FILE
-        // =========================
-
-        async function scanFile(file) {
-
-            const extension =
-                file.name
-                    .split('.')
-                    .pop()
-                    .toLowerCase();
-
-
-            const sizeMB =
-                (
-                    file.size /
-                    (1024 * 1024)
-                ).toFixed(2);
-
-
-            if (
-                !ALLOWED.includes(extension)
-            ) {
-
-                showError(
-                    'Format file tidak didukung. Support: APK, ZIP, 7Z, RAR, MP4, MP3, JPG.'
-                );
-
-                return;
-
-            }
-
-
-            if (
-                file.size > MAX_SIZE
-            ) {
-
-                showError(
-                    'Ukuran file terlalu besar. Maksimal 32 MB.'
-                );
-
-                return;
-
-            }
-
-
-            showResult();
-
-
-            resultContent.innerHTML = `
-
-                <div class="file-info">
-
-                    <i class="fas fa-file"></i>
+                <div>
 
                     <div>
-
                         <strong>
                             ${escapeHtml(file.name)}
                         </strong>
+                    </div>
+
+                    <div style="
+                        color:var(--text-secondary);
+                        font-size:.9rem;
+                    ">
+                        ${sizeMB} MB
+                        •
+                        ${getExtension(file.name).toUpperCase()}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="alert">
+
+                <i class="fas fa-spinner fa-spin"></i>
+
+                Mengupload file ke VirusTotal...
+
+            </div>
+
+        `;
+
+    }
+
+
+    async function scanFile(file) {
+
+        const ext = getExtension(file.name);
+
+        if (!allowedExtensions.includes(ext)) {
+
+            showError(
+                'Format file tidak didukung.'
+            );
+
+            return;
+
+        }
+
+
+        showLoading(file);
+
+
+        try {
+
+            const response = await fetch(
+                '/api/scan-file',
+                {
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type':
+                            file.type ||
+                            'application/octet-stream'
+                    },
+
+                    body: file
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    'Gagal mengupload file.'
+                );
+
+            }
+
+
+            if (!data.analysisId) {
+
+                throw new Error(
+                    'VirusTotal tidak memberikan Analysis ID.'
+                );
+
+            }
+
+
+            await waitForAnalysis(
+                data.analysisId,
+                file
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showError(
+                error.message ||
+                'Gagal melakukan scan.'
+            );
+
+        }
+
+    }
+
+
+    async function waitForAnalysis(
+        analysisId,
+        file
+    ) {
+
+        const maxAttempts = 30;
+
+        for (
+            let attempt = 0;
+            attempt < maxAttempts;
+            attempt++
+        ) {
+
+            resultContent.innerHTML = `
+
+                <div class="file-info">
+
+                    <i class="fas fa-file"></i>
+
+                    <div>
+
+                        <div>
+                            <strong>
+                                ${escapeHtml(file.name)}
+                            </strong>
+                        </div>
 
                         <div style="
                             color:var(--text-secondary);
                             font-size:.9rem;
-                            margin-top:4px;
                         ">
-                            ${sizeMB} MB
-                            •
-                            ${extension.toUpperCase()}
+                            ${(file.size /
+                                (1024 * 1024)
+                            ).toFixed(2)} MB
                         </div>
 
                     </div>
@@ -762,501 +641,398 @@
 
                 <div class="alert">
 
-                    <i class="fas fa-cloud-upload-alt"></i>
+                    <i class="fas fa-spinner fa-spin"></i>
 
-                    Mengirim file ke VirusTotal...
+                    VirusTotal sedang
+                    menganalisis file...
+
+                </div>
+
+                <div class="progress-text">
+
+                    Percobaan ${attempt + 1}
+                    dari ${maxAttempts}
 
                 </div>
 
             `;
 
 
-            try {
-
-                /*
-                 * File dikirim sebagai RAW BODY
-                 * ke serverless function.
-                 *
-                 * API key TIDAK pernah dikirim
-                 * ke browser.
-                 */
-
-                const response =
-                    await fetch(
-                        '/api/scan-file',
-                        {
-                            method: 'POST',
-
-                            headers: {
-                                'Content-Type':
-                                    file.type ||
-                                    'application/octet-stream',
-
-                                'X-File-Name':
-                                    encodeURIComponent(
-                                        file.name
-                                    )
-                            },
-
-                            body: file
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error ||
-                        'Upload file gagal.'
-                    );
-
-                }
-
-
-                const analysisId =
-                    data.analysisId;
-
-
-                if (!analysisId) {
-
-                    throw new Error(
-                        'VirusTotal tidak memberikan Analysis ID.'
-                    );
-
-                }
-
-
-                await waitForAnalysis(
-                    analysisId,
-                    file
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    'Scan file error:',
-                    error
-                );
-
-                showError(
-                    error.message ||
-                    'Gagal memeriksa file.'
-                );
-
-            }
-
-        }
-
-
-        // =========================
-        // WAIT ANALYSIS
-        // =========================
-
-        async function waitForAnalysis(
-            analysisId,
-            file
-        ) {
-
-            const maxAttempts = 40;
-
-
-            for (
-                let attempt = 0;
-                attempt < maxAttempts;
-                attempt++
-            ) {
-
-                const response =
-                    await fetch(
-                        '/api/scan-file-status?id=' +
-                        encodeURIComponent(
-                            analysisId
-                        )
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error ||
-                        'Gagal mengambil hasil VirusTotal.'
-                    );
-
-                }
-
-
-                const attributes =
-                    data?.data?.attributes || {};
-
-
-                const status =
-                    attributes.status ||
-                    'queued';
-
-
-                if (
-                    status === 'completed'
-                ) {
-
-                    renderFileResult(
-                        attributes,
-                        file
-                    );
-
-                    return;
-
-                }
-
-
-                resultContent.innerHTML = `
-
-                    <div class="file-info">
-
-                        <i class="fas fa-file-shield"></i>
-
-                        <div>
-
-                            <strong>
-                                ${escapeHtml(
-                                    file.name
-                                )}
-                            </strong>
-
-                            <div style="
-                                color:var(--text-secondary);
-                                font-size:.9rem;
-                                margin-top:4px;
-                            ">
-                                VirusTotal sedang
-                                menganalisis file...
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="alert">
-
-                        <i class="fas fa-spinner fa-spin"></i>
-
-                        Status:
-                        ${escapeHtml(status)}
-
-                    </div>
-
-                `;
-
-
-                await sleep(3000);
-
-            }
-
-
-            throw new Error(
-                'Analisis VirusTotal terlalu lama. Coba lagi beberapa saat.'
+            await new Promise(
+                resolve =>
+                    setTimeout(resolve, 2000)
             );
 
-        }
+
+            const response = await fetch(
+                '/api/check-analysis?id=' +
+                encodeURIComponent(analysisId)
+            );
 
 
-        // =========================
-        // FILE RESULT
-        // =========================
-
-        function renderFileResult(
-            attributes,
-            file
-        ) {
-
-            const stats =
-                attributes.stats || {};
+            const data =
+                await response.json();
 
 
-            const malicious =
-                Number(
-                    stats.malicious || 0
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    'Gagal mengambil hasil scan.'
                 );
 
-
-            const suspicious =
-                Number(
-                    stats.suspicious || 0
-                );
+            }
 
 
-            const harmless =
-                Number(
-                    stats.harmless || 0
-                );
-
-
-            const undetected =
-                Number(
-                    stats.undetected || 0
-                );
-
-
-            const total =
-                malicious +
-                suspicious +
-                harmless +
-                undetected;
-
-
-            let statusText;
-            let badgeClass;
-            let icon;
+            const attributes =
+                data.data?.attributes;
 
 
             if (
-                malicious > 0
+                attributes &&
+                attributes.status === 'completed'
             ) {
 
-                statusText =
-                    '⚠️ File Berbahaya';
+                showResult(
+                    file,
+                    attributes
+                );
 
-                badgeClass =
-                    'badge-danger';
-
-                icon =
-                    'fas fa-skull-crossbones';
-
-            } else if (
-                suspicious > 0
-            ) {
-
-                statusText =
-                    '⚠️ File Mencurigakan';
-
-                badgeClass =
-                    'badge-warning';
-
-                icon =
-                    'fas fa-exclamation-triangle';
-
-            } else {
-
-                statusText =
-                    '✅ Tidak Terdeteksi Ancaman';
-
-                badgeClass =
-                    'badge-safe';
-
-                icon =
-                    'fas fa-shield-alt';
+                return;
 
             }
 
+        }
 
-            resultContent.innerHTML = `
 
-                <div style="
-                    text-align:center;
-                    margin-bottom:20px;
+        throw new Error(
+            'Analisis VirusTotal terlalu lama. Silakan coba lagi.'
+        );
+
+    }
+
+
+    function showResult(
+        file,
+        attributes
+    ) {
+
+        const stats =
+            attributes.stats || {};
+
+
+        const malicious =
+            Number(stats.malicious || 0);
+
+        const suspicious =
+            Number(stats.suspicious || 0);
+
+        const harmless =
+            Number(stats.harmless || 0);
+
+        const undetected =
+            Number(stats.undetected || 0);
+
+
+        let statusText;
+        let badgeClass;
+
+
+        if (malicious > 0) {
+
+            statusText =
+                '⚠️ TERDETEKSI BERBAHAYA';
+
+            badgeClass =
+                'badge-danger';
+
+        } else if (suspicious > 0) {
+
+            statusText =
+                '⚠️ MENCURIGAKAN';
+
+            badgeClass =
+                'badge-warning';
+
+        } else {
+
+            statusText =
+                '✅ TIDAK TERDETEKSI ANCAMAN';
+
+            badgeClass =
+                'badge-safe';
+
+        }
+
+
+        const sizeMB =
+            (file.size /
+                (1024 * 1024)
+            ).toFixed(2);
+
+
+        resultBox.classList.add('show');
+
+
+        resultContent.innerHTML = `
+
+            <div style="
+                text-align:center;
+                margin-bottom:20px;
+            ">
+
+                <span
+                    class="badge ${badgeClass}"
+                    style="
+                        font-size:1.1rem;
+                        padding:8px 20px;
+                    "
+                >
+                    ${statusText}
+                </span>
+
+            </div>
+
+
+            <div class="file-info">
+
+                <i class="fas fa-file"></i>
+
+                <div>
+
+                    <div>
+                        <strong>
+                            ${escapeHtml(file.name)}
+                        </strong>
+                    </div>
+
+                    <div style="
+                        color:var(--text-secondary);
+                        font-size:.9rem;
+                    ">
+                        ${sizeMB} MB
+                        •
+                        ${getExtension(file.name).toUpperCase()}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div style="
+                margin-top:15px;
+                padding:15px;
+                background:var(--glass-bg);
+                border-radius:12px;
+            ">
+
+                <p style="
+                    color:var(--text-secondary);
                 ">
 
-                    <span class="
-                        badge
-                        ${badgeClass}
+                    <strong style="
+                        color:var(--neon-blue);
                     ">
+                        Hasil Scan VirusTotal
+                    </strong>
 
-                        <i class="${icon}"></i>
+                </p>
 
-                        ${statusText}
 
+                <div class="info-row">
+
+                    <span>Nama File</span>
+
+                    <span>
+                        <strong>
+                            ${escapeHtml(file.name)}
+                        </strong>
                     </span>
 
                 </div>
 
 
-                <div class="file-info">
+                <div class="info-row">
 
-                    <i class="fas fa-file"></i>
+                    <span>Ukuran</span>
 
-                    <div>
-
+                    <span>
                         <strong>
-                            ${escapeHtml(
-                                file.name
-                            )}
+                            ${sizeMB} MB
                         </strong>
-
-                        <div style="
-                            color:var(--text-secondary);
-                            font-size:.9rem;
-                            margin-top:4px;
-                        ">
-
-                            ${(
-                                file.size /
-                                (1024 * 1024)
-                            ).toFixed(2)}
-                            MB
-
-                            •
-
-                            ${escapeHtml(
-                                file.type ||
-                                'Unknown'
-                            )}
-
-                        </div>
-
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="scan-card">
+                <div class="info-row">
 
-                    <div class="scan-card-title">
+                    <span>Format</span>
 
-                        <i class="fas fa-shield-virus"></i>
-
-                        Hasil Analisis VirusTotal
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Total Engine
-                        </span>
-
+                    <span>
                         <strong>
-                            ${total}
+                            ${getExtension(file.name).toUpperCase()}
                         </strong>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Malicious
-                        </span>
-
-                        <span class="
-                            status-danger
-                            info-value
-                        ">
-                            ${malicious}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Suspicious
-                        </span>
-
-                        <span class="
-                            status-warning
-                            info-value
-                        ">
-                            ${suspicious}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Harmless
-                        </span>
-
-                        <span class="
-                            status-safe
-                            info-value
-                        ">
-                            ${harmless}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Undetected
-                        </span>
-
-                        <span class="info-value">
-                            ${undetected}
-                        </span>
-
-                    </div>
+                    </span>
 
                 </div>
 
 
-                <div class="disclaimer">
+                <div class="info-row">
 
-                    <i class="fas fa-info-circle"></i>
+                    <span>Malicious</span>
 
-                    Hasil berasal dari analisis
-                    VirusTotal. "Undetected" bukan
-                    berarti file dijamin 100% aman.
-
-                    <br>
-
-                    <a
-                        class="virus-link"
-                        href="https://www.virustotal.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i class="fas fa-external-link-alt"></i>
-                        Buka VirusTotal
-                    </a>
+                    <span class="status-danger">
+                        ${malicious}
+                    </span>
 
                 </div>
 
-            `;
 
-        }
+                <div class="info-row">
 
+                    <span>Suspicious</span>
 
-        // =========================
-        // URL SCAN
-        // =========================
+                    <span class="status-warning">
+                        ${suspicious}
+                    </span>
 
-        checkBtn.addEventListener(
-            'click',
-            scanUrl
-        );
+                </div>
 
 
-        urlInput.addEventListener(
-            'keydown',
-            (event) => {
+                <div class="info-row">
 
-                if (
-                    event.key === 'Enter'
-                ) {
+                    <span>Harmless</span>
 
-                    scanUrl();
+                    <span class="status-safe">
+                        ${harmless}
+                    </span>
 
-                }
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>Undetected</span>
+
+                    <span>
+                        ${undetected}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div style="
+                margin-top:15px;
+                text-align:center;
+                color:var(--text-secondary);
+                font-size:.85rem;
+            ">
+
+                <i class="fas fa-shield-alt"></i>
+
+                Hasil berdasarkan analisis
+                VirusTotal.
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =========================
+    // FILE PICKER
+    // =========================
+
+    fileInputBtn.addEventListener(
+        'click',
+        () => fileInput.click()
+    );
+
+
+    fileInput.addEventListener(
+        'change',
+        event => {
+
+            const file =
+                event.target.files[0];
+
+            if (file) {
+
+                scanFile(file);
 
             }
-        );
+
+        }
+    );
 
 
-        async function scanUrl() {
+    // =========================
+    // DRAG & DROP
+    // =========================
+
+    dropZone.addEventListener(
+        'dragover',
+        event => {
+
+            event.preventDefault();
+
+            dropZone.classList.add(
+                'dragover'
+            );
+
+        }
+    );
+
+
+    dropZone.addEventListener(
+        'dragleave',
+        () => {
+
+            dropZone.classList.remove(
+                'dragover'
+            );
+
+        }
+    );
+
+
+    dropZone.addEventListener(
+        'drop',
+        event => {
+
+            event.preventDefault();
+
+            dropZone.classList.remove(
+                'dragover'
+            );
+
+
+            const file =
+                event.dataTransfer.files[0];
+
+
+            if (file) {
+
+                scanFile(file);
+
+            }
+
+        }
+    );
+
+
+    // =========================
+    // URL SCAN
+    // =========================
+
+    checkBtn.addEventListener(
+        'click',
+        async () => {
 
             const url =
                 urlInput.value.trim();
@@ -1264,8 +1040,8 @@
 
             if (!url) {
 
-                showError(
-                    'Masukkan URL file terlebih dahulu.'
+                alert(
+                    'Masukkan URL file terlebih dahulu!'
                 );
 
                 return;
@@ -1275,25 +1051,11 @@
 
             try {
 
-                const parsed =
-                    new URL(url);
+                new URL(url);
 
-
-                if (
-                    parsed.protocol !== 'http:' &&
-                    parsed.protocol !== 'https:'
-                ) {
-
-                    throw new Error(
-                        'URL harus menggunakan HTTP atau HTTPS.'
-                    );
-
-                }
-
-            } catch (error) {
+            } catch {
 
                 showError(
-                    error.message ||
                     'URL tidak valid.'
                 );
 
@@ -1302,19 +1064,29 @@
             }
 
 
+            resultBox.classList.add('show');
+
+            resultContent.innerHTML = `
+
+                <div class="alert">
+
+                    <i class="fas fa-spinner fa-spin"></i>
+
+                    Mengirim URL ke VirusTotal...
+
+                </div>
+
+            `;
+
+
             checkBtn.disabled = true;
-
-
-            setLoading(
-                'Mengirim URL ke VirusTotal...'
-            );
 
 
             try {
 
                 const response =
                     await fetch(
-                        '/api/scan-url',
+                        '/api/scan-file-url',
                         {
                             method: 'POST',
 
@@ -1324,7 +1096,7 @@
                             },
 
                             body: JSON.stringify({
-                                url: url
+                                url
                             })
                         }
                     );
@@ -1338,17 +1110,13 @@
 
                     throw new Error(
                         data.error ||
-                        'Gagal mengirim URL.'
+                        'Gagal memproses URL.'
                     );
 
                 }
 
 
-                const analysisId =
-                    data.analysisId;
-
-
-                if (!analysisId) {
+                if (!data.analysisId) {
 
                     throw new Error(
                         'VirusTotal tidak memberikan Analysis ID.'
@@ -1358,21 +1126,16 @@
 
 
                 await waitForUrlAnalysis(
-                    analysisId,
+                    data.analysisId,
                     url
                 );
 
 
             } catch (error) {
 
-                console.error(
-                    'URL scan error:',
-                    error
-                );
-
                 showError(
                     error.message ||
-                    'Gagal memeriksa URL.'
+                    'Gagal scan URL.'
                 );
 
             } finally {
@@ -1382,303 +1145,258 @@
             }
 
         }
+    );
 
 
-        // =========================
-        // WAIT URL ANALYSIS
-        // =========================
+    async function waitForUrlAnalysis(
+        analysisId,
+        url
+    ) {
 
-        async function waitForUrlAnalysis(
-            analysisId,
-            url
+        for (
+            let attempt = 0;
+            attempt < 30;
+            attempt++
         ) {
-
-            const maxAttempts = 40;
-
-
-            for (
-                let attempt = 0;
-                attempt < maxAttempts;
-                attempt++
-            ) {
-
-                const response =
-                    await fetch(
-                        '/api/scan-file-status?id=' +
-                        encodeURIComponent(
-                            analysisId
-                        )
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.error ||
-                        'Gagal mengambil hasil URL.'
-                    );
-
-                }
-
-
-                const attributes =
-                    data?.data?.attributes || {};
-
-
-                if (
-                    attributes.status ===
-                    'completed'
-                ) {
-
-                    renderUrlResult(
-                        attributes,
-                        url
-                    );
-
-                    return;
-
-                }
-
-
-                setLoading(
-                    'VirusTotal sedang memeriksa URL...'
-                );
-
-
-                await sleep(3000);
-
-            }
-
-
-            throw new Error(
-                'Analisis URL terlalu lama. Coba lagi nanti.'
-            );
-
-        }
-
-
-        // =========================
-        // URL RESULT
-        // =========================
-
-        function renderUrlResult(
-            attributes,
-            url
-        ) {
-
-            const stats =
-                attributes.stats || {};
-
-
-            const malicious =
-                Number(
-                    stats.malicious || 0
-                );
-
-
-            const suspicious =
-                Number(
-                    stats.suspicious || 0
-                );
-
-
-            const harmless =
-                Number(
-                    stats.harmless || 0
-                );
-
-
-            const undetected =
-                Number(
-                    stats.undetected || 0
-                );
-
-
-            let statusText;
-            let badgeClass;
-            let icon;
-
-
-            if (
-                malicious > 0
-            ) {
-
-                statusText =
-                    '⚠️ URL Berbahaya';
-
-                badgeClass =
-                    'badge-danger';
-
-                icon =
-                    'fas fa-skull-crossbones';
-
-            } else if (
-                suspicious > 0
-            ) {
-
-                statusText =
-                    '⚠️ URL Mencurigakan';
-
-                badgeClass =
-                    'badge-warning';
-
-                icon =
-                    'fas fa-exclamation-triangle';
-
-            } else {
-
-                statusText =
-                    '✅ Tidak Terdeteksi Ancaman';
-
-                badgeClass =
-                    'badge-safe';
-
-                icon =
-                    'fas fa-shield-alt';
-
-            }
-
 
             resultContent.innerHTML = `
 
-                <div style="
-                    text-align:center;
-                    margin-bottom:20px;
-                ">
+                <div class="alert">
 
-                    <span class="
-                        badge
-                        ${badgeClass}
-                    ">
+                    <i class="fas fa-spinner fa-spin"></i>
 
-                        <i class="${icon}"></i>
-
-                        ${statusText}
-
-                    </span>
+                    VirusTotal sedang memeriksa URL...
 
                 </div>
 
+                <div class="progress-text">
 
-                <div class="scan-card">
-
-                    <div class="scan-card-title">
-
-                        <i class="fas fa-globe"></i>
-
-                        Hasil Analisis URL
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            URL
-                        </span>
-
-                        <span class="info-value">
-                            ${escapeHtml(url)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Malicious
-                        </span>
-
-                        <span class="
-                            status-danger
-                            info-value
-                        ">
-                            ${malicious}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Suspicious
-                        </span>
-
-                        <span class="
-                            status-warning
-                            info-value
-                        ">
-                            ${suspicious}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Harmless
-                        </span>
-
-                        <span class="
-                            status-safe
-                            info-value
-                        ">
-                            ${harmless}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-row">
-
-                        <span>
-                            Undetected
-                        </span>
-
-                        <span class="info-value">
-                            ${undetected}
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="disclaimer">
-
-                    <i class="fas fa-info-circle"></i>
-
-                    Hasil berasal dari VirusTotal
-                    dan tidak menjamin bahwa URL
-                    benar-benar 100% aman.
-
-                    <br>
-
-                    <a
-                        class="virus-link"
-                        href="https://www.virustotal.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <i class="fas fa-external-link-alt"></i>
-                        Buka VirusTotal
-                    </a>
+                    Percobaan ${attempt + 1}
+                    dari 30
 
                 </div>
 
             `;
 
+
+            await new Promise(
+                resolve =>
+                    setTimeout(resolve, 2000)
+            );
+
+
+            const response =
+                await fetch(
+                    '/api/check-analysis?id=' +
+                    encodeURIComponent(
+                        analysisId
+                    )
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    'Gagal mengambil hasil.'
+                );
+
+            }
+
+
+            const attributes =
+                data.data?.attributes;
+
+
+            if (
+                attributes?.status ===
+                'completed'
+            ) {
+
+                showUrlResult(
+                    url,
+                    attributes
+                );
+
+                return;
+
+            }
+
         }
 
-    });
-    </script>
+
+        throw new Error(
+            'Analisis URL terlalu lama. Silakan coba lagi.'
+        );
+
+    }
+
+
+    function showUrlResult(
+        url,
+        attributes
+    ) {
+
+        const stats =
+            attributes.stats || {};
+
+
+        const malicious =
+            Number(stats.malicious || 0);
+
+        const suspicious =
+            Number(stats.suspicious || 0);
+
+        const harmless =
+            Number(stats.harmless || 0);
+
+        const undetected =
+            Number(stats.undetected || 0);
+
+
+        let statusText;
+        let badgeClass;
+
+
+        if (malicious > 0) {
+
+            statusText =
+                '⚠️ URL BERBAHAYA';
+
+            badgeClass =
+                'badge-danger';
+
+        } else if (suspicious > 0) {
+
+            statusText =
+                '⚠️ URL MENCURIGAKAN';
+
+            badgeClass =
+                'badge-warning';
+
+        } else {
+
+            statusText =
+                '✅ URL TIDAK TERDETEKSI BERBAHAYA';
+
+            badgeClass =
+                'badge-safe';
+
+        }
+
+
+        resultContent.innerHTML = `
+
+            <div style="
+                text-align:center;
+                margin-bottom:20px;
+            ">
+
+                <span
+                    class="badge ${badgeClass}"
+                    style="
+                        font-size:1.1rem;
+                        padding:8px 20px;
+                    "
+                >
+                    ${statusText}
+                </span>
+
+            </div>
+
+
+            <div style="
+                padding:15px;
+                background:var(--glass-bg);
+                border-radius:12px;
+            ">
+
+                <div class="info-row">
+
+                    <span>URL</span>
+
+                    <span style="
+                        word-break:break-all;
+                        text-align:right;
+                    ">
+                        <strong>
+                            ${escapeHtml(url)}
+                        </strong>
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>Malicious</span>
+
+                    <span class="status-danger">
+                        ${malicious}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>Suspicious</span>
+
+                    <span class="status-warning">
+                        ${suspicious}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>Harmless</span>
+
+                    <span class="status-safe">
+                        ${harmless}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>Undetected</span>
+
+                    <span>
+                        ${undetected}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div style="
+                margin-top:15px;
+                text-align:center;
+                color:var(--text-secondary);
+                font-size:.85rem;
+            ">
+
+                <i class="fas fa-shield-alt"></i>
+
+                Hasil berdasarkan analisis
+                VirusTotal.
+
+            </div>
+
+        `;
+
+    }
+
+});
+</script>
 
 </body>
 </html>
