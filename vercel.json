@@ -115,6 +115,10 @@
       "dest": "/admin/developer.html"
     },
     {
+  "src": "/api/(.*)",
+  "dest": "/api/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
