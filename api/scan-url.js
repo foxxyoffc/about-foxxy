@@ -7,11 +7,11 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.VT_API_KEY;
+  const apiKey = process.env.VIRUSTOTAL_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({
-      error: 'VT_API_KEY belum dikonfigurasi.',
+      error: 'VIRUSTOTAL_API_KEY belum dikonfigurasi.',
     });
   }
 
