@@ -5,33 +5,359 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Check Web - FoxxyPortofolio</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    >
     <style>
-        .tools-container { max-width: 800px; margin: 120px auto 40px; padding: 0 20px; }
-        .tools-container h1 { font-size: 2rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 5px; }
-        .tools-container .subtitle { color: var(--text-secondary); margin-bottom: 25px; }
-        .input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .input-group input { flex: 1; min-width: 200px; padding: 14px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
-        .input-group button { padding: 14px 30px; background: var(--gradient); border: none; border-radius: 12px; color: var(--dark-bg); font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
-        .input-group button:hover { transform: scale(1.05); box-shadow: var(--shadow-hover); }
-        .result-box { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
-        .result-box.show { display: block; }
-        .result-box .status-safe { color: #00ff88; font-weight: 700; }
-        .result-box .status-danger { color: #ff4444; font-weight: 700; }
-        .result-box .status-warning { color: #ffaa00; font-weight: 700; }
-        .result-box .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); }
-        .result-box .info-row:last-child { border-bottom: none; }
-        .btn-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 30px; padding: 10px 25px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; color: var(--text-primary); text-decoration: none; transition: all 0.3s ease; }
-        .btn-back:hover { border-color: var(--neon-blue); transform: translateX(-5px); }
-        .alert { padding: 15px; border-radius: 12px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); text-align: center; }
-        .badge { display: inline-block; padding: 3px 12px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; }
-        .badge-safe { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
-        .badge-danger { background: rgba(255, 68, 68, 0.2); color: #ff4444; }
-        .badge-warning { background: rgba(255, 170, 0, 0.2); color: #ffaa00; }
-        .flex-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .tools-container {
+            max-width: 800px;
+            margin: 120px auto 40px;
+            padding: 0 20px;
+        }
+        .tools-container h1 {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+        }
+        .tools-container .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.12);
+        }
+        .input-group button {
+            padding: 14px 30px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--dark-bg);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        .input-group button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        .input-group button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .result-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            overflow: hidden;
+        }
+        .result-box.show {
+            display: block;
+        }
+        .result-box .status-safe {
+            color: #00ff88;
+            font-weight: 700;
+        }
+        .result-box .status-danger {
+            color: #ff4444;
+            font-weight: 700;
+        }
+        .result-box .status-warning {
+            color: #ffaa00;
+            font-weight: 700;
+        }
+        .result-box .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .result-box .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-box .info-row > span:last-child {
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            border-color: var(--neon-blue);
+            transform: translateX(-5px);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-align: center;
+        }
+
+        .alert.error {
+            background: rgba(255, 68, 68, 0.08);
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-safe {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .badge-danger {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+        }
+
+        .badge-warning {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+        }
+
+        .scan-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            padding: 14px 10px;
+            border-radius: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .stat-card .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .stat-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+        }
+
+        .stat-malicious .stat-number {
+            color: #ff4444;
+        }
+
+        .stat-suspicious .stat-number {
+            color: #ffaa00;
+        }
+
+        .stat-harmless .stat-number {
+            color: #00ff88;
+        }
+
+        .stat-undetected .stat-number {
+            color: var(--text-primary);
+        }
+
+        .section-box {
+            margin-top: 20px;
+            background: var(--glass-bg);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .section-title {
+            display: block;
+            color: var(--neon-blue);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .detection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .detection-item {
+            padding: 10px;
+            border-radius: 9px;
+            background: rgba(255, 68, 68, 0.07);
+            border: 1px solid rgba(255, 68, 68, 0.18);
+        }
+
+        .detection-item.warning {
+            background: rgba(255, 170, 0, 0.07);
+            border-color: rgba(255, 170, 0, 0.18);
+        }
+
+        .detection-engine {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .detection-result {
+            margin-top: 3px;
+            color: var(--text-secondary);
+            font-size: 0.83rem;
+            word-break: break-word;
+        }
+
+        .clean-box {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .report-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 11px 20px;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .report-btn:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        .scan-note {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
+            margin-left: 4px;
+        }
+
+        .loading-dots span {
+            animation: loadingDot 1.2s infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loadingDot {
+            0%, 60%, 100% {
+                opacity: 0.25;
+            }
+
+            30% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tools-container {
+                margin-top: 100px;
+            }
+
+            .tools-container h1 {
+                font-size: 1.6rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-group input,
+            .input-group button {
+                width: 100%;
+            }
+
+            .scan-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .result-box .info-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .result-box .info-row > span:last-child {
+                text-align: left;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="theme-toggle" id="themeToggle">
@@ -41,10 +367,16 @@
 
     <nav class="navbar">
         <div class="nav-container">
+
             <div class="nav-logo">
-                <img src="https://c.top4top.io/p_3819ed0vz1.jpg" alt="Logo" class="logo-img">
+                <img
+                    src="https://c.top4top.io/p_3819ed0vz1.jpg"
+                    alt="Logo"
+                    class="logo-img"
+                >
                 <span>Foxxy</span>
             </div>
+
             <div class="nav-menu" id="navMenu">
                 <a href="../index.html" class="nav-link">Beranda</a>
                 <a href="store.html" class="nav-link">Store</a>
@@ -53,115 +385,761 @@
                 <a href="komunitas.html" class="nav-link">Komunitas</a>
                 <a href="../admin/developer.html" class="nav-link">Developer</a>
             </div>
+
             <div class="nav-toggle" id="navToggle">
-                <span></span><span></span><span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+
         </div>
     </nav>
 
+
     <div class="tools-container">
-        <h1><i class="fas fa-shield-alt"></i> Check Keamanan Website</h1>
-        <p class="subtitle">Cek apakah website aman dari malware, ransomware, atau keylogger</p>
+
+        <h1>
+            <i class="fas fa-shield-alt"></i>
+            Check Keamanan Website
+        </h1>
+
+        <p class="subtitle">
+            Cek website menggunakan analisis keamanan VirusTotal
+        </p>
+
 
         <div class="input-group">
-            <input type="text" id="webUrl" placeholder="Masukkan URL website... (contoh: https://example.com)">
-            <button id="checkBtn"><i class="fas fa-search"></i> Check</button>
+
+            <input
+                type="text"
+                id="webUrl"
+                placeholder="Masukkan URL website... (contoh: https://example.com)"
+                autocomplete="off"
+                spellcheck="false"
+            >
+
+            <button id="checkBtn">
+                <i class="fas fa-search"></i>
+                Check
+            </button>
+
         </div>
+
 
         <div class="result-box" id="resultBox">
+
             <div id="resultContent"></div>
+
         </div>
 
-        <a href="tools.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Tools</a>
+
+        <a href="tools.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i>
+            Kembali ke Tools
+        </a>
+
     </div>
 
+
     <footer class="footer">
+
         <div class="container">
+
             <div class="footer-content">
-                <p>&copy; 2026 <span class="watermark">Foxxy</span>. All right reserved.</p>
-                <p>Developed By <span class="watermark">FoxxyOffc / FoxxyPrst</span></p>
+
+                <p>
+                    &copy; 2026
+                    <span class="watermark">Foxxy</span>.
+                    All right reserved.
+                </p>
+
+                <p>
+                    Developed By
+                    <span class="watermark">
+                        FoxxyOffc / FoxxyPrst
+                    </span>
+                </p>
+
             </div>
+
         </div>
+
     </footer>
+
 
     <script src="../js/config.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/auth.js"></script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
             initTheme();
             initNavToggle();
-            
+
+
             const btn = document.getElementById('checkBtn');
             const input = document.getElementById('webUrl');
             const resultBox = document.getElementById('resultBox');
             const resultContent = document.getElementById('resultContent');
-            
-            btn.addEventListener('click', async () => {
-                const url = input.value.trim();
-                if (!url) {
+
+
+            // ==========================================
+            // CHECK WEBSITE
+            // ==========================================
+
+            async function checkWebsite() {
+
+                const rawUrl = input.value.trim();
+
+
+                // ==========================================
+                // VALIDASI INPUT
+                // ==========================================
+
+                if (!rawUrl) {
+
                     alert('Masukkan URL website terlebih dahulu!');
+
+                    input.focus();
+
                     return;
                 }
-                
-                resultBox.classList.add('show');
-                resultContent.innerHTML = '<div class="alert"><i class="fas fa-spinner fa-spin"></i> Memeriksa website...</div>';
-                
+
+
+                let targetUrl = rawUrl;
+
+
+                // Kalau user menulis:
+                // google.com
+                // otomatis menjadi:
+                // https://google.com
+
+                if (!/^https?:\/\//i.test(targetUrl)) {
+
+                    targetUrl = 'https://' + targetUrl;
+
+                }
+
+
+                // Validasi URL di browser
+
                 try {
-                    // Simulasi pengecekan (karena API keamanan terbatas, kita pake VirusTotal atau Google Safe Browsing)
-                    // Untuk demo, kita tampilkan hasil simulasi dengan deteksi dasar
-                    const isHttps = url.startsWith('https://');
-                    const hasMaliciousPattern = /(login|verify|secure|bank|paypal|gift|free)/i.test(url) && !isHttps;
-                    
-                    let status, statusText, details = [];
-                    
-                    if (hasMaliciousPattern) {
-                        status = 'danger';
-                        statusText = '⚠️ Website Berpotensi Berbahaya';
-                        details = [
-                            'Mengandung kata-kata yang sering digunakan oleh situs phishing',
-                            'Tidak menggunakan protokol HTTPS yang aman'
-                        ];
-                    } else if (!isHttps) {
-                        status = 'warning';
-                        statusText = '⚠️ Website Tidak Aman (HTTP)';
-                        details = [
-                            'Tidak menggunakan protokol HTTPS (data tidak terenkripsi)',
-                            'Rentan terhadap serangan man-in-the-middle'
-                        ];
-                    } else {
-                        status = 'safe';
-                        statusText = '✅ Website Aman';
-                        details = [
-                            'Menggunakan protokol HTTPS (data terenkripsi)',
-                            'Tidak terdeteksi pola mencurigakan'
-                        ];
+
+                    const parsed = new URL(targetUrl);
+
+                    if (
+                        parsed.protocol !== 'http:' &&
+                        parsed.protocol !== 'https:'
+                    ) {
+
+                        throw new Error(
+                            'Hanya URL HTTP atau HTTPS yang diperbolehkan.'
+                        );
+
                     }
-                    
-                    const badgeClass = status === 'safe' ? 'badge-safe' : status === 'danger' ? 'badge-danger' : 'badge-warning';
-                    
+
+                } catch (error) {
+
+                    resultBox.classList.add('show');
+
                     resultContent.innerHTML = `
-                        <div style="text-align: center; margin-bottom: 20px;">
-                            <span class="badge ${badgeClass}" style="font-size: 1.1rem; padding: 8px 20px;">${statusText}</span>
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <div class="info-row"><span>URL</span><span><strong>${url}</strong></span></div>
-                            <div class="info-row"><span>Protokol</span><span><strong>${isHttps ? '✅ HTTPS (Aman)' : '❌ HTTP (Tidak Aman)'}</strong></span></div>
-                        </div>
-                        <div style="background: var(--glass-bg); padding: 15px; border-radius: 12px;">
-                            <strong style="color: var(--neon-blue);">Detail Pengecekan:</strong>
-                            <ul style="list-style: none; padding: 0; margin-top: 10px;">
-                                ${details.map(d => `<li style="padding: 5px 0; color: var(--text-secondary);"><i class="fas fa-circle" style="font-size: 0.5rem; color: var(--neon-blue); margin-right: 10px;"></i>${d}</li>`).join('')}
-                            </ul>
-                        </div>
-                        <div style="margin-top: 15px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
-                            <i class="fas fa-info-circle"></i> Pengecekan ini bersifat dasar. Untuk hasil lebih akurat, gunakan <a href="https://www.virustotal.com" target="_blank" style="color: var(--neon-blue);">VirusTotal</a>
+                        <div class="alert error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            ${escapeHTML(
+                                error.message ||
+                                'Format URL tidak valid.'
+                            )}
                         </div>
                     `;
-                } catch (error) {
-                    resultContent.innerHTML = '<div class="alert"><i class="fas fa-exclamation-triangle"></i> Error. Coba lagi nanti.</div>';
+
+                    return;
                 }
-            });
+
+
+                // ==========================================
+                // LOADING
+                // ==========================================
+
+                resultBox.classList.add('show');
+
+                resultContent.innerHTML = `
+                    <div class="alert">
+
+                        <i class="fas fa-shield-alt fa-spin"></i>
+
+                        Memeriksa website dengan VirusTotal
+
+                        <span class="loading-dots">
+                            <span>.</span>
+                            <span>.</span>
+                            <span>.</span>
+                        </span>
+
+                        <br>
+
+                        <small style="
+                            display:block;
+                            margin-top:8px;
+                            opacity:.75;
+                        ">
+                            Sedang mengirim URL dan mengambil hasil
+                            dari security engine.
+                        </small>
+
+                    </div>
+                `;
+
+
+                // Disable button
+
+                btn.disabled = true;
+
+                btn.innerHTML = `
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Checking...
+                `;
+
+
+                try {
+
+                    // ==========================================
+                    // REQUEST KE VERCEL SERVERLESS FUNCTION
+                    // ==========================================
+
+                    const response = await fetch('/api/check-web', {
+
+                        method: 'POST',
+
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            url: targetUrl
+                        })
+
+                    });
+
+
+                    // Ambil JSON
+
+                    let data;
+
+                    try {
+
+                        data = await response.json();
+
+                    } catch {
+
+                        throw new Error(
+                            'Server mengembalikan response yang tidak valid.'
+                        );
+
+                    }
+
+
+                    // ==========================================
+                    // ERROR DARI BACKEND
+                    // ==========================================
+
+                    if (!response.ok || !data.success) {
+
+                        throw new Error(
+                            data.message ||
+                            'Gagal melakukan pengecekan website.'
+                        );
+
+                    }
+
+
+                    // ==========================================
+                    // DATA VIRUSTOTAL
+                    // ==========================================
+
+                    const stats = data.stats || {};
+
+
+                    const malicious =
+                        Number(stats.malicious || 0);
+
+                    const suspicious =
+                        Number(stats.suspicious || 0);
+
+                    const harmless =
+                        Number(stats.harmless || 0);
+
+                    const undetected =
+                        Number(stats.undetected || 0);
+
+
+                    // ==========================================
+                    // STATUS
+                    // ==========================================
+
+                    let badgeClass = 'badge-safe';
+
+                    let statusIcon = 'fa-check-circle';
+
+                    let statusTitle =
+                        data.statusText ||
+                        'Website Aman';
+
+
+                    if (data.status === 'danger') {
+
+                        badgeClass = 'badge-danger';
+
+                        statusIcon = 'fa-skull-crossbones';
+
+                    } else if (data.status === 'warning') {
+
+                        badgeClass = 'badge-warning';
+
+                        statusIcon = 'fa-exclamation-triangle';
+
+                    }
+
+
+                    // ==========================================
+                    // DETECTIONS
+                    // ==========================================
+
+                    const detections =
+                        Array.isArray(data.detections)
+                            ? data.detections
+                            : [];
+
+
+                    let detectionHTML = '';
+
+
+                    if (detections.length > 0) {
+
+                        detectionHTML = `
+
+                            <div class="section-box">
+
+                                <span class="section-title">
+
+                                    <i class="fas fa-bug"></i>
+
+                                    Engine yang mendeteksi
+
+                                    (${detections.length})
+
+                                </span>
+
+
+                                <div class="detection-list">
+
+                                    ${detections.map(item => {
+
+                                        const isSuspicious =
+                                            item.category === 'suspicious';
+
+                                        return `
+
+                                            <div class="
+                                                detection-item
+                                                ${isSuspicious ? 'warning' : ''}
+                                            ">
+
+                                                <div class="detection-engine">
+
+                                                    <i class="
+                                                        fas
+                                                        ${isSuspicious
+                                                            ? 'fa-exclamation-triangle'
+                                                            : 'fa-times-circle'}
+                                                    "></i>
+
+                                                    ${escapeHTML(
+                                                        item.engine ||
+                                                        'Unknown Engine'
+                                                    )}
+
+                                                </div>
+
+
+                                                <div class="detection-result">
+
+                                                    ${escapeHTML(
+                                                        item.result ||
+                                                        item.category ||
+                                                        'Detection'
+                                                    )}
+
+                                                </div>
+
+                                            </div>
+
+                                        `;
+
+                                    }).join('')}
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    } else {
+
+                        detectionHTML = `
+
+                            <div class="section-box">
+
+                                <div class="clean-box">
+
+                                    <i class="fas fa-check-circle"></i>
+
+                                    Tidak ada security engine yang
+                                    melaporkan URL ini sebagai
+                                    malicious atau suspicious.
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    // ==========================================
+                    // REPORT BUTTON
+                    // ==========================================
+
+                    let reportHTML = '';
+
+                    if (data.reportUrl) {
+
+                        reportHTML = `
+
+                            <div style="text-align:center;">
+
+                                <a
+                                    href="${escapeAttribute(data.reportUrl)}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="report-btn"
+                                >
+
+                                    <i class="fas fa-external-link-alt"></i>
+
+                                    Lihat Report VirusTotal
+
+                                </a>
+
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    // ==========================================
+                    // HASIL AKHIR
+                    // ==========================================
+
+                    resultContent.innerHTML = `
+
+                        <!-- STATUS -->
+
+                        <div style="
+                            text-align:center;
+                            margin-bottom:20px;
+                        ">
+
+                            <span
+                                class="badge ${badgeClass}"
+                                style="
+                                    font-size:1.05rem;
+                                    padding:10px 20px;
+                                "
+                            >
+
+                                <i class="fas ${statusIcon}"></i>
+
+                                ${escapeHTML(statusTitle)}
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- INFO URL -->
+
+                        <div style="
+                            margin-bottom:15px;
+                        ">
+
+                            <div class="info-row">
+
+                                <span>
+                                    URL
+                                </span>
+
+                                <span>
+
+                                    <strong>
+                                        ${escapeHTML(data.url)}
+                                    </strong>
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span>
+                                    Status Analysis
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        ${escapeHTML(
+                                            data.analysisStatus ||
+                                            'unknown'
+                                        )}
+                                    </strong>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- STATISTIK -->
+
+                        <div>
+
+                            <strong style="
+                                color:var(--neon-blue);
+                            ">
+
+                                <i class="fas fa-chart-bar"></i>
+
+                                Hasil Security Engine
+
+                            </strong>
+
+
+                            <div class="scan-stats">
+
+
+                                <div class="
+                                    stat-card
+                                    stat-malicious
+                                ">
+
+                                    <span class="stat-number">
+                                        ${malicious}
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Malicious
+                                    </span>
+
+                                </div>
+
+
+                                <div class="
+                                    stat-card
+                                    stat-suspicious
+                                ">
+
+                                    <span class="stat-number">
+                                        ${suspicious}
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Suspicious
+                                    </span>
+
+                                </div>
+
+
+                                <div class="
+                                    stat-card
+                                    stat-harmless
+                                ">
+
+                                    <span class="stat-number">
+                                        ${harmless}
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Harmless
+                                    </span>
+
+                                </div>
+
+
+                                <div class="
+                                    stat-card
+                                    stat-undetected
+                                ">
+
+                                    <span class="stat-number">
+                                        ${undetected}
+                                    </span>
+
+                                    <span class="stat-label">
+                                        Undetected
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DETECTION -->
+
+                        ${detectionHTML}
+
+
+                        <!-- VIRUSTOTAL REPORT -->
+
+                        <div style="
+                            margin-top:5px;
+                        ">
+
+                            ${reportHTML}
+
+                        </div>
+
+
+                        <!-- NOTE -->
+
+                        <div class="scan-note">
+
+                            <i class="fas fa-info-circle"></i>
+
+                            Hasil pemeriksaan berasal dari analisis
+                            VirusTotal. Hasil dapat berubah seiring
+                            pembaruan database security engine.
+
+                        </div>
+
+                    `;
+
+
+                } catch (error) {
+
+                    console.error(
+                        'Check Web Error:',
+                        error
+                    );
+
+
+                    resultBox.classList.add('show');
+
+
+                    resultContent.innerHTML = `
+
+                        <div class="alert error">
+
+                            <i class="
+                                fas
+                                fa-exclamation-triangle
+                            "></i>
+
+                            <strong>
+                                Gagal melakukan pengecekan
+                            </strong>
+
+                            <br>
+
+                            <small style="
+                                display:block;
+                                margin-top:7px;
+                            ">
+
+                                ${escapeHTML(
+                                    error.message ||
+                                    'Terjadi kesalahan pada server.'
+                                )}
+
+                            </small>
+
+                        </div>
+
+                    `;
+
+                } finally {
+
+                    // ==========================================
+                    // RESET BUTTON
+                    // ==========================================
+
+                    btn.disabled = false;
+
+                    btn.innerHTML = `
+                        <i class="fas fa-search"></i>
+                        Check
+                    `;
+
+                }
+
+            }
+
+
+            // ==========================================
+            // BUTTON CLICK
+            // ==========================================
+
+            btn.addEventListener(
+                'click',
+                checkWebsite
+            );
+
+
+            // ==========================================
+            // ENTER KEY
+            // ==========================================
+
+            input.addEventListener(
+                'keydown',
+                event => {
+
+                    if (event.key === 'Enter') {
+
+                        event.preventDefault();
+
+                        checkWebsite();
+                    }
+                }
+            );
+
+
+            // ==========================================
+            // ESCAPE HTML
+            // ==========================================
+
+            function escapeHTML(value) {
+
+                return String(value ?? '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            // ==========================================
+            // ESCAPE ATTRIBUTE
+            // ==========================================
+
+            function escapeAttribute(value) {
+                return escapeHTML(value);
+            }
         });
     </script>
 </body>
