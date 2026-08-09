@@ -1,15 +1,19 @@
 const VT_API = 'https://www.virustotal.com/api/v3';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export default async function handler(req, res) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({
-      error: 'Method not allowed',
+      success: false,
+      error: 'Method not allowed'
     });
   }
 
@@ -17,74 +21,114 @@ export default async function handler(req, res) {
 
   if (!apiKey) {
     return res.status(500).json({
-      error: 'VIRUSTOTAL_API_KEY belum dikonfigurasi di Vercel.',
+      success: false,
+      error: 'VIRUSTOTAL_API_KEY belum dikonfigurasi di Vercel.'
     });
   }
 
   try {
-    // Dapatkan URL upload dari VirusTotal
-    const uploadUrlResponse = await fetch(
-      `${VT_API}/files/upload_url`,
-      {
-        method: 'GET',
-        headers: {
-          'x-apikey': apiKey,
-        },
+    let body = req.body;
+
+    // Vercel kadang memberikan body sebagai string
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch {
+        return res.status(400).json({
+          success: false,
+          error: 'Request body bukan JSON yang valid.'
+        });
       }
-    );
+    }
 
-    const uploadUrlData = await uploadUrlResponse.json();
+    const url = body?.url?.trim();
 
-    if (!uploadUrlResponse.ok) {
-      return res.status(uploadUrlResponse.status).json({
-        error:
-          uploadUrlData?.error?.message ||
-          'Gagal mendapatkan upload URL VirusTotal.',
+    if (!url) {
+      return res.status(400).json({
+        success: false,
+        error: 'URL wajib diisi.'
       });
     }
 
-    const uploadUrl = uploadUrlData?.data;
+    // Validasi URL
+    let parsedUrl;
 
-    if (!uploadUrl) {
-      return res.status(500).json({
-        error: 'Upload URL VirusTotal tidak ditemukan.',
+    try {
+      parsedUrl = new URL(url);
+    } catch {
+      return res.status(400).json({
+        success: false,
+        error: 'URL tidak valid.'
       });
     }
 
-    // Upload file ke VirusTotal
-    const uploadResponse = await fetch(uploadUrl, {
+    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+      return res.status(400).json({
+        success: false,
+        error: 'URL harus menggunakan HTTP atau HTTPS.'
+      });
+    }
+
+    /*
+     * Kirim URL ke VirusTotal
+     */
+    const form = new URLSearchParams();
+    form.append('url', url);
+
+    const vtResponse = await fetch(`${VT_API}/urls`, {
       method: 'POST',
       headers: {
         'x-apikey': apiKey,
-        'Content-Type':
-          req.headers['content-type'] ||
-          'application/octet-stream',
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: req,
-      duplex: 'half',
+      body: form.toString()
     });
 
-    const uploadData = await uploadResponse.json();
+    const vtText = await vtResponse.text();
 
-    if (!uploadResponse.ok) {
-      return res.status(uploadResponse.status).json({
+    let vtData;
+
+    try {
+      vtData = JSON.parse(vtText);
+    } catch {
+      console.error('VirusTotal response:', vtText);
+
+      return res.status(502).json({
+        success: false,
+        error: 'VirusTotal mengembalikan response yang tidak valid.'
+      });
+    }
+
+    if (!vtResponse.ok) {
+      return res.status(vtResponse.status).json({
+        success: false,
         error:
-          uploadData?.error?.message ||
-          'Gagal mengupload file ke VirusTotal.',
+          vtData?.error?.message ||
+          'VirusTotal gagal memproses URL.',
+        details: vtData
+      });
+    }
+
+    const analysisId = vtData?.data?.id;
+
+    if (!analysisId) {
+      return res.status(502).json({
+        success: false,
+        error: 'VirusTotal tidak memberikan Analysis ID.'
       });
     }
 
     return res.status(200).json({
       success: true,
-      analysisId: uploadData?.data?.id || null,
-      data: uploadData,
+      analysisId
     });
 
   } catch (error) {
-    console.error('VirusTotal scan error:', error);
+    console.error('SCAN FILE ERROR:', error);
 
     return res.status(500).json({
-      error: 'Gagal menghubungi VirusTotal.',
+      success: false,
+      error: error?.message || 'Gagal menghubungi VirusTotal.'
     });
   }
 }
